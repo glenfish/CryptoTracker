@@ -3,6 +3,7 @@ GEM
   specs:
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    colorize (0.8.1)
     diff-lcs (1.4.4)
     httparty (0.18.1)
       mime-types (~> 3.0)
@@ -39,9 +40,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  colorize (~> 0.8.1)
   httparty
   json
   json-schema-rspec
+  rspec (~> 3.10.0)
   terminal-table
 
 BUNDLED WITH
