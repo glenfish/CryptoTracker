@@ -1,0 +1,2 @@
+class AppError < StandardError
+end
