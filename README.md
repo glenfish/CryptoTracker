@@ -1,4 +1,4 @@
-# Crypto Portfolio Tracker
+# Crypto Tracker
 
 ## Application Overview
 
