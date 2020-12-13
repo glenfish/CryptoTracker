@@ -78,10 +78,11 @@ also packaged gems being used, versioning etc
 
 ## Dependencies
 
-Ruby Gems:
+Ruby Gems Bundled:
 httparty
 json
 terminal-table
+json-schema-rspec
 
 ## Usage
 
