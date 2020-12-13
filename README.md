@@ -37,7 +37,7 @@ Additonal planned features post MVP:
 
 ## Testing
 
-rspec
+rspec  
 Testing data and screenshots here
 
 ## API Data
@@ -47,7 +47,7 @@ The API is using CoinMarketCap.com.
 To test, the JSON output for the first 100 cryptos on Coin Market Cap will be saved to a text file and accessed locally. 
 
 Account with CoinMarketCap using the following credentials:  
-key: ********-****-****-****-************  (create a free account below and use your own key)
+
 url: https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=BTC  
 account url: https://pro.coinmarketcap.com/account  
 data limits: 333 per day. 10k per month
@@ -78,11 +78,11 @@ also packaged gems being used, versioning etc
 
 ## Dependencies
 
-Ruby Gems Bundled:
-httparty
-json
-terminal-table
-json-schema-rspec
+Ruby Gems Bundled:  
+httparty  
+json  
+terminal-table  
+json-schema-rspec  
 
 ## Usage
 
