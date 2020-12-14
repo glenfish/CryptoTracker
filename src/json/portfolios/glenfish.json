@@ -1,0 +1,25 @@
+{   "username":"glenfish",
+    "data":
+        { "BTC":  
+                {"asset_name":"",
+                "asset_quantity":1.5,
+                "asset_buy_date":"2020-12-14",
+                "asset_sell_date":"",
+                "usd_price":"",
+                "btc_price":"",
+                "usd_profit":"",
+                "btc_profit":""
+                }
+        },
+        { "LTC":  
+            {"asset_name":"",
+            "asset_quantity":67.2,
+            "asset_buy_date":"2020-12-14",
+            "asset_sell_date":"",
+            "usd_price":"",
+            "btc_price":"",
+            "usd_profit":"",
+            "btc_profit":""
+            }
+    }
+}
