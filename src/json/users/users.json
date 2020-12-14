@@ -16,5 +16,11 @@
         "password":"pass1234",
         "active":true,
         "user_created":"2020-12-14"
+    },
+    {   "name":"Admin",
+        "username":"fusion22",
+        "password":"fusion22",
+        "active":true,
+        "user_created":"2020-01-01"
     }
 ]
