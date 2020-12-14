@@ -5,6 +5,13 @@ require 'json'
 require 'terminal-table'
 require 'colorize'
 
+# writes API data
+def write_json_file(json, filepath)
+    File.open(filepath,"w") do |f|
+        f.write(json.to_json)
+    end
+end
+
 def display_user_info(users_json)
     rows =[]
     users_json.each_with_index do |user, index|
@@ -223,11 +230,13 @@ def get_crypto(response, portfolio_array, portfolio_assets_quantities_array)
   puts "\nYour portfolio has a total of #{portfolio_array.length + 1} digital assets.\n"
 end
 
-def call_api(api_link, api_key)
+def call_api(api_link, api_key, filepath = "./json/api_cached/latest.json")
   response = HTTParty.get(api_link,
                           { headers: { 'X-CMC_PRO_API_KEY' => api_key,
                                        'Accept' => 'application/json' } })
-  JSON.parse(response.body)
+  parsed = JSON.parse(response.body)
+  write_json_file(parsed, filepath)
+  return parsed
 end
 
 def call_dummy_api(api_test_file)
