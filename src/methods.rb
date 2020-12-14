@@ -31,12 +31,27 @@ def get_user(path_to_users_file)
     file = File.open(path_to_users_file)
     file_data = file.read
     return JSON.parse(file_data)
-end    
+end
+
+def get_portfolio(path_to_portfolio_file)
+    # return JSON portfolio data
+end
+
+def validate_username(username, users_json)
+    users_json.each_with_index do |user, index|
+        username_current = users_json[index]['username']
+        if username_current == username
+            return username
+        else 
+        return false
+        end
+    end
+end
 
 
 def top_level_menu(menu_title = "Welcome To Crypto Tracker")
     # Top level Welcome menu
-    menu_options = ['Login', 'Create User', 'Help', 'Quit']
+    menu_options = ['Login', 'Create User', 'Help', 'Quit', 'Show All Users']
     rows = []
     menu_options.each_with_index do |menu_option, index|
         rows << ["#{index + 1}. #{menu_option}"]
@@ -49,15 +64,22 @@ def top_level_menu_selection(selection, path_to_users_file)
     case selection
     when 1
         #login
-        puts "user logs in"
+        system 'clear'
+        puts "Enter username:\n"
+        username = gets.strip.chomp
+        users_json = get_user(path_to_users_file)
+        puts validate_username(username, users_json)
     when 2
         #create user
+        system 'clear'
         puts "create a user"
     when 3
         # help
+        system 'clear'
         puts "show help"
     when 4
         # quit
+        system 'clear'
         puts "goodbye"
         exit
     when 5
