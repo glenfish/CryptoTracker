@@ -175,7 +175,7 @@ end
 
 def show_portfolio(portfolio_assets_quantities_array)
     system 'clear'
-    puts "which test file... 1, 2, 3 or 4?\n"
+    puts "choose api test file... 1/2/3/4:\n"
 choice = gets.chomp.to_i
 case choice
     when 1
@@ -190,13 +190,13 @@ case choice
     api_test_file = './json/api_cached/schema.json'
 end
 
-puts "big list... y or n ?\n"
-if gets.chomp == "y"
+# puts "big list... y or n ?\n"
+# if gets.chomp == "y"
     portfolio_array = %w[BTC ETH XRP USDT BCH LTC LINK ADA DOT BNB XLM USDC BSV EOS XMR WBTC TRX XEM XTZ LEO FIL CRO NEO DAI VET REV ATOM AAVE DASH WAVES HT MIOTA UNI ZEC ETC YFI THETA BUSD COMP CEL MKR SNX OMG DOGE UMA KSM FTT ONT ZIL ALGO SUSHI OKB BTT BAT TUSD RENBTC DCR NEXO ZRX DGB PAX HUSD AVAX REN QTUM HBAR AMPL ICX ABBC CELO LRC EGLD HEDG STX LUNA KNC RSR REP EWT LSK OCEAN BTG SC QNT RUNE CVT NANO BAND MANA ZB NMR ENJ ANT MAID SNT CHSB XVG NXM RVN]
-else
-    portfolio_array = %w[BTC ETH XRP USDT BCH LTC LINK ADA]
-end
-p portfolio_assets_quantities_array
+# else
+    # portfolio_array = %w[BTC ETH XRP USDT BCH LTC LINK ADA]
+# end
+# p portfolio_assets_quantities_array
 output = []
 portfolio_assets_quantities_array.each do |element|
     symbol = element[0]
@@ -205,7 +205,7 @@ portfolio_assets_quantities_array.each do |element|
     end
 end
 portfolio_array = output
-p portfolio_array
+# p portfolio_array
 
 # system 'clear'
 portfolio = portfolio_array.join(',')
@@ -219,7 +219,7 @@ def get_crypto(response, portfolio_array, portfolio_assets_quantities_array)
     price = format('%0.2f', response['data'][crypto]['quote']['USD']['price']).gsub(/(\d)(?=\d{3}+\.)/, '\1,')
     quantity = 0
     portfolio_assets_quantities_array.each do |element|
-        p "symbol: #{element[0]} qty: #{element[1]}"
+        # p "symbol: #{element[0]} qty: #{element[1]}"
         if symbol == element[0]
             quantity = element[1]
         end
