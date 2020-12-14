@@ -1,0 +1,20 @@
+[
+    {   "name":"Nick",
+        "username":"glenfish",
+        "password":"pass1234",
+        "active":true,
+        "user_created":"2020-12-13"
+    },
+    {   "name":"Santa",
+        "username":"santastic",
+        "password":"pass1234",
+        "active":false,
+        "user_created":"2020-12-10"
+    },
+    {   "name":"Marie",
+        "username":"marie",
+        "password":"pass1234",
+        "active":true,
+        "user_created":"2020-12-14"
+    }
+]
