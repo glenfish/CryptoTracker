@@ -1,16 +1,24 @@
 # frozen_string_literal: true
-begin
+# begin
 require 'httparty'
 require 'json'
 require 'terminal-table'
 require 'colorize'
 
-require_relative 'menus'
+require_relative 'methods'
+# require_relative 'paths'
 
+path_to_users_file = './json/users/users.json'
+# users_json = get_user(path_to_users_file)
 
-
+# FINISHED CODE
 top_level_menu("Crypto Portfolio Tracker") # Optionally pass a title to the Main Menu
-top_level_menu_selection(gets.strip.chomp.to_i) # Handles the Main Menu user selection
+top_level_menu_selection(gets.strip.chomp.to_i, path_to_users_file) # Handles the Main Menu user selection
+# END FINISHED CODE
+
+
+
+
 
 
 
@@ -71,7 +79,7 @@ top_level_menu_selection(gets.strip.chomp.to_i) # Handles the Main Menu user sel
 
 # get_crypto(dummy_response, portfolio_array)
 # raise AppError
-rescue
-  puts "error"
-  retry
-end
+# rescue
+#   puts "error"
+#   retry
+# end
