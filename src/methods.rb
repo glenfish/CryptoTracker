@@ -163,7 +163,7 @@ def admin_logged_in_menu_selection(selection, path_to_users_file, path_to_portfo
         system 'clear'
         users_json = get_user(path_to_users_file)
         display_user_info(users_json)
-        return [true, "users"]
+        return [true, "fusion22"]
     when 3
         # quit
         return [false, "exit"]
