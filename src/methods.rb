@@ -57,7 +57,29 @@ end
 
 def top_level_menu(menu_title = "Welcome To Crypto Tracker")
     # Top level Welcome menu
-    menu_options = ['Login', 'Create User', 'Help', 'Quit', 'Show All Users']
+    menu_options = ['Login', 'Create User', 'Help', 'Quit']
+    rows = []
+    menu_options.each_with_index do |menu_option, index|
+        rows << ["#{index + 1}. #{menu_option}"]
+    end
+    table = Terminal::Table.new :title => menu_title.colorize(:cyan), :rows => rows
+    puts table
+end
+
+def logged_in_main_menu(menu_title = "Welcome To Crypto Tracker")
+    # Top level Welcome menu
+    menu_options = ['Help', 'Quit']
+    rows = []
+    menu_options.each_with_index do |menu_option, index|
+        rows << ["#{index + 1}. #{menu_option}"]
+    end
+    table = Terminal::Table.new :title => menu_title.colorize(:cyan), :rows => rows
+    puts table
+end
+
+def logged_in_admin_main_menu(menu_title = "Crypto Tracker Admin")
+    # Top level Welcome menu
+    menu_options = ['Create User', 'Show All Users', 'Quit']
     rows = []
     menu_options.each_with_index do |menu_option, index|
         rows << ["#{index + 1}. #{menu_option}"]
@@ -77,10 +99,10 @@ def top_level_menu_selection(selection, path_to_users_file)
         valid = validate_username(username, users_json)
         if valid
             # puts "You are successfully logged in, #{username}\n"
-            return [true, "logged_in"]
+            return [true, username]
         else
             # puts "Access denied, #{username} user doesn't exist or account inactive!\n"
-            return [false, "not_logged_in"]
+            return [false, username]
         end
     when 2
         #create user
@@ -100,6 +122,43 @@ def top_level_menu_selection(selection, path_to_users_file)
         users_json = get_user(path_to_users_file)
         display_user_info(users_json)
         return [true, "users"]
+    else
+        # error
+        raise AppError
+    end
+end
+
+def logged_in_menu_selection(selection, path_to_users_file, path_to_portfolio_file)
+    case selection
+    when 1
+        # help
+        system 'clear'
+        puts "show help"
+        return [true, "show_help"]
+    when 4
+        # quit
+        return [false, "exit"]
+    else
+        # error
+        raise AppError
+    end
+end
+
+def admin_logged_in_menu_selection(selection, path_to_users_file, path_to_portfolio_file)
+    case selection
+    when 1
+        #create user
+        system 'clear'
+        puts "create a user"
+        return [true, "create_user"]
+    when 2
+        system 'clear'
+        users_json = get_user(path_to_users_file)
+        display_user_info(users_json)
+        return [true, "users"]
+    when 3
+        # quit
+        return [false, "exit"]
     else
         # error
         raise AppError
