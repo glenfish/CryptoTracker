@@ -15,7 +15,7 @@ path_to_portfolio_file = "./json/portfolios/glenfish.json"
 # START CODE
 logged_in = false
 while !logged_in
-    top_level_menu("Crypto Portfolio Tracker - Logged Out") # Optionally pass a title to the Main Menu
+    top_level_menu("Crypto Portfolio Tracker - You Are Logged Out") # Optionally pass a title to the Main Menu
     user_selection = gets.strip.chomp.to_i # get user selection
     active_selection = top_level_menu_selection(user_selection, path_to_users_file)
     active_selection[0] == false ? exit : logged_in = active_selection[0] # exits or sets logged in status to true
@@ -28,20 +28,19 @@ while logged_in
         active_selection[0] == false ? exit : logged_in = active_selection[0] # exits or sets logged in status to true
     end
     while active_selection[1] != "fusion22" # change this to use user object attr
-        logged_in_main_menu("Welcome to Crypto Portfolio Tracker") # Optionally pass a title to the Main Menu
+        logged_in_main_menu("Crypto Portfolio Tracker Main Menu") # Optionally pass a title to the Main Menu
         user_selection = gets.strip.chomp.to_i # get user selection
         active_selection = logged_in_menu_selection(user_selection, path_to_users_file, path_to_portfolio_file)
         active_selection[0] == false ? exit : logged_in = active_selection[0] # exits or sets logged in status to true
+        if active_selection[1] == "show_portfolio"
+            # show portfolio code
+            puts read_portfolio_json(path_to_portfolio_file)
+            # show_portfolio()
+            # end show portfolio code
+        end
     end
 end
 # END CODE
-
-
-
-
-
-
-
 
 # puts "which test file... 1, 2, 3 or 4?\n"
 # choice = gets.chomp.to_i
