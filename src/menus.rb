@@ -6,9 +6,8 @@ begin
     require 'colorize'
 
 
-def top_level_menu
+def top_level_menu(menu_title = "Welcome To Crypto Tracker")
     # Top level Welcome menu
-    menu_title = "Welcome To Crypto Tracker"
     menu_options = ['Login', 'Create User', 'Help', 'Quit']
     rows = []
     menu_options.each_with_index do |menu_option, index|
