@@ -141,7 +141,7 @@ def logged_in_menu_selection(selection, path_to_users_file, path_to_portfolio_fi
     when 2
         # help
         system 'clear'
-        puts "show portfolio"
+        # puts "show portfolio"
         return [true, "show_portfolio"]
     when 3
         # quit
