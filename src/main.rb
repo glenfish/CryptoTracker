@@ -9,9 +9,11 @@ require_relative 'menus'
 
 
 
-top_level_menu
-# menu_choice = gets.strip.chomp.to_i
-top_level_menu_selection(gets.strip.chomp.to_i)
+top_level_menu("Crypto Portfolio Tracker") # Optionally pass a title to the Main Menu
+top_level_menu_selection(gets.strip.chomp.to_i) # Handles the Main Menu user selection
+
+
+
 
 # puts "which test file... 1, 2, 3 or 4?\n"
 # choice = gets.chomp.to_i
