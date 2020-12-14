@@ -69,7 +69,7 @@ end
 
 def logged_in_main_menu(menu_title = "Welcome To Crypto Tracker")
     # Top level Welcome menu
-    menu_options = ['Help', 'Portfolio', 'Quit']
+    menu_options = ['Help', 'View Portfolio', 'Quit']
     rows = []
     menu_options.each_with_index do |menu_option, index|
         rows << ["#{index + 1}. #{menu_option}"]
