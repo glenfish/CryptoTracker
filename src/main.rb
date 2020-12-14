@@ -6,14 +6,16 @@ require 'terminal-table'
 require 'colorize'
 
 require_relative 'methods'
-# require_relative 'paths'
+require_relative 'paths'
 
 path_to_users_file = './json/users/users.json'
 # users_json = get_user(path_to_users_file)
 
 # FINISHED CODE
+
 top_level_menu("Crypto Portfolio Tracker") # Optionally pass a title to the Main Menu
-top_level_menu_selection(gets.strip.chomp.to_i, path_to_users_file) # Handles the Main Menu user selection
+user_selection = gets.strip.chomp.to_i # get user selection
+top_level_menu_selection(user_selection, path_to_users_file) # Handles the Main Menu user selection
 # END FINISHED CODE
 
 
