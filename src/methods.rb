@@ -238,7 +238,7 @@ def read_portfolio_json(path_to_portfolio_file)
     # p portfolio_json
     # puts "\n"
     portfolio_array = []
-    portfolio_array << portfolio_json['username']
+    # portfolio_array << portfolio_json['username']
     # portfolio_json.each do |key, value|
     portfolio_json['data'].each do |key, value|
             symbol = key
