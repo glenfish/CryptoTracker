@@ -99,10 +99,11 @@ def top_level_menu_selection(selection, path_to_users_file)
         users_json = get_user(path_to_users_file)
         valid = validate_username(username, users_json)
         if valid
-            # puts "You are successfully logged in, #{username}\n"
+            system 'clear'
+            puts "You are successfully logged in ...\n"
             return [true, username]
         else
-            # puts "Access denied, #{username} user doesn't exist or account inactive!\n"
+            puts "Access denied, #{username} user doesn't exist or account inactive!\n"
             return [false, username]
         end
     when 2
@@ -257,6 +258,7 @@ when 1
       else
         api_test_file = './json/api_cached/schema.json'
     end
+    system 'clear'
     dummy_response = call_dummy_api(api_test_file) # cached local call
     get_crypto(dummy_response, portfolio_array, portfolio_assets_quantities_array)
     rescue
