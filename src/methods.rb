@@ -1,12 +1,9 @@
 # frozen_string_literal: true
-# begin
+
 require 'httparty'
 require 'json'
 require 'terminal-table'
 require 'colorize'
-
-# path_to_users_file = './json/users/users.json'
-
 
 def display_user_info(users_json)
     rows =[]
@@ -60,6 +57,7 @@ end
 
 def top_level_menu(menu_title = "Welcome To Crypto Tracker")
     # Top level Welcome menu
+    system 'clear'
     menu_options = ['Login', 'Create User', 'Help', 'Quit']
     rows = []
     menu_options.each_with_index do |menu_option, index|
@@ -244,6 +242,7 @@ puts "1. Use Locally Cached API Test Data\n2. Get Live CoinMarketCap.com API Dat
 api_course_selection = gets.strip.chomp.to_i
 case api_course_selection
 when 1
+    begin
     puts "Select an API test file... 1/2/3/4:\n"
     choice = gets.chomp.to_i
     case choice
@@ -260,6 +259,10 @@ when 1
     end
     dummy_response = call_dummy_api(api_test_file) # cached local call
     get_crypto(dummy_response, portfolio_array, portfolio_assets_quantities_array)
+    rescue
+    puts "Please enter a number between 1 and 4"
+    retry
+end
     
 when 2
     begin
@@ -300,17 +303,3 @@ def read_portfolio_json(path_to_portfolio_file)
 
 end
 
-
-
-
-
-
-
-
-
-
-
-# rescue
-#     puts "application error"
-#     # retry
-# end
