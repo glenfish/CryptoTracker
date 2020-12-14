@@ -68,7 +68,8 @@ def top_level_menu_selection(selection, path_to_users_file)
         puts "Enter username:\n"
         username = gets.strip.chomp
         users_json = get_user(path_to_users_file)
-        puts validate_username(username, users_json)
+        valid = validate_username(username, users_json)
+        puts "You are successfully logged in, #{username}\n" if valid
     when 2
         #create user
         system 'clear'
