@@ -39,13 +39,19 @@ end
 
 def validate_username(username, users_json)
     users_json.each_with_index do |user, index|
-        username_current = users_json[index]['username']
-        if username_current == username
+        username_current = user['username']
+        active_current = user['active']
+        # puts "Looking at: #{username_current} = #{username}"
+        # puts "User is active? #{active_current}"
+        if username_current == username && active_current == true
+            # puts "#{username} was selected"
             return username
-        else 
-        return false
+        elsif username_current == username && active_current == false
+            # puts "#{username} is not active"
+            return false
         end
     end
+    return false
 end
 
 
@@ -69,24 +75,31 @@ def top_level_menu_selection(selection, path_to_users_file)
         username = gets.strip.chomp
         users_json = get_user(path_to_users_file)
         valid = validate_username(username, users_json)
-        puts "You are successfully logged in, #{username}\n" if valid
+        if valid
+            # puts "You are successfully logged in, #{username}\n"
+            return [true, "logged_in"]
+        else
+            # puts "Access denied, #{username} user doesn't exist or account inactive!\n"
+            return [false, "not_logged_in"]
+        end
     when 2
         #create user
         system 'clear'
         puts "create a user"
+        return [true, "create_user"]
     when 3
         # help
         system 'clear'
         puts "show help"
+        return [true, "show_help"]
     when 4
         # quit
-        system 'clear'
-        puts "goodbye"
-        exit
+        return [false, "exit"]
     when 5
         system 'clear'
         users_json = get_user(path_to_users_file)
         display_user_info(users_json)
+        return [true, "users"]
     else
         # error
         raise AppError
