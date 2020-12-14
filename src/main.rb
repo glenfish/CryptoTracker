@@ -12,10 +12,17 @@ path_to_users_file = './json/users/users.json'
 # users_json = get_user(path_to_users_file)
 
 # FINISHED CODE
-
-top_level_menu("Crypto Portfolio Tracker") # Optionally pass a title to the Main Menu
-user_selection = gets.strip.chomp.to_i # get user selection
-top_level_menu_selection(user_selection, path_to_users_file) # Handles the Main Menu user selection
+logged_in = false
+while !logged_in
+    top_level_menu("Crypto Portfolio Tracker - Logged Out") # Optionally pass a title to the Main Menu
+    user_selection = gets.strip.chomp.to_i # get user selection
+    active_selection = top_level_menu_selection(user_selection, path_to_users_file)
+    active_selection[0] == false ? exit : logged_in = active_selection[0] # exits or sets logged in status to true
+end
+while logged_in
+    logged_in_main_menu("Welcome to Crypto Portfolio Tracker") # Optionally pass a title to the Main Menu
+    user_selection = gets.strip.chomp.to_i # get user selection
+end
 # END FINISHED CODE
 
 
