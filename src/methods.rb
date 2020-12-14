@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-begin
+# begin
 require 'httparty'
 require 'json'
 require 'terminal-table'
@@ -175,20 +175,7 @@ end
 
 def show_portfolio(portfolio_assets_quantities_array)
     system 'clear'
-    puts "choose api test file... 1/2/3/4:\n"
-choice = gets.chomp.to_i
-case choice
-    when 1
-    api_test_file = './json/api_cached/temp-1.json'
-    when 2
-    api_test_file = './json/api_cached/temp-2.json'
-    when 3
-    api_test_file = './json/api_cached/temp-3.json'
-    when 4
-    api_test_file = './json/api_cached/temp-4.json'
-  else
-    api_test_file = './json/api_cached/schema.json'
-end
+
 
 # puts "big list... y or n ?\n"
 # if gets.chomp == "y"
@@ -213,6 +200,7 @@ api_link = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?sy
 api_key = '' # user enters this at run time for security
 def get_crypto(response, portfolio_array, portfolio_assets_quantities_array)
   rows =[]
+  grand_total = 0.0
   portfolio_array.each do |crypto|
     name = response['data'][crypto]['name']
     symbol = response['data'][crypto]['symbol']
@@ -224,16 +212,19 @@ def get_crypto(response, portfolio_array, portfolio_assets_quantities_array)
             quantity = element[1]
         end
     end
+    grand_total += quantity * response['data'][crypto]['quote']['USD']['price']
     total = format('%0.2f', quantity * response['data'][crypto]['quote']['USD']['price']).gsub(/(\d)(?=\d{3}+\.)/, '\1,')
     rows << [name, symbol, quantity, "$" + price, "$" + total]
   end
-
+  rows << :separator
+  grand_total = format('%0.2f', grand_total).gsub(/(\d)(?=\d{3}+\.)/, '\1,')
+  rows << ['Total','','','','$' + grand_total]
   table = Terminal::Table.new :title => "Portfolio".colorize(:cyan), :headings => ['Name'.colorize(:cyan), 'Symbol'.colorize(:cyan), 'Quantity'.colorize(:cyan), 'Price USD'.colorize(:cyan), 'Total USD'.colorize(:cyan)], :rows => rows
   puts table
-  puts "\nYour portfolio has a total of #{portfolio_array.length + 1} cryptos\n"
+  puts "\nYour portfolio has a total of #{portfolio_array.length + 1} digital assets.\n"
 end
 
-def call_api(api_link)
+def call_api(api_link, api_key)
   response = HTTParty.get(api_link,
                           { headers: { 'X-CMC_PRO_API_KEY' => api_key,
                                        'Accept' => 'application/json' } })
@@ -246,9 +237,45 @@ def call_dummy_api(api_test_file)
     return JSON.parse(file_data)
 end
 
-dummy_response = call_dummy_api(api_test_file)
 
-get_crypto(dummy_response, portfolio_array, portfolio_assets_quantities_array)
+
+
+puts "1. Use Locally Cached API Test Data\n2. Get Live CoinMarketCap.com API Data\n"
+api_course_selection = gets.strip.chomp.to_i
+case api_course_selection
+when 1
+    puts "Select an API test file... 1/2/3/4:\n"
+    choice = gets.chomp.to_i
+    case choice
+        when 1
+        api_test_file = './json/api_cached/temp-1.json'
+        when 2
+        api_test_file = './json/api_cached/temp-2.json'
+        when 3
+        api_test_file = './json/api_cached/temp-3.json'
+        when 4
+        api_test_file = './json/api_cached/temp-4.json'
+      else
+        api_test_file = './json/api_cached/schema.json'
+    end
+    dummy_response = call_dummy_api(api_test_file) # cached local call
+    get_crypto(dummy_response, portfolio_array, portfolio_assets_quantities_array)
+    
+when 2
+    begin
+    puts "Enter API key:\n"
+    api_key = gets.strip.chomp
+    system 'clear'
+    puts "*** ... loading live data ... ***\n\n"
+    response = call_api(api_link, api_key) # live call
+    get_crypto(response, portfolio_array, portfolio_assets_quantities_array)
+    rescue
+        puts "Error: api key does not match"
+    end
+end
+
+
+
 end
 
 # method to read portfolio json
@@ -283,7 +310,7 @@ end
 
 
 
-rescue
-    puts "application error"
-    # retry
-end
+# rescue
+#     puts "application error"
+#     # retry
+# end
