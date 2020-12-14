@@ -135,7 +135,7 @@ def logged_in_menu_selection(selection, path_to_users_file, path_to_portfolio_fi
         system 'clear'
         puts "show help"
         return [true, "show_help"]
-    when 4
+    when 2
         # quit
         return [false, "exit"]
     else
@@ -165,7 +165,7 @@ def admin_logged_in_menu_selection(selection, path_to_users_file, path_to_portfo
     end
 end
 
-# rescue
-#     puts "error"
-#     # retry
-# end
+rescue
+    puts "application error"
+    # retry
+end
