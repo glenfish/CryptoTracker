@@ -405,10 +405,7 @@ end # end show_portfolio method
 
 # method to read portfolio json
 def read_portfolio_json(path_to_portfolio_file,active_user)
-    p active_user
-    if active_user != "" 
-        path_to_portfolio_file = "./json/portfolios/#{active_user.username}.json"
-    end
+    path_to_portfolio_file = "./json/portfolios/#{active_user.username}.json"
     portfolio_json = get_portfolio(path_to_portfolio_file)
     # p portfolio_json
     # puts "\n"
