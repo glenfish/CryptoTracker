@@ -39,6 +39,9 @@ while logged_in
             portfolio_assets_quantities_array = read_portfolio_json(path_to_portfolio_file, active_user)
             show_portfolio(portfolio_assets_quantities_array, active_user)
             # end show portfolio code
+        elsif active_selection[1] == "add_crypto"
+            #call add crypto method
+            add_crypto_to_portfolio(active_user)
         end
     end
 end
