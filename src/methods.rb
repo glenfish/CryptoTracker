@@ -182,7 +182,7 @@ def top_level_menu_selection(selection, path_to_users_file)
             puts "Welcome #{username}, you are logged in.\n"
             return [true, username]
         else
-            puts "Access denied, #{username} user doesn't exist or account inactive!\n"
+            puts "Access denied for username: #{username}\n"
             return [false, username]
         end
     when 2
