@@ -23,7 +23,11 @@ def add_crypto_to_portfolio(active_user)
     symbol = gets.strip.chomp.upcase
     puts "Enter the quantity:\n"
     quantity = gets.strip.chomp.to_f
-    puts "Add #{quantity} #{symbol} to your portfolio? (y/n)"
+    if quantity > 0.0
+        puts "Please confirm: #{quantity} #{symbol} (y/n)"
+    elsif quantity == 0.0
+        puts "Please confirm you are deleting #{symbol} (y/n)"
+    end
     if gets.strip.chomp == 'y'
         json = portfolio_json['data'].merge({symbol=>{"asset_name"=>"", "asset_quantity"=>quantity, "asset_buy_date"=>Time.now.strftime("%Y-%m-%d"), "asset_sell_date"=>"", "usd_price"=>"", "btc_price"=>"", "usd_profit"=>"", "btc_profit"=>""}})
         json_full = {"username":active_user.username,"data":json}
@@ -198,7 +202,7 @@ end
 
 def logged_in_main_menu(menu_title = "Welcome To Crypto Tracker")
     # Top level Welcome menu
-    menu_options = ['Help', 'View Portfolio', 'Add Crypto', 'Quit']
+    menu_options = ['Help', 'View Portfolio', 'Add/Remove Crypto', 'Quit']
     rows = []
     menu_options.each_with_index do |menu_option, index|
         rows << ["#{index + 1}. #{menu_option}"]
@@ -322,7 +326,7 @@ def show_portfolio(portfolio_assets_quantities_array, active_user = "")
     portfolio_assets_quantities_array.each do |element|
         symbol = element[0]
         portfolio_array.map do |crypto|
-        output << crypto if crypto == symbol
+        output << crypto if (crypto == symbol && element[1] > 0.0)
         end
     end
     portfolio_array = output
