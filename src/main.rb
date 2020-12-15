@@ -26,7 +26,11 @@ while logged_in
     while active_selection[1] != "fusion22" # change this to use user object attr
         logged_in_main_menu("Crypto Portfolio Tracker Main Menu") # Optionally pass a title to the Main Menu
         user_selection = gets.strip.chomp.to_i # get user selection
+        begin
         active_selection = logged_in_menu_selection(user_selection, path_to_users_file, path_to_portfolio_file)
+        rescue
+            retry
+        end
         active_selection[0] == false ? exit : logged_in = active_selection[0] # exits or sets logged in status to true
         if active_selection[1] == "show_portfolio"
             # show portfolio code
