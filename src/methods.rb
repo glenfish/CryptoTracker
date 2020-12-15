@@ -253,7 +253,7 @@ api_course_selection = gets.strip.chomp.to_i
 case api_course_selection
 when 1
     begin
-    puts "Select an API test file... 1/2/3/4:\n"
+    puts "Select an API test file... 1/2/3/4:\nOr select 5 for the most recent cached API file (for testing/demo)\nNOTE: If portfolio has changed since last cached, run live api call.)\n"
     choice = gets.chomp.to_i
     case choice
         when 1
@@ -264,6 +264,8 @@ when 1
         api_test_file = './json/api_cached/temp-3.json'
         when 4
         api_test_file = './json/api_cached/temp-4.json'
+        when 5
+        api_test_file = './json/api_cached/latest.json'
       else
         api_test_file = './json/api_cached/schema.json'
     end
