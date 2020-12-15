@@ -5,7 +5,12 @@ require 'json'
 require 'terminal-table'
 require 'colorize'
 
-# writes API data
+# clear terminal screen
+def clear
+    system 'clear'
+end
+
+# write JSON data to file
 def write_json_file(json, filepath)
     File.open(filepath,"w") do |f|
         f.write(json.to_json)
@@ -89,7 +94,7 @@ end
 
 def top_level_menu(menu_title = "Welcome To Crypto Tracker")
     # Top level Welcome menu
-    system 'clear'
+    clear
     menu_options = ['Login', 'Create User', 'Help', 'Quit']
     rows = []
     menu_options.each_with_index do |menu_option, index|
@@ -125,14 +130,14 @@ def top_level_menu_selection(selection, path_to_users_file)
     case selection
     when 1
         #login
-        # system 'clear'
+        # clear
         puts "Enter username:\n"
         username = gets.strip.chomp
         users_json = get_user(path_to_users_file)
         valid = validate_username(username, users_json)
         if valid
-            system 'clear'
-            puts "#{username}, you are successfully logged in ...\n"
+            clear
+            puts "Welcome #{username}, you are logged in.\n"
             return [true, username]
         else
             puts "Access denied, #{username} user doesn't exist or account inactive!\n"
@@ -140,19 +145,19 @@ def top_level_menu_selection(selection, path_to_users_file)
         end
     when 2
         #create user
-        system 'clear'
+        clear
         create_user(path_to_users_file)
         return [true, "create_user"]
     when 3
         # help
-        system 'clear'
+        clear
         puts "show help"
         return [true, "show_help"]
     when 4
         # quit
         return [false, "exit"]
     when 5
-        system 'clear'
+        clear
         users_json = get_user(path_to_users_file)
         display_user_info(users_json)
         return [true, "users"]
@@ -163,16 +168,16 @@ def top_level_menu_selection(selection, path_to_users_file)
 end
 
 def logged_in_menu_selection(selection, path_to_users_file, path_to_portfolio_file)
-    system 'clear'
+    clear
     case selection
     when 1
         # help
-        system 'clear'
+        clear
         puts "show help"
         return [true, "show_help"]
     when 2
         # help
-        system 'clear'
+        clear
         # puts "show portfolio"
         return [true, "show_portfolio"]
     when 3
@@ -187,11 +192,11 @@ def admin_logged_in_menu_selection(selection, path_to_users_file, path_to_portfo
     case selection
     when 1
         #create user
-        system 'clear'
+        clear
         create_user(path_to_users_file)
         return [true, "fusion22"]
     when 2
-        system 'clear'
+        clear
         users_json = get_user(path_to_users_file)
         display_user_info(users_json)
         return [true, "fusion22"]
@@ -205,7 +210,7 @@ def admin_logged_in_menu_selection(selection, path_to_users_file, path_to_portfo
 end
 
 def show_portfolio(portfolio_assets_quantities_array)
-    system 'clear'
+    clear
 
 
     # puts "big list... y or n ?\n"
@@ -250,7 +255,7 @@ def show_portfolio(portfolio_assets_quantities_array)
     rows << ['Grand Total','','','','$' + grand_total]
     table = Terminal::Table.new :title => "Portfolio".colorize(:cyan), :headings => ['Name'.colorize(:cyan), 'Symbol'.colorize(:cyan), 'Quantity'.colorize(:cyan), 'Price USD'.colorize(:cyan), 'Total USD'.colorize(:cyan)], :rows => rows
     puts table
-    puts "\nYour portfolio has a total of #{portfolio_array.length} digital assets.\n"
+    puts "\n" + Time.now.strftime("%Y-%m-%d %H:%M") + "\nYour portfolio has a total of #{portfolio_array.length} digital assets.\n\n"
     end
 
     def call_api(api_link, api_key, filepath = "./json/api_cached/latest.json")
@@ -270,10 +275,13 @@ def show_portfolio(portfolio_assets_quantities_array)
     # handles the I/O of selecting the portfolio file source
     puts "1. Use Locally Cached API Test Data\n2. Get Live CoinMarketCap.com API Data\n"
     api_course_selection = gets.strip.chomp.to_i
+    clear
     case api_course_selection
     when 1
         begin
-        puts "Select an API test file... 1/2/3/4:\nOr select 5 for the most recent cached API file (for testing/demo)\nNOTE: If portfolio has changed since last cached, run live api call.)\n"
+        instructions = "Select a cached API test file... 1/2/3/4\nOr for the most recent cached API file (for testing/demo), select 5\n\n"
+        instructions += "NOTE: If portfolio has changed since last cached, run a new live api call.\n".colorize(:green)
+        puts instructions
         choice = gets.chomp.to_i
         case choice
             when 1
@@ -294,7 +302,7 @@ def show_portfolio(portfolio_assets_quantities_array)
         retry
         end
         begin
-        system 'clear'
+        clear
         dummy_response = call_dummy_api(api_test_file) # cached local call
         get_crypto(dummy_response, portfolio_array, portfolio_assets_quantities_array)
         rescue
@@ -305,7 +313,7 @@ def show_portfolio(portfolio_assets_quantities_array)
         begin
         puts "Enter API key:\n"
         api_key = gets.strip.chomp
-        system 'clear'
+        clear
         puts "*** ... loading live data ... ***\n\n"
         response = call_api(api_link, api_key) # live call
         get_crypto(response, portfolio_array, portfolio_assets_quantities_array)
