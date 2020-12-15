@@ -39,8 +39,7 @@ class Portfolio
     end
 
     def create_empty_portfolio
-        code = "{\"username\":\"#{@username}\",\"data\":{\"BTC\":{\"asset_name\":\"\",\"asset_quantity\":9.5,\"asset_buy_date\":\"2020-12-14\",\"asset_sell_date\":\"\",\"usd_price\":\"\",\"btc_price\":\"\",\"usd_profit\":\"\",\"btc_profit\":\"\"}}}"
-        return code
+        return {"username":"#{@username}","data":{"BTC":{"asset_name":"","asset_quantity":0,"asset_buy_date":"2020-12-14","asset_sell_date":"","usd_price":"","btc_price":"","usd_profit":"","btc_profit":""}}}
     end
 
 end
