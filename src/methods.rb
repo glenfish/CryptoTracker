@@ -205,7 +205,7 @@ def top_level_menu_selection(selection, path_to_users_file)
             file_data = get_user(path_to_users_file)
             user_object_array = get_user_data(file_data, username)
             active_user = create_user_object(user_object_array)
-            # clear
+            clear
             puts "Welcome #{active_user.name}, you are logged in.\n"
             return [true, username, active_user]
         else
@@ -278,9 +278,10 @@ def admin_logged_in_menu_selection(selection, path_to_users_file, path_to_portfo
     end
 end
 
-def show_portfolio(portfolio_assets_quantities_array)
+def show_portfolio(portfolio_assets_quantities_array, active_user = "")
     clear
-
+    active_user_name = active_user.name
+    puts "#{active_user_name}, Select either cached or live crypto pricing:\n"
 
     # puts "big list... y or n ?\n"
     # if gets.chomp == "y"
@@ -301,30 +302,36 @@ def show_portfolio(portfolio_assets_quantities_array)
     portfolio = portfolio_array.join(',')
     api_link = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=' + portfolio
     api_key = '' # user enters this at run time for security
+    
     def get_crypto(response, portfolio_array, portfolio_assets_quantities_array)
-    rows =[]
-    grand_total = 0.0
-    portfolio_array.each do |crypto|
-        name = response['data'][crypto]['name']
-        symbol = response['data'][crypto]['symbol']
-        price = format('%0.2f', response['data'][crypto]['quote']['USD']['price']).gsub(/(\d)(?=\d{3}+\.)/, '\1,')
-        quantity = 0
-        portfolio_assets_quantities_array.each do |element|
-            # p "symbol: #{element[0]} qty: #{element[1]}"
-            if symbol == element[0]
-                quantity = element[1]
+        rows =[]
+        grand_total = 0.0
+        portfolio_array.each do |crypto|
+            name = response['data'][crypto]['name']
+            symbol = response['data'][crypto]['symbol']
+            price = format('%0.2f', response['data'][crypto]['quote']['USD']['price']).gsub(/(\d)(?=\d{3}+\.)/, '\1,')
+            quantity = 0
+            portfolio_assets_quantities_array.each do |element|
+                if symbol == element[0]
+                    quantity = element[1]
+                end
             end
+            grand_total += quantity * response['data'][crypto]['quote']['USD']['price']
+            total = format('%0.2f', quantity * response['data'][crypto]['quote']['USD']['price']).gsub(/(\d)(?=\d{3}+\.)/, '\1,')
+            rows << [name, symbol, quantity, "$" + price, "$" + total]
         end
-        grand_total += quantity * response['data'][crypto]['quote']['USD']['price']
-        total = format('%0.2f', quantity * response['data'][crypto]['quote']['USD']['price']).gsub(/(\d)(?=\d{3}+\.)/, '\1,')
-        rows << [name, symbol, quantity, "$" + price, "$" + total]
-    end
-    rows << :separator
-    grand_total = format('%0.2f', grand_total).gsub(/(\d)(?=\d{3}+\.)/, '\1,')
-    rows << ['Grand Total','','','','$' + grand_total]
-    table = Terminal::Table.new :title => "Portfolio".colorize(:cyan), :headings => ['Name'.colorize(:cyan), 'Symbol'.colorize(:cyan), 'Quantity'.colorize(:cyan), 'Price USD'.colorize(:cyan), 'Total USD'.colorize(:cyan)], :rows => rows
-    puts table
-    puts "\n" + Time.now.strftime("%Y-%m-%d %H:%M") + "\nYour portfolio has a total of #{portfolio_array.length} digital assets.\n\n"
+        rows << :separator
+        grand_total = format('%0.2f', grand_total).gsub(/(\d)(?=\d{3}+\.)/, '\1,')
+        rows << ['Grand Total','','','','$' + grand_total]
+        # table = Terminal::Table.new :title => "#{active_user_name}", :headings => ['Name'.colorize(:cyan), 'Symbol'.colorize(:cyan), 'Quantity'.colorize(:cyan), 'Price USD'.colorize(:cyan), 'Total USD'.colorize(:cyan)], :rows => rows
+
+        table = Terminal::Table.new
+        table.title = "Portfolio"
+        table.headings = ['Name'.colorize(:cyan), 'Symbol'.colorize(:cyan), 'Quantity'.colorize(:cyan), 'Price USD'.colorize(:cyan), 'Total USD'.colorize(:cyan)]
+        table.rows = rows
+        table.style = {:width => 100}
+        puts table
+        puts "\n" + Time.now.strftime("%Y-%m-%d %H:%M") + "\nYour portfolio has a total of #{portfolio_array.length} digital assets.\n\n"
     end
 
     def call_api(api_link, api_key, filepath = "./json/api_cached/latest.json")
@@ -341,11 +348,12 @@ def show_portfolio(portfolio_assets_quantities_array)
         file_data = file.read
         return JSON.parse(file_data)
     end
+    
     # handles the I/O of selecting the portfolio file source
-    puts "1. Use Locally Cached API Test Data\n2. Get Live CoinMarketCap.com API Data\n"
-    api_course_selection = gets.strip.chomp.to_i
+    puts "1. Locally Cached\n2. Live API\n"
+    api_file_selection = gets.strip.chomp.to_i
     clear
-    case api_course_selection
+    case api_file_selection
     when 1
         begin
         instructions = "Select a cached API test file... 1/2/3/4\nOr for the most recent cached API file (for testing/demo), select 5\n\n"
@@ -374,21 +382,21 @@ def show_portfolio(portfolio_assets_quantities_array)
         clear
         dummy_response = call_dummy_api(api_test_file) # cached local call
         get_crypto(dummy_response, portfolio_array, portfolio_assets_quantities_array)
-        rescue
-        puts "Your portfolio has changed. Run a fresh API call to get the latest data"
+        # rescue
+        # puts "Your portfolio has changed. Run a fresh API call to get the latest data"
     end
         
     when 2
-        begin
+        # begin
         puts "Enter API key:\n"
         api_key = gets.strip.chomp
         clear
         puts "*** ... loading live data ... ***\n\n"
         response = call_api(api_link, api_key) # live call
         get_crypto(response, portfolio_array, portfolio_assets_quantities_array)
-        rescue
-            puts "Error: api key does not match"
-        end
+        # rescue
+        #     puts "Error: api key does not match"
+        # end
     end
 end # end show_portfolio method
 
