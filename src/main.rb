@@ -8,7 +8,7 @@ require_relative 'methods'
 require_relative 'classes'
 path_to_users_file = './json/users/users.json'
 path_to_portfolio_file = "./json/portfolios/glenfish.json"
-
+active_user = ""
 # START CODE
 logged_in = false
 while !logged_in
@@ -16,6 +16,7 @@ while !logged_in
     user_selection = gets.strip.chomp.to_i # get user selection
     active_selection = top_level_menu_selection(user_selection, path_to_users_file)
     active_selection[0] == false ? exit : logged_in = active_selection[0] # exits or sets logged in status to true
+    active_user = active_selection[2] || "" # passes back the active user object
 end
 while logged_in
     while active_selection[1] == "fusion22" # change this to use user object attr subclass of user
@@ -36,7 +37,7 @@ while logged_in
         if active_selection[1] == "show_portfolio"
             # show portfolio code
             portfolio_assets_quantities_array = read_portfolio_json(path_to_portfolio_file)
-            show_portfolio(portfolio_assets_quantities_array)
+            show_portfolio(portfolio_assets_quantities_array, active_user)
             # end show portfolio code
         end
     end
