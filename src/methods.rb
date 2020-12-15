@@ -59,14 +59,17 @@ def deactivate_user(users, path_to_users_file) # change active to false for a sp
                 # deactivate the user
                 existing_username['active']=false
                 write_json_file(users, path_to_users_file)
+                clear
                 puts "#{username} user has been deactivated"
                 return
             else
+            clear
             puts "User remains active"
             return
             end
         end
     end
+    clear
     puts "User does not exist"
 end
 
@@ -195,8 +198,7 @@ end
 def top_level_menu_selection(selection, path_to_users_file)
     case selection
     when 1
-        #login
-        # clear
+        clear
         puts "Enter username:\n"
         username = gets.strip.chomp
         users_json = get_user(path_to_users_file)
@@ -332,7 +334,7 @@ def show_portfolio(portfolio_assets_quantities_array, active_user = "")
         table.style = {:width => 100}
         puts table
         puts "Data supplied by CoinMarketCap.com"
-        puts "\n" + Time.now.strftime("%Y-%m-%d %H:%M") + "\nYour portfolio has a total of #{portfolio_array.length} digital assets.\n\n"
+        puts "\nUsername: #{active_user.username}\n" + Time.now.strftime("%Y-%m-%d %H:%M") + "\nYour portfolio has a total of #{portfolio_array.length} digital assets.\n\n"
     end
 
     def call_api(api_link, api_key, filepath = "./json/api_cached/latest.json")
@@ -403,7 +405,10 @@ end # end show_portfolio method
 
 # method to read portfolio json
 def read_portfolio_json(path_to_portfolio_file,active_user)
-    path_to_portfolio_file = "./json/portfolios/#{active_user.username}.json"
+    p active_user
+    if active_user != "" 
+        path_to_portfolio_file = "./json/portfolios/#{active_user.username}.json"
+    end
     portfolio_json = get_portfolio(path_to_portfolio_file)
     # p portfolio_json
     # puts "\n"
