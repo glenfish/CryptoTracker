@@ -5,6 +5,7 @@ require 'json'
 require 'terminal-table'
 require 'colorize'
 require_relative 'methods'
+require_relative 'classes'
 path_to_users_file = './json/users/users.json'
 path_to_portfolio_file = "./json/portfolios/glenfish.json"
 
