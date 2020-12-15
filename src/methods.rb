@@ -15,6 +15,22 @@ def clear
     system 'clear'
 end
 
+def add_crypto_to_portfolio(active_user)
+    path_to_portfolio_file = "./json/portfolios/#{active_user.username}.json"
+    portfolio_json = get_portfolio(path_to_portfolio_file)
+    # p portfolio_json
+    puts "Enter the crypto SYMBOL:\n"
+    symbol = gets.strip.chomp.upcase
+    puts "Enter the quantity:\n"
+    quantity = gets.strip.chomp.to_f
+    puts "Add #{quantity} #{symbol} to your portfolio? (y/n)"
+    if gets.strip.chomp == 'y'
+        json = portfolio_json['data'].merge({symbol=>{"asset_name"=>"", "asset_quantity"=>quantity, "asset_buy_date"=>Time.now.strftime("%Y-%m-%d"), "asset_sell_date"=>"", "usd_price"=>"", "btc_price"=>"", "usd_profit"=>"", "btc_profit"=>""}})
+        json_full = {"username":active_user.username,"data":json}
+        write_json_file(json_full, path_to_portfolio_file)
+    end
+end
+
 def create_user_object(user_object_array)
     active_user = Users.new(user_object_array[0], user_object_array[1], user_object_array[2])
     return active_user
@@ -182,7 +198,7 @@ end
 
 def logged_in_main_menu(menu_title = "Welcome To Crypto Tracker")
     # Top level Welcome menu
-    menu_options = ['Help', 'View Portfolio', 'Quit']
+    menu_options = ['Help', 'View Portfolio', 'Add Crypto', 'Quit']
     rows = []
     menu_options.each_with_index do |menu_option, index|
         rows << ["#{index + 1}. #{menu_option}"]
@@ -253,6 +269,9 @@ def logged_in_menu_selection(selection, path_to_users_file, path_to_portfolio_fi
         # puts "show portfolio"
         return [true, "show_portfolio"]
     when 3
+        # quit
+        return [true, "add_crypto"]
+    when 4
         # quit
         return [false, "exit"]
     else
