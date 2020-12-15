@@ -61,7 +61,8 @@ def check_duplicate_user(users, new_username) # iterate over an array of hashes 
     return false
 end
 
-def get_user_data(users, username) # iterate over an array of hashes and return name, username and password array
+# iterate over an array of hashes and return name, username and password array
+def get_user_data(users, username)
     user_array = []
     users.each do |user|
         if user['username'] == username
@@ -73,7 +74,8 @@ def get_user_data(users, username) # iterate over an array of hashes and return 
     return user_array
 end
 
-def deactivate_user(users, path_to_users_file) # change active to false for a specific user in the users.json file
+# change active to false for a specific user in the users.json file
+def deactivate_user(users, path_to_users_file)
     puts "Enter username to make inactive:\n"
     username = gets.strip.chomp
     users.each do |existing_username|
@@ -114,9 +116,9 @@ def create_user(path_to_users_file)
     user_hash['active'] = true
     user_hash['user_created'] = Time.now.strftime("%Y-%m-%d")
 
-    if !check_duplicate_user(file_data, user_hash['username']) # look for exisitng instances of username before creating user
+    if !check_duplicate_user(file_data, user_hash['username']) # true = duplicate username, false = ok to add user
         puts "You are about to add a new user. Are you sure? y/n\n"
-            if gets.strip.chomp.to_s == "y"
+            if gets.strip.chomp.to_s.downcase == "y"
                 file_data.push(user_hash)
                 write_json_file(file_data, path_to_users_file)
                 create_user_object(user_object_array) # calls method to create the user object using array of name, username and password
@@ -124,7 +126,7 @@ def create_user(path_to_users_file)
                 write_json_file(portfolio_object.create_empty_portfolio, portfolio_object.portfolio_path)
                 puts "User Created!\n"
             else
-                puts "User creation aborted.\n"
+                puts "User creation aborted.\n" # existing username found in users.json
                 return
             end
     else 
@@ -200,28 +202,6 @@ def top_level_menu(menu_title = "Welcome To Crypto Tracker")
     puts table
 end
 
-def logged_in_main_menu(menu_title = "Welcome To Crypto Tracker")
-    # Top level Welcome menu
-    menu_options = ['Help', 'View Portfolio', 'Add/Remove Crypto', 'Quit']
-    rows = []
-    menu_options.each_with_index do |menu_option, index|
-        rows << ["#{index + 1}. #{menu_option}"]
-    end
-    table = Terminal::Table.new :title => menu_title.colorize(:cyan), :rows => rows
-    puts table
-end
-
-def logged_in_admin_main_menu(menu_title = "Crypto Tracker Admin")
-    # Top level Welcome menu
-    menu_options = ['Create User', 'Show All Users', 'Deactivate User', 'Quit']
-    rows = []
-    menu_options.each_with_index do |menu_option, index|
-        rows << ["#{index + 1}. #{menu_option}"]
-    end
-    table = Terminal::Table.new :title => menu_title.colorize(:cyan), :rows => rows
-    puts table
-end
-
 def top_level_menu_selection(selection, path_to_users_file)
     case selection
     when 1
@@ -257,6 +237,28 @@ def top_level_menu_selection(selection, path_to_users_file)
     else
         
     end
+end
+
+def logged_in_main_menu(menu_title = "Welcome To Crypto Tracker")
+    # Top level Welcome menu
+    menu_options = ['Help', 'View Portfolio', 'Add/Remove Crypto', 'Quit']
+    rows = []
+    menu_options.each_with_index do |menu_option, index|
+        rows << ["#{index + 1}. #{menu_option}"]
+    end
+    table = Terminal::Table.new :title => menu_title.colorize(:cyan), :rows => rows
+    puts table
+end
+
+def logged_in_admin_main_menu(menu_title = "Crypto Tracker Admin")
+    # Top level Welcome menu
+    menu_options = ['Create User', 'Show All Users', 'Deactivate User', 'Quit']
+    rows = []
+    menu_options.each_with_index do |menu_option, index|
+        rows << ["#{index + 1}. #{menu_option}"]
+    end
+    table = Terminal::Table.new :title => menu_title.colorize(:cyan), :rows => rows
+    puts table
 end
 
 def logged_in_menu_selection(selection, path_to_users_file, path_to_portfolio_file)
@@ -365,6 +367,8 @@ def show_portfolio(portfolio_assets_quantities_array, active_user = "")
         puts table
         puts "Data supplied by CoinMarketCap.com"
         puts "\nUsername: #{active_user.username}\n" + Time.now.strftime("%Y-%m-%d %H:%M") + "\nYour portfolio has a total of #{portfolio_array.length} digital assets.\n\n"
+    rescue
+        
     end
 
     def call_api(api_link, api_key, filepath = "./json/api_cached/latest.json")
@@ -372,7 +376,7 @@ def show_portfolio(portfolio_assets_quantities_array, active_user = "")
                             { headers: { 'X-CMC_PRO_API_KEY' => api_key,
                                         'Accept' => 'application/json' } })
     parsed = JSON.parse(response.body)
-    write_json_file(parsed, filepath)
+    write_json_file(parsed, filepath) # writes the most recent live API call to latest.json
     return parsed
     end
 
