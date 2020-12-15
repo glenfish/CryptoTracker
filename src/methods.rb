@@ -20,6 +20,11 @@ def create_user_object(user_object_array)
     return active_user
 end
 
+def create_portfolio_object(username)
+    portfolio_object = Portfolio.new(username)
+    return portfolio_object
+end
+
 # write JSON data to file
 def write_json_file(json, filepath)
     File.open(filepath,"w") do |f|
@@ -95,6 +100,8 @@ def create_user(path_to_users_file)
                 file_data.push(user_hash)
                 write_json_file(file_data, path_to_users_file)
                 create_user_object(user_object_array) # calls method to create the user object using array of name, username and password
+                portfolio_object = create_portfolio_object(user_hash['username']) # calls a method to create a portfolio object and write a blank portfolio json file
+                write_json_file(portfolio_object.create_empty_portfolio, portfolio_object.portfolio_path)
                 puts "User Created!\n"
             else
                 puts "User creation aborted.\n"
@@ -349,7 +356,9 @@ def show_portfolio(portfolio_assets_quantities_array, active_user = "")
     def call_dummy_api(api_test_file)
         file = File.open(api_test_file)
         file_data = file.read
-        return JSON.parse(file_data)
+        output = JSON.parse(file_data)
+        # p output
+        return output
     end
     
     # handles the I/O of selecting the portfolio file source
