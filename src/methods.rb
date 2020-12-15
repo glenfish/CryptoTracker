@@ -4,13 +4,20 @@ require 'httparty'
 require 'json'
 require 'terminal-table'
 require 'colorize'
-
+require_relative 'classes'
 path_to_users_file = './json/users/users.json'
 path_to_portfolio_file = "./json/portfolios/glenfish.json"
+
+active_user = "" # initialise for user objects
 
 # clear terminal screen
 def clear
     system 'clear'
+end
+
+def create_user_object(user_object_array)
+    active_user = Users.new(user_object_array[0], user_object_array[1], user_object_array[2])
+    return active_user
 end
 
 # write JSON data to file
@@ -27,6 +34,18 @@ def check_duplicate_user(users, new_username) # iterate over an array of hashes 
         end
     end
     return false
+end
+
+def get_user_data(users, username) # iterate over an array of hashes and return name, username and password array
+    user_array = []
+    users.each do |user|
+        if user['username'] == username
+            user_array << user['name']
+            user_array << user['username']
+            user_array << user['password']
+        end
+    end
+    return user_array
 end
 
 def deactivate_user(users, path_to_users_file) # change active to false for a specific user in the users.json file
@@ -53,6 +72,8 @@ end
 
 # create a new user and push to users.json
 def create_user(path_to_users_file)
+    user_object_array = []
+    puts "* Create new user *"
     file_data = get_user(path_to_users_file)
     user_attributes = {"Name: "=> "name", "Username: " => "username", "Password: " => "password"}
     user_hash = Hash.new
@@ -60,6 +81,7 @@ def create_user(path_to_users_file)
         puts "#{k}\n"
         value = gets.strip.chomp
         user_hash[v] = value
+        user_object_array << value
     end
     user_hash['active'] = true
     user_hash['user_created'] = Time.now.strftime("%Y-%m-%d")
@@ -69,6 +91,7 @@ def create_user(path_to_users_file)
             if gets.strip.chomp.to_s == "y"
                 file_data.push(user_hash)
                 write_json_file(file_data, path_to_users_file)
+                create_user_object(user_object_array) # calls method to create the user object using array of name, username and password
                 puts "User Created!\n"
             else
                 puts "User creation aborted.\n"
@@ -109,13 +132,14 @@ def get_user(path_to_users_file)
     return parsed_user_json
 end
 
+# returns JSON portfolio data
 def get_portfolio(path_to_portfolio_file)
-    # return JSON portfolio data
     file = File.open(path_to_portfolio_file)
     file_data = file.read
     return JSON.parse(file_data)
 end
 
+# checks to see if username exists in users.json file
 def validate_username(username, users_json)
     users_json.each_with_index do |user, index|
         username_current = user['username']
@@ -178,9 +202,12 @@ def top_level_menu_selection(selection, path_to_users_file)
         users_json = get_user(path_to_users_file)
         valid = validate_username(username, users_json)
         if valid
-            clear
-            puts "Welcome #{username}, you are logged in.\n"
-            return [true, username]
+            file_data = get_user(path_to_users_file)
+            user_object_array = get_user_data(file_data, username)
+            active_user = create_user_object(user_object_array)
+            # clear
+            puts "Welcome #{active_user.name}, you are logged in.\n"
+            return [true, username, active_user]
         else
             puts "Access denied for username: #{username}\n"
             return [false, username]
