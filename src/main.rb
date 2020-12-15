@@ -36,7 +36,7 @@ while logged_in
         active_selection[0] == false ? exit : logged_in = active_selection[0] # exits or sets logged in status to true
         if active_selection[1] == "show_portfolio"
             # show portfolio code
-            portfolio_assets_quantities_array = read_portfolio_json(path_to_portfolio_file)
+            portfolio_assets_quantities_array = read_portfolio_json(path_to_portfolio_file, active_user)
             show_portfolio(portfolio_assets_quantities_array, active_user)
             # end show portfolio code
         end
