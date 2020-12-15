@@ -12,6 +12,29 @@ def write_json_file(json, filepath)
     end
 end
 
+# create a new user and push to users.json
+def create_user(path_to_users_file)
+    file_data = get_user(path_to_users_file)
+    user_attributes = {"Name: "=> "name", "Username: " => "username", "Password: " => "password"}
+    user_hash = Hash.new
+    user_attributes.each_with_index do |(k,v),i|
+        puts "#{k}\n"
+        value = gets.strip.chomp
+        user_hash[v] = value
+    end
+    user_hash['active'] = true
+    user_hash['user_created'] = Time.now.strftime("%Y-%m-%d")
+    puts "You are about to add a new user. Are you sure? y/n\n"
+        if gets.strip.chomp.to_s == "y"
+            file_data.push(user_hash)
+            write_json_file(file_data, path_to_users_file)
+            puts "User Created!\n"
+        else
+            puts "User creation aborted.\n"
+            return
+        end
+end
+
 def display_user_info(users_json)
     rows =[]
     users_json.each_with_index do |user, index|
@@ -34,7 +57,9 @@ end
 def get_user(path_to_users_file)
     file = File.open(path_to_users_file)
     file_data = file.read
-    return JSON.parse(file_data)
+    parsed_user_json = JSON.parse(file_data)
+    # p parsed_user_json
+    return parsed_user_json
 end
 
 def get_portfolio(path_to_portfolio_file)
@@ -100,14 +125,14 @@ def top_level_menu_selection(selection, path_to_users_file)
     case selection
     when 1
         #login
-        system 'clear'
+        # system 'clear'
         puts "Enter username:\n"
         username = gets.strip.chomp
         users_json = get_user(path_to_users_file)
         valid = validate_username(username, users_json)
         if valid
             system 'clear'
-            puts "You are successfully logged in ...\n"
+            puts "#{username}, you are successfully logged in ...\n"
             return [true, username]
         else
             puts "Access denied, #{username} user doesn't exist or account inactive!\n"
@@ -116,7 +141,7 @@ def top_level_menu_selection(selection, path_to_users_file)
     when 2
         #create user
         system 'clear'
-        puts "create a user"
+        create_user(path_to_users_file)
         return [true, "create_user"]
     when 3
         # help
@@ -163,8 +188,8 @@ def admin_logged_in_menu_selection(selection, path_to_users_file, path_to_portfo
     when 1
         #create user
         system 'clear'
-        puts "create a user"
-        return [true, "create_user"]
+        create_user(path_to_users_file)
+        return [true, "fusion22"]
     when 2
         system 'clear'
         users_json = get_user(path_to_users_file)
@@ -224,10 +249,10 @@ def get_crypto(response, portfolio_array, portfolio_assets_quantities_array)
   end
   rows << :separator
   grand_total = format('%0.2f', grand_total).gsub(/(\d)(?=\d{3}+\.)/, '\1,')
-  rows << ['Total','','','','$' + grand_total]
+  rows << ['Grand Total','','','','$' + grand_total]
   table = Terminal::Table.new :title => "Portfolio".colorize(:cyan), :headings => ['Name'.colorize(:cyan), 'Symbol'.colorize(:cyan), 'Quantity'.colorize(:cyan), 'Price USD'.colorize(:cyan), 'Total USD'.colorize(:cyan)], :rows => rows
   puts table
-  puts "\nYour portfolio has a total of #{portfolio_array.length + 1} digital assets.\n"
+  puts "\nYour portfolio has a total of #{portfolio_array.length} digital assets.\n"
 end
 
 def call_api(api_link, api_key, filepath = "./json/api_cached/latest.json")
