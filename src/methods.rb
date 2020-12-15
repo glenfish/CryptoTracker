@@ -5,6 +5,9 @@ require 'json'
 require 'terminal-table'
 require 'colorize'
 
+path_to_users_file = './json/users/users.json'
+path_to_portfolio_file = "./json/portfolios/glenfish.json"
+
 # clear terminal screen
 def clear
     system 'clear'
@@ -15,6 +18,37 @@ def write_json_file(json, filepath)
     File.open(filepath,"w") do |f|
         f.write(json.to_json)
     end
+end
+
+def check_duplicate_user(users, new_username) # iterate over an array of hashes and check for instances of username that match
+    users.each do |existing_username|
+        if existing_username['username'] == new_username
+            return true
+        end
+    end
+    return false
+end
+
+def deactivate_user(users, path_to_users_file) # change active to false for a specific user in the users.json file
+    puts "Enter username to make inactive:\n"
+    username = gets.strip.chomp
+    users.each do |existing_username|
+        if existing_username['username'] == username
+            # confirm you want to deactivate the user
+            puts "You are about to deactivate #{existing_username['username']}. Sure?"
+            if gets.strip.chomp.downcase == 'y'
+                # deactivate the user
+                existing_username['active']=false
+                write_json_file(users, path_to_users_file)
+                puts "#{username} user has been deactivated"
+                return
+            else
+            puts "User remains active"
+            return
+            end
+        end
+    end
+    puts "User does not exist"
 end
 
 # create a new user and push to users.json
@@ -29,15 +63,23 @@ def create_user(path_to_users_file)
     end
     user_hash['active'] = true
     user_hash['user_created'] = Time.now.strftime("%Y-%m-%d")
-    puts "You are about to add a new user. Are you sure? y/n\n"
-        if gets.strip.chomp.to_s == "y"
-            file_data.push(user_hash)
-            write_json_file(file_data, path_to_users_file)
-            puts "User Created!\n"
-        else
-            puts "User creation aborted.\n"
-            return
-        end
+
+    if !check_duplicate_user(file_data, user_hash['username']) # look for exisitng instances of username before creating user
+        puts "You are about to add a new user. Are you sure? y/n\n"
+            if gets.strip.chomp.to_s == "y"
+                file_data.push(user_hash)
+                write_json_file(file_data, path_to_users_file)
+                puts "User Created!\n"
+            else
+                puts "User creation aborted.\n"
+                return
+            end
+    else 
+        puts "This username already exists"
+        return
+    end
+
+        
 end
 
 def display_user_info(users_json)
@@ -95,7 +137,7 @@ end
 def top_level_menu(menu_title = "Welcome To Crypto Tracker")
     # Top level Welcome menu
     clear
-    menu_options = ['Login', 'Create User', 'Help', 'Quit']
+    menu_options = ['Login', 'Help', 'Quit']
     rows = []
     menu_options.each_with_index do |menu_option, index|
         rows << ["#{index + 1}. #{menu_option}"]
@@ -117,7 +159,7 @@ end
 
 def logged_in_admin_main_menu(menu_title = "Crypto Tracker Admin")
     # Top level Welcome menu
-    menu_options = ['Create User', 'Show All Users', 'Quit']
+    menu_options = ['Create User', 'Show All Users', 'Deactivate User', 'Quit']
     rows = []
     menu_options.each_with_index do |menu_option, index|
         rows << ["#{index + 1}. #{menu_option}"]
@@ -144,26 +186,20 @@ def top_level_menu_selection(selection, path_to_users_file)
             return [false, username]
         end
     when 2
-        #create user
-        clear
-        create_user(path_to_users_file)
-        return [true, "create_user"]
-    when 3
         # help
         clear
         puts "show help"
         return [true, "show_help"]
-    when 4
+    when 3
         # quit
         return [false, "exit"]
-    when 5
-        clear
-        users_json = get_user(path_to_users_file)
-        display_user_info(users_json)
-        return [true, "users"]
+    # when 5
+        # clear
+        # users_json = get_user(path_to_users_file)
+        # display_user_info(users_json)
+        # return [true, "users"]
     else
-        # error
-        raise AppError
+        
     end
 end
 
@@ -196,12 +232,18 @@ def admin_logged_in_menu_selection(selection, path_to_users_file, path_to_portfo
         create_user(path_to_users_file)
         return [true, "fusion22"]
     when 2
+        # display users
         clear
         users_json = get_user(path_to_users_file)
         display_user_info(users_json)
         return [true, "fusion22"]
     when 3
-        # quit
+        # deactivate user
+        file_data = get_user(path_to_users_file)
+        deactivate_user(file_data, path_to_users_file)
+        return [true, "fusion22"]
+    when 4
+        #quit
         return [false, "exit"]
     else
         # error
