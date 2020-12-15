@@ -303,7 +303,7 @@ def show_portfolio(portfolio_assets_quantities_array, active_user = "")
     api_link = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=' + portfolio
     api_key = '' # user enters this at run time for security
     
-    def get_crypto(response, portfolio_array, portfolio_assets_quantities_array)
+    def get_crypto(response, portfolio_array, portfolio_assets_quantities_array, active_user)
         rows =[]
         grand_total = 0.0
         portfolio_array.each do |crypto|
@@ -322,15 +322,16 @@ def show_portfolio(portfolio_assets_quantities_array, active_user = "")
         end
         rows << :separator
         grand_total = format('%0.2f', grand_total).gsub(/(\d)(?=\d{3}+\.)/, '\1,')
-        rows << ['Grand Total','','','','$' + grand_total]
+        rows << ["Grand Total",'','','','$' + grand_total]
         # table = Terminal::Table.new :title => "#{active_user_name}", :headings => ['Name'.colorize(:cyan), 'Symbol'.colorize(:cyan), 'Quantity'.colorize(:cyan), 'Price USD'.colorize(:cyan), 'Total USD'.colorize(:cyan)], :rows => rows
 
         table = Terminal::Table.new
-        table.title = "Portfolio"
-        table.headings = ['Name'.colorize(:cyan), 'Symbol'.colorize(:cyan), 'Quantity'.colorize(:cyan), 'Price USD'.colorize(:cyan), 'Total USD'.colorize(:cyan)]
+        table.title = "#{active_user.name}'s Crypto Portfolio".colorize(:blue)
+        table.headings = ['Name'.colorize(:blue), 'Symbol'.colorize(:blue), 'Quantity'.colorize(:blue), 'Price USD'.colorize(:blue), 'Total USD'.colorize(:blue)]
         table.rows = rows
         table.style = {:width => 100}
         puts table
+        puts "Data supplied by CoinMarketCap.com"
         puts "\n" + Time.now.strftime("%Y-%m-%d %H:%M") + "\nYour portfolio has a total of #{portfolio_array.length} digital assets.\n\n"
     end
 
@@ -356,7 +357,7 @@ def show_portfolio(portfolio_assets_quantities_array, active_user = "")
     case api_file_selection
     when 1
         begin
-        instructions = "Select a cached API test file... 1/2/3/4\nOr for the most recent cached API file (for testing/demo), select 5\n\n"
+        instructions = "Please select a cached API test file 1/2/3/4\n\n"
         instructions += "NOTE: If portfolio has changed since last cached, run a new live api call.\n".colorize(:green)
         puts instructions
         choice = gets.chomp.to_i
@@ -381,7 +382,7 @@ def show_portfolio(portfolio_assets_quantities_array, active_user = "")
         begin
         clear
         dummy_response = call_dummy_api(api_test_file) # cached local call
-        get_crypto(dummy_response, portfolio_array, portfolio_assets_quantities_array)
+        get_crypto(dummy_response, portfolio_array, portfolio_assets_quantities_array,active_user)
         # rescue
         # puts "Your portfolio has changed. Run a fresh API call to get the latest data"
     end
@@ -393,7 +394,7 @@ def show_portfolio(portfolio_assets_quantities_array, active_user = "")
         clear
         puts "*** ... loading live data ... ***\n\n"
         response = call_api(api_link, api_key) # live call
-        get_crypto(response, portfolio_array, portfolio_assets_quantities_array)
+        get_crypto(response, portfolio_array, portfolio_assets_quantities_array, active_user)
         # rescue
         #     puts "Error: api key does not match"
         # end
@@ -401,7 +402,8 @@ def show_portfolio(portfolio_assets_quantities_array, active_user = "")
 end # end show_portfolio method
 
 # method to read portfolio json
-def read_portfolio_json(path_to_portfolio_file)
+def read_portfolio_json(path_to_portfolio_file,active_user)
+    path_to_portfolio_file = "./json/portfolios/#{active_user.username}.json"
     portfolio_json = get_portfolio(path_to_portfolio_file)
     # p portfolio_json
     # puts "\n"
