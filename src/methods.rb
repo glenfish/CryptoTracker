@@ -294,12 +294,17 @@ when 1
       else
         api_test_file = './json/api_cached/schema.json'
     end
+    rescue
+    puts "Please enter a number between 1 and 4"
+    retry
+    end
+    begin
     system 'clear'
     dummy_response = call_dummy_api(api_test_file) # cached local call
     get_crypto(dummy_response, portfolio_array, portfolio_assets_quantities_array)
     rescue
-    puts "Please enter a number between 1 and 4"
-    retry
+    puts "Your portfolio has changed. Run a fresh API call to get the latest data"
+
 end
     
 when 2
