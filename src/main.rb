@@ -12,11 +12,15 @@ active_user = ""
 # START CODE
 logged_in = false
 while !logged_in
+    begin
     top_level_menu("Crypto Portfolio Tracker - You Are Logged Out") # Optionally pass a title to the Main Menu
     user_selection = gets.strip.chomp.to_i # get user selection
     active_selection = top_level_menu_selection(user_selection, path_to_users_file)
     active_selection[0] == false ? exit : logged_in = active_selection[0] # exits or sets logged in status to true
     active_user = active_selection[2] || "" # passes back the active user object
+    rescue
+        retry
+    end
 end
 while logged_in
     while active_selection[1] == "fusion22" # change this to use user object attr subclass of user
