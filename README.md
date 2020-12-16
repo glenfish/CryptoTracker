@@ -1,7 +1,7 @@
 # CryptoTracker
 
 CryptoTracker v 1.0  
-Built with Ruby 2.7.1
+Built with Ruby 2.7.2
 
 ## Application Overview
 
