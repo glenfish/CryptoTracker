@@ -38,7 +38,7 @@ rescue
 end
 
 def create_user_object(user_object_array)
-    active_user = Users.new(user_object_array[0], user_object_array[1], user_object_array[2])
+    active_user = User.new(user_object_array[0], user_object_array[1], user_object_array[2])
     return active_user
 end
 
@@ -185,9 +185,9 @@ end
 
 
 def top_level_menu(menu_title = "Welcome To Crypto Tracker")
-    # Top level Welcome menu
+    # Top level Welcome menu - user logged out
     clear
-    menu_options = ['Login', 'Help', 'Quit']
+    menu_options = ['Login', 'Quit']
     rows = []
     menu_options.each_with_index do |menu_option, index|
         rows << ["#{index + 1}. #{menu_option}"]
@@ -198,7 +198,7 @@ end
 
 def top_level_menu_selection(selection, path_to_users_file)
     case selection
-    when 1
+    when 1 # attempts to log user in
         clear
         puts "Enter username:\n"
         username = gets.strip.chomp
@@ -215,19 +215,8 @@ def top_level_menu_selection(selection, path_to_users_file)
             puts "Access denied for username: #{username}\n"
             return [false, username]
         end
-    when 2
-        # help
-        clear
-        puts "show help"
-        return [true, "show_help"]
-    when 3
-        # quit
+    when 2 # quit
         return [false, "exit"]
-    # when 5
-        # clear
-        # users_json = read_json_file(path_to_users_file)
-        # display_user_info(users_json)
-        # return [true, "users"]
     else
         
     end
@@ -235,7 +224,7 @@ end
 
 def logged_in_main_menu(menu_title = "Welcome To Crypto Tracker")
     # Top level Welcome menu
-    menu_options = ['Help', 'View Portfolio', 'Add/Remove Crypto', 'Quit']
+    menu_options = ['View Portfolio', 'Add/Remove Crypto', 'Help', 'Quit']
     rows = []
     menu_options.each_with_index do |menu_option, index|
         rows << ["#{index + 1}. #{menu_option}"]
@@ -259,18 +248,17 @@ def logged_in_menu_selection(selection, path_to_users_file, path_to_portfolio_fi
     clear
     case selection
     when 1
-        # help
+        # portfolio
         clear
-        puts "show help"
-        return [true, "show_help"]
-    when 2
-        # help
-        clear
-        # puts "show portfolio"
         return [true, "show_portfolio"]
-    when 3
-        # quit
+    when 2
+        # add a crypto
         return [true, "add_crypto"]
+    when 3
+        # help
+        clear
+        show_help
+        return [true, "show_help"]
     when 4
         # quit
         return [false, "exit"]
@@ -293,7 +281,7 @@ def admin_logged_in_menu_selection(selection, path_to_users_file, path_to_portfo
         display_user_info(users_json)
         return [true, "fusion22"]
     when 3
-        # deactivate user
+        # deactivate a user
         file_data = read_json_file(path_to_users_file)
         deactivate_user(file_data, path_to_users_file)
         return [true, "fusion22"]
@@ -447,4 +435,8 @@ def read_portfolio_json(path_to_portfolio_file,active_user)
     # puts "\n"
     return portfolio_array
 rescue
+end
+
+def show_help()
+    puts "heres your help, now be on yer way you scoundral"
 end
