@@ -17,7 +17,7 @@ while !logged_in
     user_selection = gets.strip.chomp.to_i # get user selection
     active_selection = top_level_menu_selection(user_selection, path_to_users_file)
     active_selection[0] == false ? exit : logged_in = active_selection[0] # exits or sets logged in status to true
-    active_user = active_selection[2] || "" # passes back the active user object
+    active_user = active_selection[2] # passes back the active user object
     rescue
         retry
     end
