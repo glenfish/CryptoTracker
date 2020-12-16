@@ -1,4 +1,4 @@
-class Users
+class User
     attr_reader
     attr_writer :password
     attr_accessor :name, :username, :active
