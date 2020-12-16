@@ -15,24 +15,26 @@ def clear
     system 'clear'
 end
 
+# add a new crypto entry to portfolio, or changes an existing entry. Can set quantity = 0 to as a form of quasi delete.
 def add_crypto_to_portfolio(active_user)
     path_to_portfolio_file = "./json/portfolios/#{active_user.username}.json"
-    portfolio_json = get_portfolio(path_to_portfolio_file)
+    portfolio_json = read_json_file(path_to_portfolio_file)
     # p portfolio_json
     puts "Enter the crypto SYMBOL:\n"
     symbol = gets.strip.chomp.upcase
     puts "Enter the quantity:\n"
     quantity = gets.strip.chomp.to_f
     if quantity > 0.0
-        puts "Please confirm: #{quantity} #{symbol} (y/n)"
+        puts "Please confirm: #{quantity} #{symbol} (y/n)" # verify user wants to add crypto to portfolio
     elsif quantity == 0.0
-        puts "Please confirm you are deleting #{symbol} (y/n)"
+        puts "Please confirm you are deleting #{symbol} (y/n)" # does not delete, just sets quantity = 0
     end
-    if gets.strip.chomp == 'y'
-        json = portfolio_json['data'].merge({symbol=>{"asset_name"=>"", "asset_quantity"=>quantity, "asset_buy_date"=>Time.now.strftime("%Y-%m-%d"), "asset_sell_date"=>"", "usd_price"=>"", "btc_price"=>"", "usd_profit"=>"", "btc_profit"=>""}})
-        json_full = {"username":active_user.username,"data":json}
-        write_json_file(json_full, path_to_portfolio_file)
+    if gets.strip.chomp.downcase == 'y'
+        json= {"username":active_user.username,"data":portfolio_json['data'].merge({symbol=>{"asset_name"=>"", "asset_quantity"=>quantity, "asset_buy_date"=>Time.now.strftime("%Y-%m-%d"), "asset_sell_date"=>"", "usd_price"=>"", "btc_price"=>"", "usd_profit"=>"", "btc_profit"=>""}})}
+        write_json_file(json, path_to_portfolio_file)
     end
+rescue
+
 end
 
 def create_user_object(user_object_array)
@@ -50,6 +52,13 @@ def write_json_file(json, filepath)
     File.open(filepath,"w") do |f|
         f.write(json.to_json)
     end
+end
+
+# read JSON data from file
+def read_json_file(filepath)
+    file = File.open(filepath)
+    file_data = file.read
+    return JSON.parse(file_data)
 end
 
 def check_duplicate_user(users, new_username) # iterate over an array of hashes and check for instances of username that match
@@ -104,7 +113,7 @@ end
 def create_user(path_to_users_file)
     user_object_array = []
     puts "* Create new user *"
-    file_data = get_user(path_to_users_file)
+    file_data = read_json_file(path_to_users_file)
     user_attributes = {"Name: "=> "name", "Username: " => "username", "Password: " => "password"}
     user_hash = Hash.new
     user_attributes.each_with_index do |(k,v),i|
@@ -156,21 +165,6 @@ def display_user_info(users_json)
 
 end
 
-def get_user(path_to_users_file)
-    file = File.open(path_to_users_file)
-    file_data = file.read
-    parsed_user_json = JSON.parse(file_data)
-    # p parsed_user_json
-    return parsed_user_json
-end
-
-# returns JSON portfolio data
-def get_portfolio(path_to_portfolio_file)
-    file = File.open(path_to_portfolio_file)
-    file_data = file.read
-    return JSON.parse(file_data)
-end
-
 # checks to see if username exists in users.json file
 def validate_username(username, users_json)
     users_json.each_with_index do |user, index|
@@ -208,10 +202,10 @@ def top_level_menu_selection(selection, path_to_users_file)
         clear
         puts "Enter username:\n"
         username = gets.strip.chomp
-        users_json = get_user(path_to_users_file)
+        users_json = read_json_file(path_to_users_file)
         valid = validate_username(username, users_json)
         if valid
-            file_data = get_user(path_to_users_file)
+            file_data = read_json_file(path_to_users_file)
             user_object_array = get_user_data(file_data, username)
             active_user = create_user_object(user_object_array)
             clear
@@ -231,7 +225,7 @@ def top_level_menu_selection(selection, path_to_users_file)
         return [false, "exit"]
     # when 5
         # clear
-        # users_json = get_user(path_to_users_file)
+        # users_json = read_json_file(path_to_users_file)
         # display_user_info(users_json)
         # return [true, "users"]
     else
@@ -295,12 +289,12 @@ def admin_logged_in_menu_selection(selection, path_to_users_file, path_to_portfo
     when 2
         # display users
         clear
-        users_json = get_user(path_to_users_file)
+        users_json = read_json_file(path_to_users_file)
         display_user_info(users_json)
         return [true, "fusion22"]
     when 3
         # deactivate user
-        file_data = get_user(path_to_users_file)
+        file_data = read_json_file(path_to_users_file)
         deactivate_user(file_data, path_to_users_file)
         return [true, "fusion22"]
     when 4
@@ -371,6 +365,7 @@ def show_portfolio(portfolio_assets_quantities_array, active_user = "")
         
     end
 
+    # makes live call to Coin Market Cap API. api_link var passes comma separated values of cryptos of the active portfolio
     def call_api(api_link, api_key, filepath = "./json/api_cached/latest.json")
     response = HTTParty.get(api_link,
                             { headers: { 'X-CMC_PRO_API_KEY' => api_key,
@@ -378,14 +373,6 @@ def show_portfolio(portfolio_assets_quantities_array, active_user = "")
     parsed = JSON.parse(response.body)
     write_json_file(parsed, filepath) # writes the most recent live API call to latest.json
     return parsed
-    end
-
-    def call_dummy_api(api_test_file)
-        file = File.open(api_test_file)
-        file_data = file.read
-        output = JSON.parse(file_data)
-        # p output
-        return output
     end
     
     # handles the I/O of selecting the portfolio file source
@@ -419,7 +406,7 @@ def show_portfolio(portfolio_assets_quantities_array, active_user = "")
         end
         begin
         clear
-        dummy_response = call_dummy_api(api_test_file) # cached local call
+        dummy_response = read_json_file(api_test_file) # cached local call
         get_crypto(dummy_response, portfolio_array, portfolio_assets_quantities_array,active_user)
         # rescue
         # puts "Your portfolio has changed. Run a fresh API call to get the latest data"
@@ -429,20 +416,21 @@ def show_portfolio(portfolio_assets_quantities_array, active_user = "")
         # begin
         puts "Enter API key:\n"
         api_key = gets.strip.chomp
-        clear
+        if !api_key.match(/(...\X-)/) 
+            puts "Error: api key does not match"
+            return
+        end
         puts "*** ... loading live data ... ***\n\n"
         response = call_api(api_link, api_key) # live call
         get_crypto(response, portfolio_array, portfolio_assets_quantities_array, active_user)
-        # rescue
-        #     puts "Error: api key does not match"
-        # end
     end
+
 end # end show_portfolio method
 
 # method to read portfolio json
 def read_portfolio_json(path_to_portfolio_file,active_user)
     path_to_portfolio_file = "./json/portfolios/#{active_user.username}.json"
-    portfolio_json = get_portfolio(path_to_portfolio_file)
+    portfolio_json = read_json_file(path_to_portfolio_file)
     # p portfolio_json
     # puts "\n"
     portfolio_array = []
@@ -458,4 +446,5 @@ def read_portfolio_json(path_to_portfolio_file,active_user)
     # p portfolio_array
     # puts "\n"
     return portfolio_array
+rescue
 end
