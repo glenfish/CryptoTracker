@@ -23,13 +23,13 @@ while !logged_in
     end
 end
 while logged_in
-    while active_selection[1] == "fusion22" # change this to use user object attr subclass of user
+    while active_selection[1] == "fusion22" # admin user (hard coded for now for use with this one username)
         logged_in_admin_main_menu() # Optionally pass a title to the Main Menu
         user_selection = gets.strip.chomp.to_i # get user selection
         active_selection = admin_logged_in_menu_selection(user_selection, path_to_users_file, path_to_portfolio_file) # array is returned with true/false for logged in at index 0, and a custom value for each action chosen at index 1
         active_selection[0] == false ? exit : logged_in = active_selection[0] # exits or sets logged in status to true
     end
-    while active_selection[1] != "fusion22" # change this to use user object attr
+    while active_selection[1] != "fusion22" # regular user, not admin user
         logged_in_main_menu("Crypto Portfolio Tracker Main Menu") # Optionally pass a title to the Main Menu
         user_selection = gets.strip.chomp.to_i # get user selection
         begin
