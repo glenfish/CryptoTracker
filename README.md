@@ -1,4 +1,4 @@
-# Crypto Tracker
+# Crypto Tracker v 1.0
 
 ## Application Overview
 
@@ -53,7 +53,9 @@ account url: https://pro.coinmarketcap.com/account
 data limits: 333 per day. 10k per month
 
 The following symbols will be used for this test file:  
-`BTC,ETH,XRP,USDT,BCH,LTC,LINK,ADA,DOT,BNB,XLM,USDC,BSV,EOS,XMR,WBTC,TRX,XEM,XTZ,LEO,FIL,CRO,NEO,DAI,VET,REV,ATOM,AAVE,DASH,WAVES,HT,MIOTA,UNI,ZEC,ETC,YFI,THETA,BUSD,COMP,CEL,MKR,SNX,OMG,DOGE,UMA,KSM,FTT,ONT,ZIL,ALGO,SUSHI,OKB,BTT,BAT,TUSD,RENBTC,DCR,NEXO,ZRX,DGB,PAX,HUSD,AVAX,REN,QTUM,HBAR,AMPL,ICX,ABBC,CELO,LRC,EGLD,HEDG,STX,LUNA,KNC,RSR,REP,EWT,LSK,OCEAN,BTG,SC,QNT,RUNE,CVT,NANO,BAND,MANA,ZB,NMR,ENJ,ANT,MAID,SNT,CHSB,XVG,NXM,RVN`
+`
+BTC,ETH,XRP,USDT,BCH,LTC,LINK,ADA,DOT,BNB,XLM,USDC,BSV,EOS,XMR,WBTC,TRX,XEM,XTZ,LEO,FIL,CRO,NEO,DAI,VET,REV,ATOM,AAVE,DASH,WAVES,HT,MIOTA,UNI,ZEC,ETC,YFI,THETA,BUSD,COMP,CEL,MKR,SNX,OMG,DOGE,UMA,KSM,FTT,ONT,ZIL,ALGO,SUSHI,OKB,BTT,BAT,TUSD,RENBTC,DCR,NEXO,ZRX,DGB,PAX,HUSD,AVAX,REN,QTUM,HBAR,AMPL,ICX,ABBC,CELO,LRC,EGLD,HEDG,STX,LUNA,KNC,RSR,REP,EWT,LSK,OCEAN,BTG,SC,QNT,RUNE,CVT,NANO,BAND,MANA,ZB,NMR,ENJ,ANT,MAID,SNT,CHSB,XVG,NXM,RVN
+`
 
 ## Github Repo
 
@@ -65,7 +67,11 @@ The following symbols will be used for this test file:
 
 ## Data Persistence
 
-The user data should be instantiated as an object via a user class. User account data must be written to a local JSON file. When the user logs in successfully, the user object is created for use within the current session. This stores state information on the user and provides methods for calling the read and write methods json files.
+User and user's portfolio data is stored locally in JSON file format. A User class instantiates the current user at login and facilitates attribute passing for personalisation of the user experience as well as writing and reading to the correct portfolio file.
+
+Upon user creation, a user is created as an object of the User class, and a portfolio is created as an object of the Portfolio class. The latter uses a method to build the user's portfolio file in JSON format, which is written locally for storage.
+
+At this stage the Portfolio class is only used in this instance, however it will be incorporated more fully with the addition of more app features.
 
 ## Error Handling
 
@@ -73,18 +79,27 @@ The user data should be instantiated as an object via a user class. User account
 
 ## Installation
 
-info on installing
-also packaged gems being used, versioning etc
-
-## Dependencies
-
-Ruby Gems Bundled:  
+Ruby 2.7.2 required to run CryptoTracker  
+The following gems are packaged:  
 httparty  
 json  
 terminal-table  
-json-schema-rspec  
+colorize version 0.8.1 or greater  
 
 ## Usage
 
-Documentation for using the program
+CryptoTracker is designed for people who buy and sell digital assets or 'cryptocurrency'. A user can create a portfolio of cryptos from the top 100 assets listed on CoinMarketCap.com and get real time price data to track the portfolio value.
+
+The user can add a symbol name that represents the cryptocurrency on trading exchanges, and the quantity purchased. The app will display a list of all entries, showing name, symbol, quantity, current USD price of the asset, and the current USD value of the user's assets, with a grand total showing the combined portfolio value.
+
+In addition to real time pricing data, there is a menu option to display recent API data which is stored locally. This is priomarily for testing, but can be useful when adding new cryptos to the portfolio, and the user simply wants to check the list without requesting fresh live data with every refresh of the portfolio page.
+
+An administrator account has user creation privilliges and can deactivate any given user. Admin can also view the full list of users, usernames, passwords, status and date the user was created.
+
+All users are stored together locally in 'users' JSON file, and each puser has their own poerfolio JSON file based on their username. The file contains data on the cryptocurrency symbols (for example 'BTC' for Bitcoin, or 'ETH' for Ethereum) and quantities of cryptos being tracked in the portfolio for each given user.
+
+Additonal features are planned for the future. The current version of the app is version 1.0
+
+
+
 
