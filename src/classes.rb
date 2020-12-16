@@ -1,7 +1,7 @@
 class User
-    attr_reader
-    attr_writer :password
-    attr_accessor :name, :username, :active
+    attr_reader :name, :username, :active
+    attr_writer 
+    attr_accessor 
 
     def initialize(name, username, password)
         @name = name
@@ -15,7 +15,11 @@ class User
     
     # methods
     def to_s
-        return "Name: #{@name} Username: #{@username} Password: #{@password} Active: #{@active} Created: #{@user_created}"
+        return "Name: #{@name} Username: #{@username} Password: ******** Active: #{@active} Created: #{@user_created}"
+    end
+
+    def show_password
+        return @password
     end
     
 end
