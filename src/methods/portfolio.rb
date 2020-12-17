@@ -74,7 +74,7 @@ def show_portfolio(portfolio_assets_quantities_array, active_user = "")
     when 1
         begin
         instructions = "Please select a cached API test file 1/2/3/4\n\n"
-        instructions += "NOTE: If portfolio has changed since last cached, run a new live api call.\n".colorize(:green)
+        # instructions += "NOTE: If portfolio has changed since last cached, run a new live api call.\n".colorize(:green)
         puts instructions
         choice = gets.chomp.to_i
         case choice
