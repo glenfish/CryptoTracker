@@ -13,7 +13,7 @@ require_relative 'help'
 require_relative 'user'
 
 path_to_users_file = './json/users/users.json'
-path_to_portfolio_file = "./json/portfolios/glenfish.json"
+path_to_portfolio_file = "./json/portfolios/default.json"
 
 # clear terminal screen
 def clear
@@ -46,8 +46,7 @@ def top_level_menu_selection(selection, path_to_users_file)
         users_json = read_json_file(path_to_users_file)
         valid = validate_username(username, users_json)
         if valid
-            file_data = read_json_file(path_to_users_file)
-            user_object_array = get_user_data(file_data, username)
+            user_object_array = get_user_data(users_json, username)
             active_user = create_user_object(user_object_array)
             clear
             puts "Welcome #{active_user.name}, you are logged in.\n"
@@ -75,7 +74,7 @@ def logged_in_main_menu(menu_title = "Welcome To Crypto Tracker")
 end
 
 # logged in User menu selection handling
-def logged_in_menu_selection(selection, path_to_users_file, path_to_portfolio_file)
+def logged_in_menu_selection(selection)
     clear
     case selection
     when 1
