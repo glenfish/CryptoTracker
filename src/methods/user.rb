@@ -1,5 +1,7 @@
 def create_user_object(user_object_array)
-    active_user = User.new(user_object_array[0], user_object_array[1], user_object_array[2])
+    file = File.open('api/api_key.txt')
+    api_key = file.read
+    active_user = User.new(user_object_array[0], user_object_array[1], user_object_array[2], api_key)
     return active_user
 end
 
