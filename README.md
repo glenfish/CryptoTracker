@@ -106,7 +106,7 @@ All users are stored together locally in 'users' JSON file, and each puser has t
 <div style="clear: both;"></div>
 <img src="./docs/app_screenshots/portfolio-view.png"
      alt="User Portfolio view"
-     style="float: left; margin-bottom: 20px;" width="700px" />
+     style="float: left; margin-bottom: 20px;" width="800px" />
 <div style="clear: both;"></div>
 <img src="./docs/app_screenshots/logged-in-admin.png"
      alt="Admin logged in"
@@ -118,7 +118,7 @@ All users are stored together locally in 'users' JSON file, and each puser has t
 <div style="clear: both;"></div>
 <img src="./docs/app_screenshots/create-new-user.png"
      alt="Admin create new user"
-     style="float: left; margin-bottom: 20px;" width="500px" />
+     style="float: left; margin-bottom: 20px;" width="400px" />
 <div style="clear: both;"></div>
 
 
