@@ -6,7 +6,7 @@ require 'terminal-table'
 require 'colorize'
 require_relative './methods/menu'
 path_to_users_file = './json/users/users.json'
-path_to_portfolio_file = "./json/portfolios/glenfish.json"
+path_to_portfolio_file = "./json/portfolios/tester.json" #default
 active_user = ""
 
 flag1 = ARGV[0] # get the flag
@@ -44,7 +44,7 @@ while logged_in
         logged_in_main_menu("Crypto Portfolio Tracker Main Menu") # Optionally pass a title to the Main Menu
         user_selection = gets.strip.chomp.to_i # get user selection
         begin
-        select = logged_in_menu_selection(user_selection, path_to_users_file, path_to_portfolio_file)
+        select = logged_in_menu_selection(user_selection)
         rescue
             retry
         end
