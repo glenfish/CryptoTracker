@@ -96,6 +96,16 @@ An administrator account has user creation privilliges and can deactivate any gi
 
 All users are stored together locally in 'users' JSON file, and each puser has their own porfolio JSON file based on their username. The file contains data on the cryptocurrency symbols (for example 'BTC' for Bitcoin, or 'ETH' for Ethereum) and quantities of cryptos being tracked in the portfolio for each given user.
 
+ ![User not logged in](./docs/app_screenshots/logged-out.png)
+ ![User not logged in](./docs/app_screenshots/logged-in-user.png)
+ ![User not logged in](./docs/app_screenshots/portfolio-view.png)
+ ![User not logged in](./docs/app_screenshots/logged-in-admin.png)
+ ![User not logged in](./docs/app_screenshots/users-view.png)
+ ![User not logged in](./docs/app_screenshots/create-new-user.png)
+
+
+
+
 
 
 
