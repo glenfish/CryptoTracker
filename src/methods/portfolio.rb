@@ -1,3 +1,5 @@
+require_relative '../api/api'
+
 # create portfolio object
 def create_portfolio_object(username)
     portfolio_object = Portfolio.new(username)
@@ -29,8 +31,8 @@ end
 def show_portfolio(portfolio_assets_quantities_array, active_user = "")
     clear
     active_user_name = active_user.name
+    api_key = active_user.api_key
     puts "#{active_user_name}, Select either cached or live crypto pricing:\n"
-
     # puts "big list... y or n ?\n"
     # if gets.chomp == "y"
     portfolio_array = %w[BTC ETH XRP USDT BCH LTC LINK ADA DOT BNB XLM USDC BSV EOS XMR WBTC TRX XEM XTZ LEO FIL CRO NEO DAI VET REV ATOM AAVE DASH WAVES HT MIOTA UNI ZEC ETC YFI THETA BUSD COMP CEL MKR SNX OMG DOGE UMA KSM FTT ONT ZIL ALGO SUSHI OKB BTT BAT TUSD RENBTC DCR NEXO ZRX DGB PAX HUSD AVAX REN QTUM HBAR AMPL ICX ABBC CELO LRC EGLD HEDG STX LUNA KNC RSR REP EWT LSK OCEAN BTG SC QNT RUNE CVT NANO BAND MANA ZB NMR ENJ ANT MAID SNT CHSB XVG NXM RVN]
@@ -48,10 +50,9 @@ def show_portfolio(portfolio_assets_quantities_array, active_user = "")
     portfolio_array = output
 
     portfolio = portfolio_array.join(',')
-    api_link = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=' + portfolio
-    api_key = '' # user enters this at run time for security
+    api_link = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol='
+    live_api_link = api_link + portfolio
 
-    # makes live call to Coin Market Cap API. api_link var passes comma separated values of cryptos of the active portfolio
     
     # handles the I/O of selecting the portfolio file source
     puts "1. Locally Cached\n2. Live API\n"
@@ -92,14 +93,15 @@ def show_portfolio(portfolio_assets_quantities_array, active_user = "")
         
     when 2
         # begin
-        puts "Enter API key:\n"
-        api_key = gets.strip.chomp
+        # puts "Enter API key:\n"
+        # api_key = gets.strip.chomp
+        # puts api_key
         if !api_key.match(/(...\X-)/) 
             puts "Error: api key does not match"
             return
         end
         puts "*** ... loading live data ... ***\n\n"
-        response = call_api(api_link, api_key) # live call
+        response = call_api(live_api_link, api_key) # live call
         get_crypto(response, portfolio_array, portfolio_assets_quantities_array, active_user)
     end
 
