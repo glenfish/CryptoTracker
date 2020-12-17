@@ -98,20 +98,24 @@ All users are stored together locally in 'users' JSON file, and each puser has t
 
 <img src="./docs/app_screenshots/logged-out.png"
      alt="User not logged in"
-     style="float: left; margin-bottom: 20px;" width="300px" />
-
+     style="float: left; margin-bottom: 20px;" width="400px" />
+<div style="clear: both;"></div>
 <img src="./docs/app_screenshots/logged-in-user.png"
      alt="User logged in"
-     style="float: left; margin-bottom: 20px;" width="300px" />
+     style="float: left; margin-bottom: 20px;" width="400px" />
+<div style="clear: both;"></div>
 <img src="./docs/app_screenshots/portfolio-view.png"
      alt="User Portfolio view"
-     style="float: left; margin-bottom: 20px;" width="500px" />
+     style="float: left; margin-bottom: 20px;" width="700px" />
+<div style="clear: both;"></div>
 <img src="./docs/app_screenshots/logged-in-admin.png"
      alt="Admin logged in"
      style="float: left; margin-bottom: 20px;" width="300px" />
+<div style="clear: both;"></div>
 <img src="./docs/app_screenshots/users-view.png"
      alt="Admin show users"
      style="float: left; margin-bottom: 20px;" width="500px" />
+<div style="clear: both;"></div>
 <img src="./docs/app_screenshots/create-new-user.png"
      alt="Admin create new user"
      style="float: left; margin-bottom: 20px;" width="500px" />
