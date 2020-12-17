@@ -1,5 +1,17 @@
 require_relative '../api/api'
 
+def waiting(symbol=".")
+    i = 0
+    loop do
+        print symbol
+        sleep(0.006)
+        i += 1
+        if i == 90
+            break
+        end
+    end
+end
+
 # create portfolio object
 def create_portfolio_object(username)
     portfolio_object = Portfolio.new(username)
@@ -100,8 +112,10 @@ def show_portfolio(portfolio_assets_quantities_array, active_user = "")
             puts "Error: api key does not match"
             return
         end
-        puts "*** ... loading live data ... ***\n\n"
+        print "... loading live data "
+        waiting
         response = call_api(live_api_link, api_key) # live call
+        clear
         get_crypto(response, portfolio_array, portfolio_assets_quantities_array, active_user)
     end
 
