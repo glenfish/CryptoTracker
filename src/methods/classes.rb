@@ -1,12 +1,13 @@
 class User
-    attr_reader :name, :username, :active
+    attr_reader :name, :username, :active, :api_key
     attr_writer 
     attr_accessor 
 
-    def initialize(name, username, password)
+    def initialize(name, username, password, api_key)
         @name = name
         @username = username
         @password = password
+        @api_key = api_key
         @active = true
         @user_created = Time.now.strftime("%Y-%m-%d")
     end
