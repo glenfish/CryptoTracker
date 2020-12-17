@@ -8,6 +8,18 @@ require_relative './methods/menu'
 path_to_users_file = './json/users/users.json'
 path_to_portfolio_file = "./json/portfolios/glenfish.json"
 active_user = ""
+
+flag1 = ARGV[0] # get the flag
+# flag2 = ARGV[1]
+# flag3 = ARGV[2]
+ARGV.clear # clear argv so we don't have a problem with gets
+# allowed: -h, --h, -help or --help
+if flag1 == "-h" or flag1 == "--h" or flag1 == "-help" or flag1 == "--help" # allow for variations on help request via flag
+    clear
+    show_help # show the help information
+    exit # quit
+end
+
 # START CODE
 logged_in = false
 while !logged_in
