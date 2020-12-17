@@ -5,7 +5,6 @@ require 'json'
 require 'terminal-table'
 require 'colorize'
 require_relative 'methods'
-require_relative 'classes'
 path_to_users_file = './json/users/users.json'
 path_to_portfolio_file = "./json/portfolios/glenfish.json"
 active_user = ""
@@ -44,8 +43,9 @@ while logged_in
             show_portfolio(portfolio_assets_quantities_array, active_user)
             # end show portfolio code
         elsif active_selection[1] == "add_crypto"
-            #call add crypto method
             add_crypto_to_portfolio(active_user)
+        elsif active_selection[1] == "show_help"
+            show_help
         end
     end
 end
