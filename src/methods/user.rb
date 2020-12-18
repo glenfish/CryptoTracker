@@ -1,8 +1,8 @@
 def create_user_object(user_object_array)
     file = File.open('api/api_key.txt')
-    api_key = file.read
-    active_user = User.new(user_object_array[0], user_object_array[1], user_object_array[2], api_key)
-    return active_user
+    api_key = file.read # get the API key
+    active_user = User.new(user_object_array[0], user_object_array[1], user_object_array[2], user_object_array[3], api_key) # create user object with (name, username, password, admin, api_key)
+    return active_user # return the user object
 end
 
 def check_duplicate_user(users, new_username) # iterate over an array of hashes and check for instances of username that match
@@ -14,7 +14,7 @@ def check_duplicate_user(users, new_username) # iterate over an array of hashes 
     return false
 end
 
-# iterate over an array of hashes and return name, username and password array
+# iterate over an array of hashes and return name, username, password and admin array
 def get_user_data(users, username)
     user_array = []
     users.each do |user|
@@ -22,6 +22,7 @@ def get_user_data(users, username)
             user_array << user['name']
             user_array << user['username']
             user_array << user['password']
+            user_array << user['admin']
         end
     end
     return user_array
@@ -58,11 +59,14 @@ def create_user(path_to_users_file)
     user_object_array = []
     puts "* Create new user *"
     file_data = read_json_file(path_to_users_file)
-    user_attributes = {"Name: "=> "name", "Username: " => "username", "Password: " => "password"}
+    user_attributes = {"Name: "=> "name", "Username: " => "username", "Password: " => "password", "Is Admin?: (y/n) " => "admin"}
     user_hash = Hash.new
     user_attributes.each_with_index do |(k,v),i|
         puts "#{k}\n"
         value = gets.strip.chomp
+        if v == "admin"
+            value.downcase == "y" ? value = true : value = false
+        end
         user_hash[v] = value
         user_object_array << value
     end
@@ -71,12 +75,14 @@ def create_user(path_to_users_file)
 
     if !check_duplicate_user(file_data, user_hash['username']) # true = duplicate username, false = ok to add user
         puts "You are about to add a new user. Are you sure? y/n\n"
-            if gets.strip.chomp.to_s.downcase == "y"
+            if gets.strip.chomp.to_s.downcase == "y" || gets.strip.chomp.to_s.downcase == "yes"
                 file_data.push(user_hash)
                 write_json_file(file_data, path_to_users_file)
                 create_user_object(user_object_array) # calls method to create the user object using array of name, username and password
                 portfolio_object = create_portfolio_object(user_hash['username']) # calls a method to create a portfolio object and write a blank portfolio json file
-                write_json_file(portfolio_object.create_empty_portfolio, portfolio_object.portfolio_path)
+                unless user_hash['admin']
+                    write_json_file(portfolio_object.create_empty_portfolio, portfolio_object.portfolio_path)
+                end
                 puts "User Created!\n"
             else
                 puts "User creation aborted.\n" # existing username found in users.json

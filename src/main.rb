@@ -7,7 +7,7 @@ require 'colorize'
 require_relative './methods/menu'
 path_to_users_file = './json/users/users.json'
 path_to_portfolio_file = "./json/portfolios/tester.json" #default
-active_user = ""
+active_user = []
 def title
     title = "  __                    ___                    \n /    _     _  |_  _     |   _  _   _ |   _  _ \n \\__ |  \\/ |_) |_ (_)    |  |  (_| (_ |( (- |  \n        /  |                                   "
     puts title
@@ -39,16 +39,16 @@ while !logged_in
         title
         exit
     elsif
-        logged_in = select[0] # exits or sets logged in status to true
+        logged_in = select[0] # sets logged in status to true
     end
-    active_user = select[2] # passes back the active user object
+    active_user = select[2] # passes back and assigns the active user object
     rescue
         retry
     end
 end
 while logged_in
-    while select[1] == "fusion22" # admin user (hard coded for now for use with this one username)
-        logged_in_admin_main_menu() # Optionally pass a title to the Main Menu
+    while active_user.admin == true # admin user, not regular user
+        logged_in_admin_main_menu("Admin Menu") # Optionally pass a title to the Main Menu
         user_selection = gets.strip.chomp.to_i # get user selection
         select = admin_logged_in_menu_selection(user_selection, path_to_users_file, path_to_portfolio_file) # array is returned with true/false for logged in at index 0, and a custom value for each action chosen at index 1
         if select[0] == false
@@ -56,10 +56,10 @@ while logged_in
             title
             exit
         elsif
-            logged_in = select[0] # exits or sets logged in status to true
+            logged_in = select[0] # sets logged in status to true
         end
     end
-    while select[1] != "fusion22" # regular user, not admin user
+    while active_user.admin == false # regular user, not admin user
         logged_in_main_menu("Crypto Portfolio Tracker Main Menu") # Optionally pass a title to the Main Menu
         user_selection = gets.strip.chomp.to_i # get user selection
         begin
@@ -72,7 +72,7 @@ while logged_in
             title
             exit
         elsif
-            logged_in = select[0] # exits or sets logged in status to true
+            logged_in = select[0] # sets logged in status to true
         end
         if select[1] == "show_portfolio"
             # show portfolio code

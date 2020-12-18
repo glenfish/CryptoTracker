@@ -3,7 +3,7 @@ class User
     attr_writer 
     attr_accessor 
 
-    def initialize(name, username, password, api_key, admin)
+    def initialize(name, username, password, admin = false, api_key)
         @name = name
         @username = username
         @password = password
