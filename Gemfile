@@ -16,4 +16,6 @@ gem 'terminal-table'
 
 gem "colorize", "~> 0.8.1"
 
+gem 'activesupport'
+
 # gem "rails"
