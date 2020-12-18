@@ -3,20 +3,21 @@ class User
     attr_writer 
     attr_accessor 
 
-    def initialize(name, username, password, api_key)
+    def initialize(name, username, password, api_key, admin)
         @name = name
         @username = username
         @password = password
         @api_key = api_key
         @active = true
         @user_created = Time.now.strftime("%Y-%m-%d")
+        @admin = admin
     end
 
     
     
     # methods
     def to_s
-        return "Name: #{@name} Username: #{@username} Password: ******** Active: #{@active} Created: #{@user_created}"
+        return "Name: #{@name} Username: #{@username} Password: ******** Active: #{@active} Created: #{@user_created} Is Admin:#{@admin}"
     end
 
     def show_password
