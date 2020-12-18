@@ -5,27 +5,18 @@ require 'json'
 require 'terminal-table'
 require 'colorize'
 
+
 require_relative '../api/api'
 require_relative 'classes'
 require_relative 'json-read-write'
 require_relative 'portfolio'
 require_relative 'help'
 require_relative 'user'
+require_relative 'general'
+require_relative 'password'
 
 path_to_users_file = './json/users/users.json'
 path_to_portfolio_file = "./json/portfolios/default.json"
-
-
-
-# clear terminal screen
-def clear
-    system 'clear'
-end
-
-def title
-    title = "  __                    ___                    \n /    _     _  |_  _     |   _  _   _ |   _  _ \n \\__ |  \\/ |_) |_ (_)    |  |  (_| (_ |( (- |  \n        /  |                                   "
-    puts title
-end
 
 ############################################################
 ###### MENU SYSTEM DISPLAY AND HANDLING ####################
@@ -46,17 +37,24 @@ end
 
 # logged out menu handling
 def top_level_menu_selection(selection, path_to_users_file)
+    retries ||= 0
+    begin
     case selection
     when 1 # attempts to log user in
-        clear
+        # clear
         puts "Enter username:\n"
         username = gets.strip.chomp
+        puts "Password:\n"
+        your_password = gets.strip.chomp
         users_json = read_json_file(path_to_users_file)
-        valid = validate_username(username, users_json)
+        valid = validate_username(username, your_password, users_json)
+        if valid == "password_error"
+            raise error
+        end
         if valid
             user_object_array = get_user_data(users_json, username)
             active_user = create_user_object(user_object_array)
-            # clear
+            clear
             puts "Welcome #{active_user.name}, you are logged in.\n"
             return [true, username, active_user]
         else
@@ -67,6 +65,11 @@ def top_level_menu_selection(selection, path_to_users_file)
         return [false, "exit"]
     else
         
+    end
+    rescue
+        retry if (retries += 1) < 3
+        puts "You have entered incorrect login information. Goodbye."
+        return [false]
     end
 end
 

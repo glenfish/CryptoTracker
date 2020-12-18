@@ -4,6 +4,7 @@ require 'httparty'
 require 'json'
 require 'terminal-table'
 require 'colorize'
+require 'active_support'
 require_relative './methods/menu'
 path_to_users_file = './json/users/users.json'
 path_to_portfolio_file = "./json/portfolios/tester.json" #default
@@ -34,16 +35,16 @@ while !logged_in
     top_level_menu("CryptoTracker :: You Are Logged Out") # Optionally pass a title to the Main Menu
     user_selection = gets.strip.chomp.to_i # get user selection
     select = top_level_menu_selection(user_selection, path_to_users_file)
-    if select[0] == false
-        clear
+    if select[0] == false 
+        # clear
         title
         exit
     elsif
         logged_in = select[0] # sets logged in status to true
     end
     active_user = select[2] # passes back and assigns the active user object
-    rescue
-        retry
+    # rescue
+    #     # retry
     end
 end
 while logged_in

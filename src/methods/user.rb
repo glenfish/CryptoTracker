@@ -72,6 +72,9 @@ def create_user(path_to_users_file)
         if v == "admin"
             value.downcase == "y" ? value = true : value = false
         end
+        if v == "password"
+            value = encrypt(value)
+        end
         user_hash[v] = value
         user_object_array << value
     end
@@ -108,7 +111,7 @@ def display_user_info(users_json)
     users_json.each_with_index do |user, index|
         name = users_json[index]['name']
         username = users_json[index]['username']
-        password = users_json[index]['password']
+        password = decrypt(users_json[index]['password'])
         users_json[index]['admin'] == true ? admin = "admin".colorize(:red) : admin = "user".colorize(:blue)
         users_json[index]['active'] == true ? status = "yes".colorize(:green) : status = "no".colorize(:red)
         creation_date = users_json[index]['user_created']
@@ -124,19 +127,25 @@ def display_user_info(users_json)
 end
 
 # checks to see if username exists in users.json file
-def validate_username(username, users_json)
+def validate_username(username, password, users_json)
     users_json.each_with_index do |user, index|
+        name_current = user['name']
         username_current = user['username']
+        password_current = decrypt(user['password'])
         active_current = user['active']
         # puts "Looking at: #{username_current} = #{username}"
         # puts "User is active? #{active_current}"
-        if username_current == username && active_current == true
+        if username_current == username && active_current == true && password_current == password
             # puts "#{username} was selected"
             return username
+        elsif username_current == username && active_current == true && password_current != password
+            clear
+            # puts "Incorrect username or password. Please try again."
+            return "password_error"
         elsif username_current == username && active_current == false
             # puts "#{username} is not active"
             return false
         end
-    end
+    end  
     return false
 end
