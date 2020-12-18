@@ -55,9 +55,7 @@ def top_level_menu_selection(selection, path_to_users_file)
         valid = validate_username(username, users_json)
         if valid
             user_object_array = get_user_data(users_json, username)
-            p user_object_array
             active_user = create_user_object(user_object_array)
-            p active_user
             # clear
             puts "Welcome #{active_user.name}, you are logged in.\n"
             return [true, username, active_user]
