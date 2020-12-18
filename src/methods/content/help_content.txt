@@ -1,5 +1,5 @@
 
-Crypto Tracker is a digital asset portfolio manager. Users can add crypto assets to their portfolio and track the prices and values of their holdings. You need to install Ruby on either you Mac or Linux machine, or in your Windows Subsystem for Linux (WSL) on Windows. (F)or more information on this please see https://www.howtogeek.com/426749/how-to-access-your-linux-wsl-files-in-windows-10/)
+Crypto Tracker is a digital asset portfolio manager. Users can add crypto assets to their portfolio and track the prices and values of their holdings. You need to install Ruby on either your Mac or Linux machine, or in your Windows Subsystem for Linux (WSL) on Windows. (For more information on this please see https://www.howtogeek.com/426749/how-to-access-your-linux-wsl-files-in-windows-10/)
 
 To run CryptoTracker in your terminal change into the directory CryptoTracker/src/ and enter:
 bash crypto.sh
@@ -16,13 +16,11 @@ ruby main.rb --h
 ruby main.rb -help
 ruby main.rb --help
 
-
-
 *********************
 * WHAT TO DO FIRST: *
 *********************
 
-Log in as admin and create a user account (select option 1), then log out and log in again with the new username.
+Log in as admin and create a user account (select option 1), then log out. Log in again with the new username you just created.
 Admin login is: fusion22
 
 Note: In this version of CryptoTracker, even though you can create a password, you MUST enter your username when logging in. 
@@ -44,13 +42,13 @@ Admins can create and manage users.
 Users can see the following options in their logged in menu:
 
 1. View Portfolio
-Selecting this option will show your current portfolio. It will be empty by default (In this case you must add cryptos to it - see the below). After selecting View Portfolio you will have a choice of how you would like to view your portfolio. The second option gets live data from CoinMarketCap, and the first option uses pricing that is stored on your computer. If you want the latest market prices, select option 2. If you just want to check to see if your cryptos and quantities look correct and you don't need to see the latest pricing, select option 1. If you select option 1, you will be asked to select from one of four different cached files. You can choose any of them, 1, 2, 3 or 4.
+Selecting this option will show your current portfolio. It will be empty by default (In this case you must add cryptos to it - see below). After selecting View Portfolio you will have a choice of how you would like to view your portfolio. The second option gets live data from CoinMarketCap, and the first option uses pricing that is stored on your computer. If you want the latest market prices, select option 2. If you just want to check to see if your cryptos and quantities look correct and you don't need to see the latest pricing, select option 1. If you select option 1, you will be asked to select from one of four different cached files. You may choose any of them... 1, 2, 3 or 4.
 
 2. Add/Remove Crypto
-Selecting this option from the main user menu will allow you to add a crypto to your portfolio, or if it already exists, you can change or delete it. You will be guided with questions. You must enter the cryptocurrency symbol and the quantity of that asset you wish to update it to. If you already had BTC (Bitcoin) for example and you wish to delete it (perhaps you sold your Bitcoin, you made a mistake with the emtry, or you are just testing) you can enter BTC with a quantity of 0. Any changes you made you can fix simply by selecting Add/Remove Crypto again, and re-entering the information.
+Selecting this option from the main user menu will allow you to add a crypto to your portfolio, or if it already exists, you can change or delete it. You will be guided with questions. You must enter the cryptocurrency symbol and the quantity of that asset you wish to update. If you already had BTC (Bitcoin), for example and you wish to delete it (perhaps you sold your Bitcoin, you made a mistake with the emtry, or you are just testing) you can enter BTC with a quantity of 0. Any changes you make you can fix simply by selecting Add/Remove Crypto again, and re-entering the correct information.
 
 3. Help
-Brings you to this help page
+Brings you to the help page you are reading now.
 
 4. Quit
 Exits the CryptoTracker app.
@@ -66,19 +64,22 @@ Selecting this option will ask you for the following:
 Name: Bob
 Username: bobby56
 Password: xxx
-Is Admin? (y/n): ** Note: you must select 'n' if you want to create a regular user, otherwise select 'y' to create another admin user
+Is Admin? (y/n): ** Note: you must select 'n' if you want to create a regular user (so you can start a portfolio), otherwise select 'y' to create another admin user
 You will be asked to confirm. After confirmation, you can go to the next step and verify that the new user is created.
 
 2. Show All Users
-Selecting this option will disp[lay all users, their credentials, their Active status (yes/no) and their Type (admin/user). Remember, only a user can manage a portfolio. Admin users can create and view users only.
+Selecting this option will disp[lay all users, their credentials, their Active status (yes/no) and their Type (admin/user). Remember, only a user can manage a portfolio. Admin users can create, view and manage users only.
 
 3. Deactivate User
-This option will ask you for a username. If the username is found in the list of users or admins, you will be asked to confirm before that user or admin account is deactivated. Once an account is deactivated it cannot be reactivated at this time. You can always create a new account for the user. Note: You cannot set the main Admin user (with username: fusion22) to inactive. If you try to, it will be rejected. Why? Because you always need an active Admin user to create regular users. If all Admin users were somehow set to inactive, users could no longer be created or managed.
+This option will ask you for a username. If the username is found in the list of users or admins, you will be asked to confirm before that account is deactivated. Once an account is deactivated it cannot be reactivated. You can always create a new account for the user. Note: You cannot set the main Admin user (with username: fusion22) to inactive. If you try to, it will be rejected. Why? Because you always need to have an active Admin user to create regular users. If all Admin users were somehow set to inactive, users could no longer be created or managed. Think of it as a safety feature!
 
 4. Quit
 Exit the CryptoTracker app.
 
-Enjoy using CryptoTracker!
+Enjoy using CryptoTracker and good luck with your portfolio!
+
+CryptoTracker cropyright 2020 All Rights Reserved.
+Free for personal use. No re-distribution.
 
 
 
