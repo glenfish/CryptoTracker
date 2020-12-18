@@ -1,5 +1,5 @@
 class User
-    attr_reader :name, :username, :active, :api_key
+    attr_reader :name, :username, :active, :api_key, :admin
     attr_writer 
     attr_accessor 
 
