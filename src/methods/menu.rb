@@ -142,7 +142,8 @@ def admin_logged_in_menu_selection(selection, path_to_users_file, path_to_portfo
         return [false, "exit"]
     else
         # error
-        raise AppError
+        clear
+        return [true, "error"]
     end
 end
 ############################################################
