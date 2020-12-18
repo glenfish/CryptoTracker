@@ -6,8 +6,8 @@ def create_user_object(user_object_array)
 end
 
 def check_duplicate_user(users, new_username) # iterate over an array of hashes and check for instances of username that match
-    users.each do |existing_username|
-        if existing_username['username'] == new_username
+    users.each do |user|
+        if user['username'] == new_username
             return true
         end
     end
@@ -32,13 +32,18 @@ end
 def deactivate_user(users, path_to_users_file)
     puts "Enter username to make inactive:\n"
     username = gets.strip.chomp
-    users.each do |existing_username|
-        if existing_username['username'] == username
+    if username == "fusion22"
+        clear
+        puts "Sorry! You cannot deactivate this admin user."
+        return
+    end
+    users.each do |user|
+        if user['username'] == username and username != "fusion22"
             # confirm you want to deactivate the user
-            puts "You are about to deactivate #{existing_username['username']}. Sure?"
+            puts "You are about to deactivate #{user['username']}. Sure?"
             if gets.strip.chomp.downcase == 'y'
                 # deactivate the user
-                existing_username['active']=false
+                user['active']=false
                 write_json_file(users, path_to_users_file)
                 clear
                 puts "#{username} user has been deactivated"
@@ -75,19 +80,20 @@ def create_user(path_to_users_file)
 
     if !check_duplicate_user(file_data, user_hash['username']) # true = duplicate username, false = ok to add user
         puts "You are about to add a new user. Are you sure? y/n\n"
-            if gets.strip.chomp.to_s.downcase == "y" || gets.strip.chomp.to_s.downcase == "yes"
-                file_data.push(user_hash)
-                write_json_file(file_data, path_to_users_file)
-                create_user_object(user_object_array) # calls method to create the user object using array of name, username and password
-                portfolio_object = create_portfolio_object(user_hash['username']) # calls a method to create a portfolio object and write a blank portfolio json file
-                unless user_hash['admin']
-                    write_json_file(portfolio_object.create_empty_portfolio, portfolio_object.portfolio_path)
-                end
-                puts "User Created!\n"
-            else
-                puts "User creation aborted.\n" # existing username found in users.json
-                return
+        choice = gets.strip.chomp.to_s.downcase
+        if choice == "y" || choice == "yes"
+            file_data.push(user_hash)
+            write_json_file(file_data, path_to_users_file)
+            create_user_object(user_object_array) # calls method to create the user object using array of name, username and password
+            portfolio_object = create_portfolio_object(user_hash['username']) # calls a method to create a portfolio object and write a blank portfolio json file
+            unless user_hash['admin']
+                write_json_file(portfolio_object.create_empty_portfolio, portfolio_object.portfolio_path)
             end
+            puts "User Created!\n"
+        else
+            puts "User creation aborted.\n" # existing username found in users.json
+            return
+        end
     else 
         puts "This username already exists"
         return
@@ -96,19 +102,21 @@ def create_user(path_to_users_file)
         
 end
 
+# display a table of all users (viewable only by Admins)
 def display_user_info(users_json)
     rows =[]
     users_json.each_with_index do |user, index|
         name = users_json[index]['name']
         username = users_json[index]['username']
         password = users_json[index]['password']
-        status = users_json[index]['active']
+        users_json[index]['admin'] == true ? admin = "admin".colorize(:red) : admin = "user".colorize(:blue)
+        users_json[index]['active'] == true ? status = "yes".colorize(:green) : status = "no".colorize(:red)
         creation_date = users_json[index]['user_created']
-        rows << [name,username,password,status,creation_date]
+        rows << [name,username,password,admin, status,creation_date]
         if index < (users_json.size - 1)
             rows << :separator
         else
-            table = Terminal::Table.new :title => "Users".colorize(:cyan), :headings => ["Name", "Username", "Pass", "Active", "Joined"], :rows => rows
+            table = Terminal::Table.new :title => "Users".colorize(:cyan), :headings => ["Name".colorize(:cyan), "Username".colorize(:cyan), "Password".colorize(:cyan), "Type".colorize(:cyan), "Active".colorize(:cyan), "Joined".colorize(:cyan)], :rows => rows
             puts table  
         end
     end
