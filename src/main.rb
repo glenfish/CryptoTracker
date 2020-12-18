@@ -9,10 +9,6 @@ require_relative './methods/menu'
 path_to_users_file = './json/users/users.json'
 path_to_portfolio_file = "./json/portfolios/tester.json" #default
 active_user = []
-def title
-    title = "  __                    ___                    \n /    _     _  |_  _     |   _  _   _ |   _  _ \n \\__ |  \\/ |_) |_ (_)    |  |  (_| (_ |( (- |  \n        /  |                                   "
-    puts title
-end
 
 # flag handling *************************************************
 flag1 = ARGV[0] # get the flag
