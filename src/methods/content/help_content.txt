@@ -20,20 +20,17 @@ ruby main.rb --help
 * WHAT TO DO FIRST: *
 *********************
 
-Log in as admin and create a user account (select option 1), then log out. Log in again with the new username you just created.
+Log in as admin and create a user account (select option 1), then log out. Log in again with the new username and password you just created.
 Admin login is: fusion22
 
-Note: In this version of CryptoTracker, even though you can create a password, you MUST enter your username when logging in. 
+Users can: 
+- view their portfolio
+- add cryptos to their portfolio
 
-If you created an account such as the one below:
-Name: Mary
-username: mary
-password: pass1234
-... YOU MUST  enter 'mary' to log in. Do not enter the password. Logging in with a secure password will come in the next release of CryptoTracker.
-
-Users can create and view portfolios.
-
-Admins can create and manage users.
+Admins can:
+- view all users
+- add new users (both admins and regular users)
+- deactivate users
 
 *****************
 * USER OPTIONS: *
@@ -63,15 +60,18 @@ Admins can see the following options in their logged in menu:
 Selecting this option will ask you for the following:
 Name: Bob
 Username: bobby56
-Password: xxx
+Password: pass1234
 Is Admin? (y/n): ** Note: you must select 'n' if you want to create a regular user (so you can start a portfolio), otherwise select 'y' to create another admin user
+
 You will be asked to confirm. After confirmation, you can go to the next step and verify that the new user is created.
 
 2. Show All Users
 Selecting this option will disp[lay all users, their credentials, their Active status (yes/no) and their Type (admin/user). Remember, only a user can manage a portfolio. Admin users can create, view and manage users only.
 
 3. Deactivate User
-This option will ask you for a username. If the username is found in the list of users or admins, you will be asked to confirm before that account is deactivated. Once an account is deactivated it cannot be reactivated. You can always create a new account for the user. Note: You cannot set the main Admin user (with username: fusion22) to inactive. If you try to, it will be rejected. Why? Because you always need to have an active Admin user to create regular users. If all Admin users were somehow set to inactive, users could no longer be created or managed. Think of it as a safety feature!
+This option will ask you for a username. If the username is found in the list of users or admins, you will be asked to confirm before that account is deactivated. Once an account is deactivated it cannot be reactivated. You can always create a new account for the user. 
+
+IMPORTANT: You cannot set the main Admin user (with username: fusion22) to inactive. If you try to, it will be rejected. Why? Because you always need to have an active Admin user to create regular users. If all Admin users were somehow set to inactive, users could no longer be created or managed. Think of it as a safety feature!
 
 4. Quit
 Exit the CryptoTracker app.
