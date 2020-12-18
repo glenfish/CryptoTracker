@@ -48,7 +48,7 @@ while !logged_in
 end
 while logged_in
     while active_user.admin == true # admin user, not regular user
-        logged_in_admin_main_menu("Admin Menu") # Optionally pass a title to the Main Menu
+        logged_in_admin_main_menu("#{active_user.name}'s Admin Menu") # Optionally pass a title to the Main Menu
         user_selection = gets.strip.chomp.to_i # get user selection
         select = admin_logged_in_menu_selection(user_selection, path_to_users_file, path_to_portfolio_file) # array is returned with true/false for logged in at index 0, and a custom value for each action chosen at index 1
         if select[0] == false
