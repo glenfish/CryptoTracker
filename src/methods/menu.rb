@@ -15,9 +15,16 @@ require_relative 'user'
 path_to_users_file = './json/users/users.json'
 path_to_portfolio_file = "./json/portfolios/default.json"
 
+
+
 # clear terminal screen
 def clear
     system 'clear'
+end
+
+def title
+    title = "  __                    ___                    \n /    _     _  |_  _     |   _  _   _ |   _  _ \n \\__ |  \\/ |_) |_ (_)    |  |  (_| (_ |( (- |  \n        /  |                                   "
+    puts title
 end
 
 ############################################################
@@ -25,7 +32,7 @@ end
 ############################################################
 
 # logged out menu display
-def top_level_menu(menu_title = "Welcome To Crypto Tracker")
+def top_level_menu(menu_title = "Welcome To CryptoTracker")
     clear
     menu_options = ['Login', 'Quit']
     rows = []
@@ -33,6 +40,7 @@ def top_level_menu(menu_title = "Welcome To Crypto Tracker")
         rows << ["#{index + 1}. #{menu_option}"]
     end
     table = Terminal::Table.new :title => menu_title.colorize(:cyan), :rows => rows
+    title
     puts table
 end
 
@@ -70,6 +78,7 @@ def logged_in_main_menu(menu_title = "Welcome To Crypto Tracker")
         rows << ["#{index + 1}. #{menu_option}"]
     end
     table = Terminal::Table.new :title => menu_title.colorize(:cyan), :rows => rows
+    # title
     puts table
 end
 
@@ -105,6 +114,7 @@ def logged_in_admin_main_menu(menu_title = "Crypto Tracker Admin")
         rows << ["#{index + 1}. #{menu_option}"]
     end
     table = Terminal::Table.new :title => menu_title.colorize(:cyan), :rows => rows
+    # title
     puts table
 end
 
