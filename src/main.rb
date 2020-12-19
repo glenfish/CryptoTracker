@@ -11,10 +11,19 @@ path_to_portfolio_file = "./json/portfolios/tester.json" #default
 active_user = []
 
 # flag handling *************************************************
-flag1 = ARGV[0] # get the flag
-# flag2 = ARGV[1]
-# flag3 = ARGV[2]
-ARGV.clear # clear argv so we don't have a problem with gets
+flags = []
+ARGV.each do |arg|
+    flags << arg.strip.chomp
+end
+ARGV.clear
+username_flag = ""
+password_flag = ""
+if flags.length == 1
+    flag1 = flags[0] # get the help flag
+elsif flags.length == 2
+    username_flag = flags[0]
+    password_flag = flags[1]
+end
 # allowed: -h, --h, -help or --help
 if flag1 == "-h" or flag1 == "--h" or flag1 == "-help" or flag1 == "--help" # allow for variations on help request via flag
     clear
@@ -22,15 +31,21 @@ if flag1 == "-h" or flag1 == "--h" or flag1 == "-help" or flag1 == "--help" # al
     show_help # show the help information
     exit # quit
 end
+
 # end flag handling *********************************************
 
 # START CONTROL FLOW
 logged_in = false
 while !logged_in
     begin
-    top_level_menu("CryptoTracker :: You Are Logged Out") # Optionally pass a title to the Main Menu
-    user_selection = gets.strip.chomp.to_i # get user selection
-    select = top_level_menu_selection(user_selection, path_to_users_file)
+    case
+    when (username_flag == "" || password_flag == "") # if no flag was captured for username, show the 'logged out' top level menu
+        top_level_menu("CryptoTracker :: You Are Logged Out") # Optionally pass a title to the Main Menu
+        user_selection = gets.strip.chomp.to_i # get user selection
+        select = top_level_menu_selection(user_selection, path_to_users_file, username_flag, password_flag)
+    else # if username_flag and password_flag was captured, proceed to automatically log in with the arguments passed
+        select = top_level_menu_selection(1, path_to_users_file, username_flag, password_flag)
+    end
     if select[0] == false 
         # clear
         title

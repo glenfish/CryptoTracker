@@ -36,18 +36,22 @@ def top_level_menu(menu_title = "Welcome To CryptoTracker")
 end
 
 # logged out menu handling
-def top_level_menu_selection(selection, path_to_users_file)
+def top_level_menu_selection(selection, path_to_users_file, username, password)
     retries ||= 0
     begin
     case selection
     when 1 # attempts to log user in
         # clear
-        puts "Enter username:\n"
-        username = gets.strip.chomp
-        puts "Password:\n"
-        your_password = gets.strip.chomp
+        # puts "Username flag is: #{username}"
+        # puts "Password flag is: #{password}"
+        if username == ""
+            puts "Enter username:\n"
+            username = gets.strip.chomp
+            puts "Password:\n"
+            password = gets.strip.chomp
+        end
         users_json = read_json_file(path_to_users_file)
-        valid = validate_username(username, your_password, users_json)
+        valid = validate_username(username, password, users_json)
         if valid == "password_error"
             raise error
         end
