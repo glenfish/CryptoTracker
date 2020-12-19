@@ -38,10 +38,11 @@ def deactivate_user(users, path_to_users_file)
         return
     end
     users.each do |user|
-        if user['username'] == username and username != "fusion22"
+        if user['username'] == username and username != "fusion22" # cant delete admin with password 'fusion22'
             # confirm you want to deactivate the user
-            puts "You are about to deactivate #{user['username']}. Sure?"
-            if gets.strip.chomp.downcase == 'y'
+            puts "You are about to deactivate #{user['username']}. Sure? (y/n)"
+            choice = gets.strip.chomp.downcase
+            if choice.match(/^y/) 
                 # deactivate the user
                 user['active']=false
                 write_json_file(users, path_to_users_file)
