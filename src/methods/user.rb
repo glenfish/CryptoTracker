@@ -28,17 +28,33 @@ def get_user_data(users, username)
     return user_array
 end
 
+#activate or deactive a user
+def activate_deactivate(file_data, path_to_users_file)
+    clear
+    puts "1. Activate User\n2. Deactivate User\n3. Go back\n"
+    choice = gets.strip.chomp.to_i
+    case choice
+    when 1
+        activate_user(file_data, path_to_users_file)
+    when 2
+        deactivate_user(file_data, path_to_users_file)
+    when 3
+        clear
+        return
+    end
+end
+
 # change active to false for a specific user in the users.json file
 def deactivate_user(users, path_to_users_file)
     puts "Enter username to make inactive:\n"
     username = gets.strip.chomp
-    if username == "fusion22"
+    if username == "admin"
         clear
         puts "Sorry! You cannot deactivate this admin user."
         return
     end
     users.each do |user|
-        if user['username'] == username and username != "fusion22" # cant delete admin with password 'fusion22'
+        if user['username'] == username and username != "admin" # cant delete admin user
             # confirm you want to deactivate the user
             puts "You are about to deactivate #{user['username']}. Sure? (y/n)"
             choice = gets.strip.chomp.downcase
@@ -52,6 +68,32 @@ def deactivate_user(users, path_to_users_file)
             else
             clear
             puts "User remains active"
+            return
+            end
+        end
+    end
+    clear
+    puts "User does not exist"
+end
+
+def activate_user(users, path_to_users_file)
+    puts "Enter username to make active:\n"
+    username = gets.strip.chomp
+    users.each do |user|
+        if user['username'] == username
+            # confirm you want to deactivate the user
+            puts "You are about to activate #{user['username']}. Sure? (y/n)"
+            choice = gets.strip.chomp.downcase
+            if choice.match(/^y/) 
+                # activate the user
+                user['active']=true
+                write_json_file(users, path_to_users_file)
+                clear
+                puts "#{username} user has been activated"
+                return
+            else
+            clear
+            puts "No change to user"
             return
             end
         end

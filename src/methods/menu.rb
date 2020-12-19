@@ -118,7 +118,7 @@ end
 # logged in Admin menu display
 def logged_in_admin_main_menu(menu_title = "Crypto Tracker Admin")
     # Top level Welcome menu
-    menu_options = ['Create User', 'Show All Users', 'Deactivate User', 'Quit']
+    menu_options = ['Create User', 'Show All Users', 'Activate/Deactivate User', 'Quit']
     rows = []
     menu_options.each_with_index do |menu_option, index|
         rows << ["#{index + 1}. #{menu_option}"]
@@ -145,7 +145,8 @@ def admin_logged_in_menu_selection(selection, path_to_users_file, path_to_portfo
     when 3
         # deactivate a user
         file_data = read_json_file(path_to_users_file)
-        deactivate_user(file_data, path_to_users_file)
+        activate_deactivate(file_data,path_to_users_file)
+        # deactivate_user(file_data, path_to_users_file)
         return [true, "fusion22"]
     when 4
         #quit
