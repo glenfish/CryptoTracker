@@ -6,6 +6,10 @@ bash crypto.sh
 .. or ..
 ruby main.rb
 
+*************************************
+* Run with Optional Flags/Arguments *
+*************************************
+
 To see this help file using a flag, you can run any of these:
 bash crypto.sh -h
 bash crypto.sh --h
@@ -15,6 +19,17 @@ ruby main.rb -h
 ruby main.rb --h
 ruby main.rb -help
 ruby main.rb --help
+
+You can also login directly by using the following:
+-u "your-username-here"
+-p "your-password-here"
+
+example:
+bash crypto.sh -u "admin" -p "fusion22"
+... or ...
+ruby main.rb -u "admin" -p "fusion22"
+
+If either your username or password are incorrect or missing, you will have the option to log in from the main menu.
 
 *********************
 * WHAT TO DO FIRST: *
