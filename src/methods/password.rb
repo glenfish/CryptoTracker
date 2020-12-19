@@ -1,6 +1,6 @@
 def encrypt(unencrypted_password)
     encrypted = Base64.encode64(unencrypted_password)
-    return encrypted
+    return encrypted.chomp
   end
   
   def decrypt(encrypted_password)
