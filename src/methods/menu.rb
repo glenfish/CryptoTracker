@@ -25,7 +25,7 @@ path_to_portfolio_file = "./json/portfolios/default.json"
 # logged out menu display
 def top_level_menu(menu_title = "Welcome To CryptoTracker")
     clear
-    menu_options = ['Login', 'Quit']
+    menu_options = ['Login', 'Help', 'Quit']
     rows = []
     menu_options.each_with_index do |menu_option, index|
         rows << ["#{index + 1}. #{menu_option}"]
@@ -65,7 +65,10 @@ def top_level_menu_selection(selection, path_to_users_file, username, password)
             puts "Access denied for username: #{username}\n"
             return [false, username]
         end
-    when 2 # quit
+    when 2 # help
+        show_help
+        exit
+    when 3 # quit
         return [false, "exit"]
     else
         raise error
