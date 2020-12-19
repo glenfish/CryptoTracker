@@ -85,11 +85,59 @@ IMPORTANT: You cannot set the main Admin user (with username: fusion22) to inact
 4. Quit
 Exit the CryptoTracker app.
 
+*************************
+* Troubleshooting / FAQ *
+*************************
+
+Q1. I can't log in!
+A. Log in as admin user and select option 2. Show All Users
+You will see the user and password for all users here, including other admin users.
+
+Q2. My account is not active. How do I re-activate it?
+A. Log in an an admin user and select 3. Activate/Deactivate User, then select 1. Activate User. Follow the prompts.
+
+Q3. How do I run the CryptoTracker app?
+A. Navigate to the CryptoTracker/src/ directory in your terminal and type the following: 
+ruby main.rb
+... or ...
+bash crypto.sh
+
+Q4. Help, none of the users can log in!
+A. This scenario should never come up, it is only here for an emergency in case something became corrupted. Please carefull follow the below instructions.
+
+Step 1:
+In the folder CryptoTracker/src/json/users/  ... is a file called users_backup.json
+Move the users.json file out of the folder and rename users_backup.json to users.json
+
+Step 2:
+You will now be able to log in using the defaul admin user.
+username: admin
+password: fusion22
+
+Step 3:
+It is important that before you re-create users, you copy all the portfolio files in
+CryptoTracker/src/json/portfolios/
+and make a copy of them somewhere else. You will need to move them back again after the next step.
+
+Step 4:
+Make sure you completed step 3 before proceeding! If not, you will lose all your portfolios.
+After performing this step, you can re-create all the accounts.
+IMPORTANT: You MUST create the accounts using the exact same username as before. The username matches up to the portfolio filename, so if they are not the same, you will not be able to see your old portfolio, and you will need to create it from scratch. If you followed the steps as shown above, you will be able to see your portfolio again as they were.
+
+Step 5:
+Only after creating your accounts again should you then move all your backed up portfolio files into the CryptoTracker/src/json/portfolios/ folder.
+You will be overwriting the files that are there. If you are prompted to replace the files, say yes to all.
+
+You will now be able to log in and access your portfolios as before.
+
+____________________________________________________________
+
 Enjoy using CryptoTracker and good luck with your portfolio!
 
 CryptoTracker cropyright 2020 All Rights Reserved.
 Free for personal use. No re-distribution.
 
+____________________________________________________________
 
 
 
