@@ -53,7 +53,7 @@ def top_level_menu_selection(selection, path_to_users_file, username, password)
         users_json = read_json_file(path_to_users_file)
         valid = validate_username(username, password, users_json)
         if valid == "password_error"
-            raise error
+            return [false]
         end
         if valid
             user_object_array = get_user_data(users_json, username)
@@ -68,7 +68,7 @@ def top_level_menu_selection(selection, path_to_users_file, username, password)
     when 2 # quit
         return [false, "exit"]
     else
-        
+        raise error
     end
     rescue
         retry if (retries += 1) < 3

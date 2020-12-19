@@ -54,8 +54,8 @@ while !logged_in
         logged_in = select[0] # sets logged in status to true
     end
     active_user = select[2] # passes back and assigns the active user object
-    # rescue
-    #     # retry
+    rescue
+        retry
     end
 end
 while logged_in
