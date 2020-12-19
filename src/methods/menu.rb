@@ -66,6 +66,8 @@ def top_level_menu_selection(selection, path_to_users_file, username, password)
             return [false, username]
         end
     when 2 # help
+        clear
+        title
         show_help
         exit
     when 3 # quit
@@ -106,6 +108,7 @@ def logged_in_menu_selection(selection)
     when 3
         # help
         clear
+        title
         return [true, "show_help"]
     when 4
         # quit

@@ -105,15 +105,17 @@ end
 # create a new user and push to users.json
 def create_user(path_to_users_file)
     user_object_array = []
+    is_admin_user = ''
     puts "* Create new user *"
     file_data = read_json_file(path_to_users_file)
-    user_attributes = {"Name: "=> "name", "Username: " => "username", "Password: " => "password", "Is Admin?: (y/n) " => "admin"}
+    user_attributes = {"Name: "=> "name", "Username: " => "username", "Password: " => "password", "Is Admin?: (y/n) Note: only regular non-admin users can have portfolios" => "admin"}
     user_hash = Hash.new
     user_attributes.each_with_index do |(k,v),i|
         puts "#{k}\n"
         value = gets.strip.chomp
         if v == "admin"
             value.downcase == "y" ? value = true : value = false
+            is_admin_user = value
         end
         if v == "password"
             value = encrypt(value)
@@ -125,7 +127,11 @@ def create_user(path_to_users_file)
     user_hash['user_created'] = Time.now.strftime("%Y-%m-%d")
 
     if !check_duplicate_user(file_data, user_hash['username']) # true = duplicate username, false = ok to add user
-        puts "You are about to add a new user. Are you sure? y/n\n"
+        if is_admin_user
+            puts "You are about to add a new Admin User. Are you sure? y/n\n"
+        else
+            puts "You are about to add a new Regular User. Are you sure? y/n\n"
+        end
         choice = gets.strip.chomp.to_s.downcase
         if choice == "y" || choice == "yes"
             file_data.push(user_hash)
