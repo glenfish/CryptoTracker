@@ -10,15 +10,13 @@ ruby main.rb
 * Run with Optional Flags/Arguments *
 *************************************
 
+Navigate to the CryptoTracker/src/ directory to use these commands.
+
 To see this help file using a flag, you can run any of these:
 bash crypto.sh -h
 bash crypto.sh --h
 bash crypto.sh -help
 bash crypto.sh --help
-ruby main.rb -h
-ruby main.rb --h
-ruby main.rb -help
-ruby main.rb --help
 
 You can also login directly by using the following:
 -u "your-username-here"
@@ -26,8 +24,6 @@ You can also login directly by using the following:
 
 example:
 bash crypto.sh -u "admin" -p "fusion22"
-... or ...
-ruby main.rb -u "admin" -p "fusion22"
 
 *********************
 * WHAT TO DO FIRST: *
