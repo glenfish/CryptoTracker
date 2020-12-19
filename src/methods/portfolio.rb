@@ -31,15 +31,19 @@ def add_crypto_to_portfolio(active_user)
         puts "Please confirm: #{quantity} #{symbol} (y/n)" # verify user wants to add crypto to portfolio
     elsif quantity == 0.0
         puts "Please confirm you are deleting #{symbol} (y/n)" # does not delete, just sets quantity = 0
+    else
+        puts "You cannot enter a negative number for quantity. Must be positive or zero."
+    return
     end
-    if gets.strip.chomp.downcase == 'y'
+    confirm = gets.strip.chomp.downcase
+    if (confirm == 'y' && quantity >= 0)
         json= {"username":active_user.username,"data":portfolio_json['data'].merge({symbol=>{"asset_name"=>"", "asset_quantity"=>quantity, "asset_buy_date"=>Time.now.strftime("%Y-%m-%d"), "asset_sell_date"=>"", "usd_price"=>"", "btc_price"=>"", "usd_profit"=>"", "btc_profit"=>""}})}
         write_json_file(json, path_to_portfolio_file)
-        puts "Your portfolio was updated!"
+        puts "Your portfolio was updated"
     else
         puts "Your portfolio was not changed"
     end
-rescue
+# rescue
 
 end
 

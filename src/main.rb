@@ -66,6 +66,7 @@ while logged_in
         if select[0] == false
             clear
             title
+            puts "when lambo?\n\n"
             exit
         elsif
             logged_in = select[0] # sets logged in status to true
@@ -82,6 +83,7 @@ while logged_in
         if select[0] == false
             clear
             title
+            puts "to the moon!\n\n"
             exit
         elsif
             logged_in = select[0] # sets logged in status to true
