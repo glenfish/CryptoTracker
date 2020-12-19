@@ -1,7 +1,7 @@
 class User
     attr_reader :name, :username, :active, :api_key, :admin
     attr_writer 
-    attr_accessor 
+    attr_accessor :portfolio_modified
 
     def initialize(name, username, password, admin = false, api_key)
         @name = name
@@ -11,6 +11,7 @@ class User
         @active = true
         @user_created = Time.now.strftime("%Y-%m-%d")
         @admin = admin
+        @portfolio_modified = true
     end
 
     
