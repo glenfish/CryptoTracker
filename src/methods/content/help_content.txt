@@ -43,16 +43,11 @@ When it asks Is Admin? - you type 'n' (for no). You are not creating an admin us
 4. Run CryptoTracker again and log in using the new user account information you just created in step 3.
 You can now add cryptos to your portfolio.
 
-To add a crypto... select 2. Add/Remove Crypto
-Enter the crypto symbol you wish to add
-Enter the quantity of that crypto you wish to add
-Confirm! View your portfolio!
-
-Users can: 
+*** Users can: 
 - view their portfolio
 - add cryptos to their portfolio
 
-Admins can:
+*** Admins can:
 - view all users
 - add new users (both admins and regular users)
 - deactivate users
