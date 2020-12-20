@@ -1,13 +1,80 @@
 # CryptoTracker
-
+20-10-2020  
 CryptoTracker v 1.1  
-Built with Ruby 2.7.2
+Built with Ruby 2.7.2  
 
-## Application Overview
+## Installation
+
+To Install:
+```
+git clone https://github.com/glenfish/CryptoTracker.git
+```
+
+Navigate to the CryptoTracker/src/ directory and run:  
+ ```
+ bash crypto.sh
+ ```
+
+ Optionally to open directly into a user account, run:  
+```
+crypto.sh -u "username" -p "password"
+```
+
+CryptoTracker uses bundler and the following gems are packaged:  
+
+```
+httparty  
+json  
+terminal-table  
+colorize version  
+activesupport
+```
+
+## Github Repository
+
+[> CryptoTracker App on Github](https://github.com/glenfish/CryptoTracker)
+
+## Trello Board - Project Management
+
+[> CryptoTracker App Trello Board](https://trello.com/b/9gKJL3WM/crypto-portfolio-manager-terminal-app)
+
+Screenshots:  
+[> trello 1](./docs/trello_screenshots/ScreenShot2020-12-11at11.40.39PM.png)
+
+[> trello 2](./docs/trello_screenshots/ScreenShot2020-12-12at1.25.33PM.png)
+
+[> trello 3](./docs/trello_screenshots/ScreenShot2020-12-14at5.09.36PM.png)
+
+[> trello 4](./docs/trello_screenshots/ScreenShot2020-12-14at11.38.44PM.png)
+
+[> trello 5](./docs/trello_screenshots/ScreenShot2020-12-14at11.38.44PM.png)
+
+[> trello 6](./docs/trello_screenshots/ScreenShot2020-12-15at9.52.52PM.png)
+
+[> trello 7](./docs/trello_screenshots/ScreenShot2020-12-16at9.53.05PM.png)
+
+[> trello 8](./docs/trello_screenshots/ScreenShot2020-12-16at12.09.35AM.png)
+
+[> trello 9](./docs/trello_screenshots/ScreenShot2020-12-19at6.48.20PM.png)
+
+[> trello 10](./docs/trello_screenshots/ScreenShot2020-12-20at6.08.19PM.png)
+
+## Statement Of Purpose
+
+CryptoTracker aims to provide investors in cryptocurrency and other digital assets a tool with which to record buys and sells, output profit and loss statements and offer live pricing functionality for the portfolio.
+
+There are online services that offer similar functionality, however most people are not comfortable entering their investments into an unknown website or cloud based service. They prefer anonymity. Many users rely on manually updated Excel spreadsheets.
+
+This app aims to offer a better crypto tracking solution that is local and private, with real time pricing data and other metrics. It was designed to be simple, fast, easy to use and light weight. It requires Ruby and runs on Windows, Mac and Linux systems.
+
+The v1.1 release covered in this README file is a working product that offers many of the features described, however it is a work in progress and may new features will be added over time, beyond the scope of this document. Please check back in the future for updates.
+
+
+## Scope
 
 A terminal application for creating and managing a portfolio of cryptocurrency or digital assets using live market rate API data.
 
-CORE features:
+MVP release of CryptoTracker 
 
 - command line application
 - text driven menu
@@ -29,17 +96,80 @@ CORE features:
 - log out
 - 8000+ cryptocurrencies and digital assets
 
-Additonal planned features post MVP:
+## Out of scope: Additonal planned features post MVP
 
 - add and display 24hr % change, market cap, asset_buy_date, asset_sell_date, usd_profit, btc_profit
 - edit all aspects of portfolio
 - display summary profit and loss statement
 - save portfolio view or P&L to PDF or print
+- design and build out a GUI front end
+- run as a standalone executable app
 
-## Testing
+## CryptoTracker App Features
 
-rspec  
-< testing data and screenshots here >
+### Add Cryptocurrency To Portfolio
+
+The user can add a symbol name that represents the cryptocurrency on trading exchanges, and the quantity purchased. The app will display a list of all entries, showing name, symbol, quantity, current USD price of the asset, and the current USD value of the user's assets, with a grand total showing the combined portfolio value.
+
+This is done by merging hashes and writing to the username.json portfolio file.
+
+### API v Local Calls
+
+To minimise API calls, every call is cached locally in a JSON file. If the portfolio is changed in any way the API is called, otherwise the local cache data is used. Local cache is reset every time a user logs in, resulting in a refresh of pricing. The state management is controlled using an object attribute on the user.
+
+### User Management
+
+An administrator account has user creation privilliges and can activate or deactivate any user. Admin can also view the full list of users, usernames, passwords, status, account type and date the user was created. All users are stored together locally in 'users' JSON file.
+
+## Local Portfolio Files
+
+Each user has their own porfolio JSON file based on their username. The file contains key value pairs for the cryptocurrency symbols (for example 'BTC' for Bitcoin, or 'ETH' for Ethereum) and quantity of assets being tracked in the portfolio for each given user.
+
+## CryptoTracker Screenshots
+
+<img src="./docs/app_screenshots/v1_1/logged_out.png"
+     alt="User not logged in"
+     style="float: left; margin-bottom: 20px;" width="400px" />
+<div style="clear: both;"></div>
+<img src="./docs/app_screenshots/v1_1/logged_in_user.png"
+     alt="User logged in"
+     style="float: left; margin-bottom: 20px;" width="400px" />
+<div style="clear: both;"></div>
+<img src="./docs/app_screenshots/v1_1/logged_in_admin.png"
+     alt="Admin logged in"
+     style="float: left; margin-bottom: 20px;" width="400px" />
+<div style="clear: both;"></div>
+<img src="./docs/app_screenshots/v1_1/show_portfolio.png"
+     alt="User Portfolio view"
+     style="float: left; margin-bottom: 20px;" width="800px" />
+<div style="clear: both;"></div>
+<img src="./docs/app_screenshots/v1_1/show_users.png"
+     alt="Admin show users"
+     style="float: left; margin-bottom: 20px;" width="500px" />
+<div style="clear: both;"></div>
+<img src="./docs/app_screenshots/v1_0/create-new-user.png"
+     alt="Admin create new user"
+     style="float: left; margin-bottom: 20px;" width="180px" />
+<div style="clear: both;"></div>
+
+# Help
+
+The user can access the following in the help file, listed below:
+- Run Instructions
+- Using Arguments with the script
+- What To Do First
+- User options
+- Admin options
+- Troubleshooting / FAQ
+
+The help file explains in detail how to use the software.
+
+[> View CryptoTracker Help Here](https://github.com/glenfish/CryptoTracker/docs/help_content.txt)
+
+<img src="./docs/app_screenshots/v1_1/help.png"
+     alt="Help file sample image"
+     style="float: left; margin-bottom: 20px;" width="500px" />
+<div style="clear: both;"></div>
 
 ## API
 
@@ -53,14 +183,6 @@ url: https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=BT
 account url: https://pro.coinmarketcap.com/account  
 data limits: 333 per day. 10k per month
 
-## Github Repository
-
-[> CryptoTracker App on Github](https://github.com/glenfish/CryptoTracker)
-
-## Trello Board - Project Management
-
-[> CryptoTracker App Trello Board](https://trello.com/b/9gKJL3WM/crypto-portfolio-manager-terminal-app)
-
 ## Data Persistence
 
 User and user's portfolio data is stored locally in JSON file format. A User class instantiates the current user at login and facilitates attribute passing for personalisation of the user experience as well as writing and reading to the correct portfolio file.
@@ -71,68 +193,166 @@ At this stage the Portfolio class is only used in this instance, however it will
 
 ## Error Handling
 
-- Errors have been handled with logic in many cases, however where code errors may occur, the flow is not complicated by an over-abundance of error output. Instead, retry and clears have been used to improve the user experience and make it more intuative.
+Errors have been handled with logic in many cases, however where code errors may occur, the flow is not complicated by an over-abundance of error output. Instead, retry and clears have been used to improve the user experience and make it more intuative.
 
-## Installation
+## Control Flow & UML
 
-Ruby 2.7.2 was used to develop CryptoTracker  
-The following gems are packaged:  
-httparty  
-json  
-terminal-table  
-colorize version
-activesupport
+[> View Control Flow & UML Diagram PDF](https://github.com/glenfish/CryptoTracker/docs/control-flow-uml.pdf)
 
-## Usage
+[> View UML Diagram only](https://github.com/glenfish/CryptoTracker/docs/uml.png)
 
-CryptoTracker is designed for people who buy and sell digital assets or 'cryptocurrency'. A user can create a portfolio of cryptos from the assets listed on CoinMarketCap.com and get real time price data to track the portfolio value.
+## Testing
 
-The user can add a symbol name that represents the cryptocurrency on trading exchanges, and the quantity purchased. The app will display a list of all entries, showing name, symbol, quantity, current USD price of the asset, and the current USD value of the user's assets, with a grand total showing the combined portfolio value.
+Rspec is initialised in the build, however it is not currently being implemented as part of the testing procedure. It is planned that rspec will become a featured part of further test driven development for CryptoTracker.
 
-To minimise API calls, every call is cached locally in a JSON file. If the portfolio is changed in any way the API is called, otherwise the local cache data is used. Local cache is reset every time a user logs in, resulting in a refresh of pricing.
+Manual testing was completed for all functionality. Some of these tests were documented and screenshots taken.
 
-An administrator account has user creation privilliges and can activate or deactivate any user. Admin can also view the full list of users, usernames, passwords, status, account type and date the user was created.
+### Script Login w/ arguments
 
-All users are stored together locally in 'users' JSON file, and each puser has their own porfolio JSON file based on their username. The file contains data on the cryptocurrency symbols (for example 'BTC' for Bitcoin, or 'ETH' for Ethereum) and quantities of cryptos being tracked in the portfolio for each given user.
+The admin user's credentials (admin, fusion22) were passed as arguments to the shell script, captured in main.rb and logged the user in automatically.  
 
-# Screenshots
-
-<img src="./docs/app_screenshots/logged-out.png"
-     alt="User not logged in"
-     style="float: left; margin-bottom: 20px;" width="400px" />
-<div style="clear: both;"></div>
-<img src="./docs/app_screenshots/logged-in-user.png"
-     alt="User logged in"
-     style="float: left; margin-bottom: 20px;" width="400px" />
-<div style="clear: both;"></div>
-<img src="./docs/app_screenshots/portfolio-view.png"
-     alt="User Portfolio view"
-     style="float: left; margin-bottom: 20px;" width="800px" />
-<div style="clear: both;"></div>
-<img src="./docs/app_screenshots/logged-in-admin.png"
-     alt="Admin logged in"
-     style="float: left; margin-bottom: 20px;" width="300px" />
-<div style="clear: both;"></div>
-<img src="./docs/app_screenshots/users-view.png"
-     alt="Admin show users"
+<img src="./docs/manual_testing/cli-login/cli_login_1.png"
+     alt="Bash script login with arghuments"
      style="float: left; margin-bottom: 20px;" width="500px" />
 <div style="clear: both;"></div>
-<img src="./docs/app_screenshots/create-new-user.png"
-     alt="Admin create new user"
-     style="float: left; margin-bottom: 20px;" width="400px" />
+
+<img src="./docs/manual_testing/cli-login/cli_login_2.png"
+     alt="Bash script login with arghuments"
+     style="float: left; margin-bottom: 20px;" width="200px" />
 <div style="clear: both;"></div>
 
-# Help
+### User Login
 
-The user can access the following in the help file, listed below:
-- Run Instructions
-- Using Arguments with the script
-- What To Do First
-- User options
-- Admin options
-- Troubleshooting / FAQ
+Login of user was tested using the following credentials:  
+username: kim  
+password: xxx  
 
-[> CryptoTracker App Help](https://github.com/glenfish/CryptoTracker/docs/help_content.txt)
+<img src="./docs/manual_testing/user-login/user_login_1.png"
+     alt="User not logged in"
+     style="float: left; margin-bottom: 20px;" width="260px" />
+<div style="clear: both;"></div>
+
+<img src="./docs/manual_testing/user-login/user_login_2.png"
+     alt="User not logged in"
+     style="float: left; margin-bottom: 20px;" width="220px" />
+<div style="clear: both;"></div>
+
+### View Portfolio
+
+The 'Kim' user account was used to display the current portfolio. Selecting option 1 called the API and built the portfolio as below:
+
+<img src="./docs/manual_testing/view-portfolio/view_portfolio.png"
+     alt="View Portfolio"
+     style="float: left; margin-bottom: 20px;" width="500px" />
+<div style="clear: both;"></div>
+
+### Create User
+
+Admin account successfully created a new admin user account for Jack with username 'jman' and password 'pass1234':
+
+<img src="./docs/manual_testing/create-user/create_user_1.png"
+     alt="Admin creating a new regular user"
+     style="float: left; margin-bottom: 20px;" width="180px" />
+<div style="clear: both;"></div>
+
+<img src="./docs/manual_testing/create-user/create_user_2.png"
+     alt="Admin creating a new regular user"
+     style="float: left; margin-bottom: 20px;" width="390px" />
+<div style="clear: both;"></div>
+
+The user list displayed shows a new admin user 'Jack' added in the last row:
+
+<img src="./docs/manual_testing/create-user/create_user_3.png"
+     alt="Admin creating a new regular user"
+     style="float: left; margin-bottom: 20px;" width="350px" />
+<div style="clear: both;"></div>
+
+Multiple users were created and tested successfully using the following credentials:  
+
+name: Jim  
+username: jimbo  
+pass: 1234  
+
+name: Scott  
+username: djscotty  
+pass: 1234  
+
+Name: Gonzo  
+username: gonzers  
+pass: pass1234  
+
+### Deactivate User
+
+Admin was successful in setting Active to 'no'. In the users.json file this is represented as `"active":false`
+
+<img src="./docs/manual_testing/deactivate-user/deactivate_user_1.png"
+     alt="Admin deactivating a user"
+     style="float: left; margin-bottom: 20px;" width="120px" />
+<div style="clear: both;"></div>
+
+<img src="./docs/manual_testing/deactivate-user/deactivate_user_2.png"
+     alt="Admin deactivating a user"
+     style="float: left; margin-bottom: 20px;" width="260px" />
+<div style="clear: both;"></div>
+
+<img src="./docs/manual_testing/deactivate-user/deactivate_user_3.png"
+     alt="Admin deactivating a user"
+     style="float: left; margin-bottom: 20px;" width="180px" />
+<div style="clear: both;"></div>
+
+<img src="./docs/manual_testing/deactivate-user/deactivate_user_4.png"
+     alt="Admin deactivating a user"
+     style="float: left; margin-bottom: 20px;" width="340px" />
+<div style="clear: both;"></div>
+
+### Add/Remove Crypto
+
+Entering a new crypto to the portfolio: symbol BTC , quantity 50.
+
+<img src="./docs/manual_testing/add-remove-crypto/add_remove_crypto_1.png"
+     alt="Add/Remove Crypto Asset from Portfolio"
+     style="float: left; margin-bottom: 20px;" width="220px" />
+<div style="clear: both;"></div>
+
+<img src="./docs/manual_testing/add-remove-crypto/add_remove_crypto_2.png"
+     alt="Add/Remove Crypto Asset from Portfolio"
+     style="float: left; margin-bottom: 20px;" width="180px" />
+<div style="clear: both;"></div>
+
+<img src="./docs/manual_testing/add-remove-crypto/add_remove_crypto_3.png"
+     alt="Add/Remove Crypto Asset from Portfolio"
+     style="float: left; margin-bottom: 20px;" width="220px" />
+<div style="clear: both;"></div>
+
+Below is the output of the portfolio view after adding the 50 Bitcoin:
+
+<img src="./docs/manual_testing/add-remove-crypto/add_remove_crypto_4.png"
+     alt="Add/Remove Crypto Asset from Portfolio"
+     style="float: left; margin-bottom: 20px;" width="500px" />
+<div style="clear: both;"></div>
+
+Here is a second test showing the addition of 1000 Chainlink (LINK):
+
+<img src="./docs/manual_testing/add-remove-crypto/add_remove_crypto_2_1.png"
+     alt="Add 1000 Chainlink to Portfolio"
+     style="float: left; margin-bottom: 20px;" width="200px" />
+<div style="clear: both;"></div>
+
+<img src="./docs/manual_testing/add-remove-crypto/add_remove_crypto_2_2.png"
+     alt="Add 1000 Chainlink to Portfolio"
+     style="float: left; margin-bottom: 20px;" width="500px" />
+<div style="clear: both;"></div>
+
+As part of the testing process for adding or modifying cryptos, two cases were considered:
+1. Incorrect symbol  
+A symbol that is not defined does not cause an error, it is simply not added because it runs a match on the existing array of symbols first.
+
+2. Negative quantity
+This was handled by some simple logic that checked for greater than or equal to zero on the user input. An error is handled with "You cannot enter a negative number for quantity. Must be positive or zero" and flow breaks out of the add_crypto_to_portfolio method back to the menu handler.
+
+Additonally there was the case when a crpto was added with a zero quantity. In this instance, it serves as a method of 'deleting' the asset from the portfolio. All 0 quantity hashes are excluded from the portfolio view build.
+
+
 
 
 
