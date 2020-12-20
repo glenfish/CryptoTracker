@@ -129,15 +129,15 @@ Each user has their own porfolio JSON file based on their username. The file con
 
 <img src="./docs/app_screenshots/v1_1/logged_out.png"
      alt="User not logged in"
-     style="float: left; margin-bottom: 20px;" width="600px" />
+     style="float: left; margin-bottom: 20px;" width="800px" />
 <div style="clear: both;"></div>
 <img src="./docs/app_screenshots/v1_1/logged_in_user.png"
      alt="User logged in"
-     style="float: left; margin-bottom: 20px;" width="600px" />
+     style="float: left; margin-bottom: 20px;" width="800px" />
 <div style="clear: both;"></div>
 <img src="./docs/app_screenshots/v1_1/logged_in_admin.png"
      alt="Admin logged in"
-     style="float: left; margin-bottom: 20px;" width="600px" />
+     style="float: left; margin-bottom: 20px;" width="800px" />
 <div style="clear: both;"></div>
 <img src="./docs/app_screenshots/v1_1/show_portfolio.png"
      alt="User Portfolio view"
@@ -145,11 +145,11 @@ Each user has their own porfolio JSON file based on their username. The file con
 <div style="clear: both;"></div>
 <img src="./docs/app_screenshots/v1_1/show_users.png"
      alt="Admin show users"
-     style="float: left; margin-bottom: 20px;" width="600px" />
+     style="float: left; margin-bottom: 20px;" width="800px" />
 <div style="clear: both;"></div>
 <img src="./docs/app_screenshots/v1_0/create-new-user.png"
      alt="Admin create new user"
-     style="float: left; margin-bottom: 20px;" width="360px" />
+     style="float: left; margin-bottom: 20px;" width="560px" />
 <div style="clear: both;"></div>
 
 # Help
