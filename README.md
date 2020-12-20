@@ -264,7 +264,7 @@ The user list displayed shows a new admin user 'Jack' added in the last row:
 
 <img src="./docs/manual_testing/create-user/create_user_3.png"
      alt="Admin creating a new regular user"
-     style="float: left; margin-bottom: 20px;" width="550px" />
+     style="float: left; margin-bottom: 20px;" width="600px" />
 <div style="clear: both;"></div>
 
 Multiple users were created and tested successfully using the following credentials:  
@@ -287,12 +287,12 @@ Admin was successful in setting Active to 'no'. In the users.json file this is r
 
 <img src="./docs/manual_testing/deactivate-user/deactivate_user_1.png"
      alt="Admin deactivating a user"
-     style="float: left; margin-bottom: 20px;" width="320px" />
+     style="float: left; margin-bottom: 20px;" width="280px" />
 <div style="clear: both;"></div>
 
 <img src="./docs/manual_testing/deactivate-user/deactivate_user_2.png"
      alt="Admin deactivating a user"
-     style="float: left; margin-bottom: 20px;" width="2460px" />
+     style="float: left; margin-bottom: 20px;" width="320px" />
 <div style="clear: both;"></div>
 
 <img src="./docs/manual_testing/deactivate-user/deactivate_user_3.png"
@@ -302,7 +302,7 @@ Admin was successful in setting Active to 'no'. In the users.json file this is r
 
 <img src="./docs/manual_testing/deactivate-user/deactivate_user_4.png"
      alt="Admin deactivating a user"
-     style="float: left; margin-bottom: 20px;" width="440px" />
+     style="float: left; margin-bottom: 20px;" width="600px" />
 <div style="clear: both;"></div>
 
 ### Add/Remove Crypto
