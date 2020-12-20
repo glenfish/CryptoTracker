@@ -118,7 +118,15 @@ bash crypto.sh
 Q4. I added a crypto. Why did it not show in the portfolio?
 A. Double check the symbol you are entering. Go to CoinMarketCap.com and search for the symbol you want to add.
 
-Q5. Help, none of the users can log in!
+Q5. I'm lost! I don't know where to start.
+A. Read the section at the top called 'Do This First'.
+If you're still having trouble and just want to log into an existing account and have a look around, use the credentials below:
+username: kim
+password: xxx
+
+You will see if you log in as an admin user that the Kim user is displayed in the users table. You can activate or deactivate this test account as you wish at any time.
+
+Q6. Help, none of the users can log in!
 A. This scenario should never come up, it is only here for an emergency in case something became corrupted. Please carefull follow the below instructions.
 
 Step 1:
