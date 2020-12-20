@@ -1,5 +1,5 @@
 # CryptoTracker
-20-10-2020  
+20-12-2020  
 CryptoTracker v 1.1  
 Built with Ruby 2.7.2  
 
@@ -10,7 +10,7 @@ To Install:
 git clone https://github.com/glenfish/CryptoTracker.git
 ```
 
-Navigate to the CryptoTracker/src/ directory and run:  
+In the 'src' directory, run:  
  ```
  bash crypto.sh
  ```
@@ -129,15 +129,15 @@ Each user has their own porfolio JSON file based on their username. The file con
 
 <img src="./docs/app_screenshots/v1_1/logged_out.png"
      alt="User not logged in"
-     style="float: left; margin-bottom: 20px;" width="400px" />
+     style="float: left; margin-bottom: 20px;" width="600px" />
 <div style="clear: both;"></div>
 <img src="./docs/app_screenshots/v1_1/logged_in_user.png"
      alt="User logged in"
-     style="float: left; margin-bottom: 20px;" width="400px" />
+     style="float: left; margin-bottom: 20px;" width="600px" />
 <div style="clear: both;"></div>
 <img src="./docs/app_screenshots/v1_1/logged_in_admin.png"
      alt="Admin logged in"
-     style="float: left; margin-bottom: 20px;" width="400px" />
+     style="float: left; margin-bottom: 20px;" width="600px" />
 <div style="clear: both;"></div>
 <img src="./docs/app_screenshots/v1_1/show_portfolio.png"
      alt="User Portfolio view"
@@ -145,11 +145,11 @@ Each user has their own porfolio JSON file based on their username. The file con
 <div style="clear: both;"></div>
 <img src="./docs/app_screenshots/v1_1/show_users.png"
      alt="Admin show users"
-     style="float: left; margin-bottom: 20px;" width="500px" />
+     style="float: left; margin-bottom: 20px;" width="600px" />
 <div style="clear: both;"></div>
 <img src="./docs/app_screenshots/v1_0/create-new-user.png"
      alt="Admin create new user"
-     style="float: left; margin-bottom: 20px;" width="180px" />
+     style="float: left; margin-bottom: 20px;" width="360px" />
 <div style="clear: both;"></div>
 
 # Help
@@ -168,7 +168,7 @@ The help file explains in detail how to use the software.
 
 <img src="./docs/app_screenshots/v1_1/help.png"
      alt="Help file sample image"
-     style="float: left; margin-bottom: 20px;" width="500px" />
+     style="float: left; margin-bottom: 20px;" width="800px" />
 <div style="clear: both;"></div>
 
 ## API
@@ -213,12 +213,12 @@ The admin user's credentials (admin, fusion22) were passed as arguments to the s
 
 <img src="./docs/manual_testing/cli-login/cli_login_1.png"
      alt="Bash script login with arghuments"
-     style="float: left; margin-bottom: 20px;" width="500px" />
+     style="float: left; margin-bottom: 20px;" width="800px" />
 <div style="clear: both;"></div>
 
 <img src="./docs/manual_testing/cli-login/cli_login_2.png"
      alt="Bash script login with arghuments"
-     style="float: left; margin-bottom: 20px;" width="200px" />
+     style="float: left; margin-bottom: 20px;" width="400px" />
 <div style="clear: both;"></div>
 
 ### User Login
@@ -229,12 +229,12 @@ password: xxx
 
 <img src="./docs/manual_testing/user-login/user_login_1.png"
      alt="User not logged in"
-     style="float: left; margin-bottom: 20px;" width="260px" />
+     style="float: left; margin-bottom: 20px;" width="460px" />
 <div style="clear: both;"></div>
 
 <img src="./docs/manual_testing/user-login/user_login_2.png"
      alt="User not logged in"
-     style="float: left; margin-bottom: 20px;" width="220px" />
+     style="float: left; margin-bottom: 20px;" width="420px" />
 <div style="clear: both;"></div>
 
 ### View Portfolio
@@ -252,7 +252,7 @@ Admin account successfully created a new admin user account for Jack with userna
 
 <img src="./docs/manual_testing/create-user/create_user_1.png"
      alt="Admin creating a new regular user"
-     style="float: left; margin-bottom: 20px;" width="180px" />
+     style="float: left; margin-bottom: 20px;" width="380px" />
 <div style="clear: both;"></div>
 
 <img src="./docs/manual_testing/create-user/create_user_2.png"
