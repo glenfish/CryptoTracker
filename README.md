@@ -149,7 +149,7 @@ Each user has their own porfolio JSON file based on their username. The file con
 <div style="clear: both;"></div>
 <img src="./docs/app_screenshots/v1_0/create-new-user.png"
      alt="Admin create new user"
-     style="float: left; margin-bottom: 20px;" width="560px" />
+     style="float: left; margin-bottom: 20px;" width="360px" />
 <div style="clear: both;"></div>
 
 # Help
@@ -243,7 +243,7 @@ The 'Kim' user account was used to display the current portfolio. Selecting opti
 
 <img src="./docs/manual_testing/view-portfolio/view_portfolio.png"
      alt="View Portfolio"
-     style="float: left; margin-bottom: 20px;" width="500px" />
+     style="float: left; margin-bottom: 20px;" width="800px" />
 <div style="clear: both;"></div>
 
 ### Create User
@@ -257,14 +257,14 @@ Admin account successfully created a new admin user account for Jack with userna
 
 <img src="./docs/manual_testing/create-user/create_user_2.png"
      alt="Admin creating a new regular user"
-     style="float: left; margin-bottom: 20px;" width="390px" />
+     style="float: left; margin-bottom: 20px;" width="800px" />
 <div style="clear: both;"></div>
 
 The user list displayed shows a new admin user 'Jack' added in the last row:
 
 <img src="./docs/manual_testing/create-user/create_user_3.png"
      alt="Admin creating a new regular user"
-     style="float: left; margin-bottom: 20px;" width="350px" />
+     style="float: left; margin-bottom: 20px;" width="550px" />
 <div style="clear: both;"></div>
 
 Multiple users were created and tested successfully using the following credentials:  
@@ -287,22 +287,22 @@ Admin was successful in setting Active to 'no'. In the users.json file this is r
 
 <img src="./docs/manual_testing/deactivate-user/deactivate_user_1.png"
      alt="Admin deactivating a user"
-     style="float: left; margin-bottom: 20px;" width="120px" />
+     style="float: left; margin-bottom: 20px;" width="320px" />
 <div style="clear: both;"></div>
 
 <img src="./docs/manual_testing/deactivate-user/deactivate_user_2.png"
      alt="Admin deactivating a user"
-     style="float: left; margin-bottom: 20px;" width="260px" />
+     style="float: left; margin-bottom: 20px;" width="2460px" />
 <div style="clear: both;"></div>
 
 <img src="./docs/manual_testing/deactivate-user/deactivate_user_3.png"
      alt="Admin deactivating a user"
-     style="float: left; margin-bottom: 20px;" width="180px" />
+     style="float: left; margin-bottom: 20px;" width="340px" />
 <div style="clear: both;"></div>
 
 <img src="./docs/manual_testing/deactivate-user/deactivate_user_4.png"
      alt="Admin deactivating a user"
-     style="float: left; margin-bottom: 20px;" width="340px" />
+     style="float: left; margin-bottom: 20px;" width="440px" />
 <div style="clear: both;"></div>
 
 ### Add/Remove Crypto
@@ -311,36 +311,36 @@ Entering a new crypto to the portfolio: symbol BTC , quantity 50.
 
 <img src="./docs/manual_testing/add-remove-crypto/add_remove_crypto_1.png"
      alt="Add/Remove Crypto Asset from Portfolio"
-     style="float: left; margin-bottom: 20px;" width="220px" />
+     style="float: left; margin-bottom: 20px;" width="400px" />
 <div style="clear: both;"></div>
 
 <img src="./docs/manual_testing/add-remove-crypto/add_remove_crypto_2.png"
      alt="Add/Remove Crypto Asset from Portfolio"
-     style="float: left; margin-bottom: 20px;" width="180px" />
+     style="float: left; margin-bottom: 20px;" width="360px" />
 <div style="clear: both;"></div>
 
 <img src="./docs/manual_testing/add-remove-crypto/add_remove_crypto_3.png"
      alt="Add/Remove Crypto Asset from Portfolio"
-     style="float: left; margin-bottom: 20px;" width="220px" />
+     style="float: left; margin-bottom: 20px;" width="440px" />
 <div style="clear: both;"></div>
 
 Below is the output of the portfolio view after adding the 50 Bitcoin:
 
 <img src="./docs/manual_testing/add-remove-crypto/add_remove_crypto_4.png"
      alt="Add/Remove Crypto Asset from Portfolio"
-     style="float: left; margin-bottom: 20px;" width="500px" />
+     style="float: left; margin-bottom: 20px;" width="800px" />
 <div style="clear: both;"></div>
 
 Here is a second test showing the addition of 1000 Chainlink (LINK):
 
 <img src="./docs/manual_testing/add-remove-crypto/add_remove_crypto_2_1.png"
      alt="Add 1000 Chainlink to Portfolio"
-     style="float: left; margin-bottom: 20px;" width="200px" />
+     style="float: left; margin-bottom: 20px;" width="340px" />
 <div style="clear: both;"></div>
 
 <img src="./docs/manual_testing/add-remove-crypto/add_remove_crypto_2_2.png"
      alt="Add 1000 Chainlink to Portfolio"
-     style="float: left; margin-bottom: 20px;" width="500px" />
+     style="float: left; margin-bottom: 20px;" width="800px" />
 <div style="clear: both;"></div>
 
 As part of the testing process for adding or modifying cryptos, two cases were considered:
