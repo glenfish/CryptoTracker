@@ -1,6 +1,6 @@
 # CryptoTracker
 
-CryptoTracker v 1.0  
+CryptoTracker v 1.1  
 Built with Ruby 2.7.2
 
 ## Application Overview
@@ -11,19 +11,23 @@ CORE features:
 
 - command line application
 - text driven menu
-- connect/input live API digital asset data (requires API entry by user for security)
-- connect/input static local JSON data for testing
-- create user (Admin only)
-- login user (using username only)
-- set to live data or test file data
-- add to portfolio (buy digital assets)
-  - asset_symbol
-  - asset_quantity
-- delete portfolio (delete purchases or delete entire portfolio)
-- show current portfolio
+- get live API data (requires API KEY and account with CoinMarketCap.com)
+- cache and save price data locally
+- read and write local JSON files for long term storage
+- admin and user roles
+- create regular and admin users (Admin role only)
+- activate and deactivate users
+- encrypted password storage
+- login authentication
+- add assets to portfolio
+- modify and delete assets in portfolio
+- display current portfolio
 - Classes for Users and Portfolios
-- JSON file read/write methods for Users and Portfolios
+- help file
+- bash script to run ruby app
+- script flags for auto-login and help
 - log out
+- 8000+ cryptocurrencies and digital assets
 
 Additonal planned features post MVP:
 
@@ -31,7 +35,6 @@ Additonal planned features post MVP:
 - edit all aspects of portfolio
 - display summary profit and loss statement
 - save portfolio view or P&L to PDF or print
-- user account creation, password usage and authentication on user accounts
 
 ## Testing
 
@@ -42,7 +45,7 @@ rspec
 
 The API is using CoinMarketCap.com. 
 
-To test, the JSON output for the first 100 cryptos on Coin Market Cap will be saved to a text file and accessed locally. 
+In testing, the JSON output for the first 100 cryptos on Coin Market Cap was saved to a text file and accessed locally. In v1.1 release, a list of over 8000 cryptos is available to add to the portfolio with pricing data.
 
 Account with CoinMarketCap using the following credentials:  
 
@@ -50,18 +53,13 @@ url: https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=BT
 account url: https://pro.coinmarketcap.com/account  
 data limits: 333 per day. 10k per month
 
-The following symbols will be used for this test file:  
-`
-BTC,ETH,XRP,USDT,BCH,LTC,LINK,ADA,DOT,BNB,XLM,USDC,BSV,EOS,XMR,WBTC,TRX,XEM,XTZ,LEO,FIL,CRO,NEO,DAI,VET,REV,ATOM,AAVE,DASH,WAVES,HT,MIOTA,UNI,ZEC,ETC,YFI,THETA,BUSD,COMP,CEL,MKR,SNX,OMG,DOGE,UMA,KSM,FTT,ONT,ZIL,ALGO,SUSHI,OKB,BTT,BAT,TUSD,RENBTC,DCR,NEXO,ZRX,DGB,PAX,HUSD,AVAX,REN,QTUM,HBAR,AMPL,ICX,ABBC,CELO,LRC,EGLD,HEDG,STX,LUNA,KNC,RSR,REP,EWT,LSK,OCEAN,BTG,SC,QNT,RUNE,CVT,NANO,BAND,MANA,ZB,NMR,ENJ,ANT,MAID,SNT,CHSB,XVG,NXM,RVN
-`
-
 ## Github Repository
 
-[Crypto Portfolio Tracker App on Github](https://github.com/glenfish/Crypto-Portfolio-Tracker)
+[> CryptoTracker App on Github](https://github.com/glenfish/CryptoTracker)
 
 ## Trello Board - Project Management
 
-[Crypto Portfolio Tracker App Trello Board](https://trello.com/b/9gKJL3WM/crypto-portfolio-manager-terminal-app)
+[> CryptoTracker App Trello Board](https://trello.com/b/9gKJL3WM/crypto-portfolio-manager-terminal-app)
 
 ## Data Persistence
 
@@ -73,28 +71,31 @@ At this stage the Portfolio class is only used in this instance, however it will
 
 ## Error Handling
 
-- tba
+- Errors have been handled with logic in many cases, however where code errors may occur, the flow is not complicated by an over-abundance of error output. Instead, retry and clears have been used to improve the user experience and make it more intuative.
 
 ## Installation
 
-Ruby 2.7.2 required to run CryptoTracker  
+Ruby 2.7.2 was used to develop CryptoTracker  
 The following gems are packaged:  
 httparty  
 json  
 terminal-table  
-colorize version 0.8.1 or greater  
+colorize version
+activesupport
 
 ## Usage
 
-CryptoTracker is designed for people who buy and sell digital assets or 'cryptocurrency'. A user can create a portfolio of cryptos from the top 100 assets listed on CoinMarketCap.com and get real time price data to track the portfolio value.
+CryptoTracker is designed for people who buy and sell digital assets or 'cryptocurrency'. A user can create a portfolio of cryptos from the assets listed on CoinMarketCap.com and get real time price data to track the portfolio value.
 
 The user can add a symbol name that represents the cryptocurrency on trading exchanges, and the quantity purchased. The app will display a list of all entries, showing name, symbol, quantity, current USD price of the asset, and the current USD value of the user's assets, with a grand total showing the combined portfolio value.
 
-In addition to real time pricing data, there is a menu option to display recent API data which is stored locally. This is primarily for testing, but can be useful when adding new cryptos to the portfolio, and the user simply wants to check the list without requesting fresh live data with every refresh of the portfolio page.
+To minimise API calls, every call is cached locally in a JSON file. If the portfolio is changed in any way the API is called, otherwise the local cache data is used. Local cache is reset every time a user logs in, resulting in a refresh of pricing.
 
-An administrator account has user creation privilliges and can deactivate any given user. Admin can also view the full list of users, usernames, passwords, status and date the user was created.
+An administrator account has user creation privilliges and can activate or deactivate any user. Admin can also view the full list of users, usernames, passwords, status, account type and date the user was created.
 
 All users are stored together locally in 'users' JSON file, and each puser has their own porfolio JSON file based on their username. The file contains data on the cryptocurrency symbols (for example 'BTC' for Bitcoin, or 'ETH' for Ethereum) and quantities of cryptos being tracked in the portfolio for each given user.
+
+# Screenshots
 
 <img src="./docs/app_screenshots/logged-out.png"
      alt="User not logged in"
@@ -121,7 +122,17 @@ All users are stored together locally in 'users' JSON file, and each puser has t
      style="float: left; margin-bottom: 20px;" width="400px" />
 <div style="clear: both;"></div>
 
+# Help
 
+The user can access the following in the help file, listed below:
+- Run Instructions
+- Using Arguments with the script
+- What To Do First
+- User options
+- Admin options
+- Troubleshooting / FAQ
+
+[> CryptoTracker App Help](https://github.com/glenfish/CryptoTracker/docs/help_content.txt)
 
 
 
