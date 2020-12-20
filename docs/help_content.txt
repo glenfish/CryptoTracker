@@ -1,0 +1,167 @@
+
+Crypto Tracker is a digital asset portfolio manager. Users can add over 8000 different crypto assets to their portfolio and track the prices and values of their holdings. You need to install Ruby on either your Mac or Linux machine, or in your Windows Subsystem for Linux (WSL) on Windows. (For more information on this please see https://www.howtogeek.com/426749/how-to-access-your-linux-wsl-files-in-windows-10/)
+
+To run CryptoTracker in your terminal change into the directory CryptoTracker/src/ and enter:
+bash crypto.sh
+.. or ..
+ruby main.rb
+
+*************************************
+* Run with Optional Flags/Arguments *
+*************************************
+
+Navigate to the CryptoTracker/src/ directory to use these commands.
+
+To see this help file using a flag, you can run any of these:
+bash crypto.sh -h
+bash crypto.sh --h
+bash crypto.sh -help
+bash crypto.sh --help
+
+You can also login directly by using the following:
+-u "your-username-here"
+-p "your-password-here"
+
+example:
+bash crypto.sh -u "admin" -p "fusion22"
+
+******************
+* DO THIS FIRST: *
+******************
+YOU MUST CREATE A USER ACCOUNT
+How to Log in as admin and create a user account:
+
+1. Run CryptoTracker (see above on how to do that) and then select option 1 and enter the following...
+username: admin
+password: fusion22
+
+2. You are now logged in as the default admin user. Select option 1. Create User
+
+3. Enter a name, username and password for your user account. 
+When it asks Is Admin? - you type 'n' (for no). You are not creating an admin user, you want a regular user so you can start a portfolio. Only regular users can have portfolios. It will ask you to confirm, and then you're done! Select 4. Quit
+
+4. Run CryptoTracker again and log in using the new user account information you just created in step 3.
+You can now add cryptos to your portfolio.
+
+*** Users can: 
+- view their portfolio
+- add cryptos to their portfolio
+
+*** Admins can:
+- view all users
+- add new users (both admins and regular users)
+- deactivate users
+
+*****************
+* USER OPTIONS: *
+*****************
+
+Users can see the following options in their logged in menu:
+
+1. View Portfolio
+Selecting this option will show your current portfolio. It will be empty by default (In this case you must add cryptos to it - see below).
+
+2. Add/Remove Crypto
+Selecting this option from the main user menu will allow you to add a crypto to your portfolio, or if it already exists, you can change or delete it. You will be guided with questions. You must enter the cryptocurrency symbol and the quantity of that asset you wish to update. If you want to add Bitcoin for example, you would enter its symbol BTC and then the quentity of Bitcoin you want to add, say 0.5
+
+If you already had BTC (Bitcoin) for example and you wish to delete it (perhaps you sold your Bitcoin, you made a mistake with the entry, or you are just testing the app) you can enter BTC with a quantity of 0. Any changes you make you can fix simply by selecting Add/Remove Crypto again, and re-entering the information.
+
+3. Help
+Brings you to the help page you are reading now.
+
+4. Quit
+Exits the CryptoTracker app.
+
+*****************
+* ADMIN OPTIONS *
+*****************
+
+Admins can see the following options in their logged in menu:
+
+1. Create User
+Selecting this option will ask you for the following:
+Name: Bob
+Username: bobby56
+Password: pass1234
+Is Admin? (y/n): ** Note: you must select 'n' if you want to create a regular user (so you can start a portfolio), otherwise select 'y' to create another admin user
+
+You will be asked to confirm. After confirmation, you can go to the next step and verify that the new user is created.
+
+2. Show All Users
+Selecting this option will disp[lay all users, their credentials, their Active status (yes/no) and their Type (admin/user). Remember, only a user can manage a portfolio. Admin users can create, view and manage users only.
+
+3. Deactivate User
+This option will ask you for a username. If the username is found in the list of users or admins, you will be asked to confirm before that account is deactivated. Once an account is deactivated it cannot be reactivated. You can always create a new account for the user. 
+
+IMPORTANT: You cannot set the main Admin user (with username: fusion22) to inactive. If you try to, it will be rejected. Why? Because you always need to have an active Admin user to create regular users. If all Admin users were somehow set to inactive, users could no longer be created or managed. Think of it as a safety feature!
+
+4. Quit
+Exit the CryptoTracker app.
+
+*************************
+* Troubleshooting / FAQ *
+*************************
+
+Q1. I can't log in!
+A. Log in as admin user and select option 2. Show All Users
+You will see the user and password for all users here, including other admin users.
+
+Q2. My account is not active. How do I re-activate it?
+A. Log in an an admin user and select 3. Activate/Deactivate User, then select 1. Activate User. Follow the prompts.
+
+Q3. How do I run the CryptoTracker app?
+A. Navigate to the CryptoTracker/src/ directory in your terminal and type the following: 
+ruby main.rb
+... or ...
+bash crypto.sh
+
+Q4. I added a crypto. Why did it not show in the portfolio?
+A. Double check the symbol you are entering. Go to CoinMarketCap.com and search for the symbol you want to add.
+
+Q5. I'm lost! I don't know where to start.
+A. Read the section at the top called 'Do This First'.
+If you're still having trouble and just want to log into an existing account and have a look around, use the credentials below:
+username: kim
+password: xxx
+
+You will see if you log in as an admin user that the Kim user is displayed in the users table. You can activate or deactivate this test account as you wish at any time.
+
+Q6. Help, none of the users can log in!
+A. This scenario should never come up, it is only here for an emergency in case something became corrupted. Please carefull follow the below instructions.
+
+Step 1:
+In the folder CryptoTracker/src/json/users/  ... is a file called users_backup.json
+Move the users.json file out of the folder and rename users_backup.json to users.json
+
+Step 2:
+You will now be able to log in using the defaul admin user.
+username: admin
+password: fusion22
+
+Step 3:
+It is important that before you re-create users, you copy all the portfolio files in
+CryptoTracker/src/json/portfolios/
+and make a copy of them somewhere else. You will need to move them back again after the next step.
+
+Step 4:
+Make sure you completed step 3 before proceeding! If not, you will lose all your portfolios.
+After performing this step, you can re-create all the accounts.
+IMPORTANT: You MUST create the accounts using the exact same username as before. The username matches up to the portfolio filename, so if they are not the same, you will not be able to see your old portfolio, and you will need to create it from scratch. If you followed the steps as shown above, you will be able to see your portfolio again as they were.
+
+Step 5:
+Only after creating your accounts again should you then move all your backed up portfolio files into the CryptoTracker/src/json/portfolios/ folder.
+You will be overwriting the files that are there. If you are prompted to replace the files, say yes to all.
+
+You will now be able to log in and access your portfolios as before.
+
+____________________________________________________________
+
+Enjoy using CryptoTracker and good luck with your portfolio!
+
+CryptoTracker cropyright 2020 All Rights Reserved.
+Free for personal use. No re-distribution.
+
+____________________________________________________________
+
+
+
