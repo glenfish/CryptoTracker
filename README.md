@@ -1,11 +1,20 @@
 # CryptoTracker
-CryptoTracker v 1.2  beta  
+CryptoTracker v 2.0  beta  
 
 ## Installation
 
 To Install:
 ```
 git clone https://github.com/glenfish/CryptoTracker.git
+```
+
+Requires gems (they will autoinstall with a confirmation prompt)
+```
+httparty  
+json  
+terminal-table  
+colorize version  
+activesupport
 ```
 
 In the 'src' directory, run:  
@@ -16,16 +25,6 @@ In the 'src' directory, run:
  Optionally to open directly into a user account, run:  
 ```
 crypto.sh -u "username" -p "password"
-```
-
-CryptoTracker uses bundler and the following gems are packaged:  
-
-```
-httparty  
-json  
-terminal-table  
-colorize version  
-activesupport
 ```
 
 ## Github Repository
