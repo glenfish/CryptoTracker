@@ -39,7 +39,7 @@ def add_crypto_to_portfolio(active_user)
     if (confirm == 'y' && quantity >= 0)
         json= {"username":active_user.username,"data":portfolio_json['data'].merge({symbol=>{"asset_name"=>"", "asset_quantity"=>quantity, "asset_buy_date"=>Time.now.strftime("%Y-%m-%d"), "asset_sell_date"=>"", "usd_price"=>"", "btc_price"=>"", "usd_profit"=>"", "btc_profit"=>""}})}
         write_json_file(json, path_to_portfolio_file)
-        if quantity > 0
+        if quantity > 0 # only update portfolio.modified if a cypto was changed to a positive value. Setting to 0 will do nothing
             active_user.portfolio_modified = true
         end
         puts "Your portfolio was updated"
