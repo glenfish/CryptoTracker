@@ -1,6 +1,5 @@
 # CryptoTracker
-20-12-2020  
-CryptoTracker v 1.1  
+CryptoTracker v 1.2  beta
 Built with Ruby 2.7.2  
 
 ## Installation
@@ -34,30 +33,7 @@ activesupport
 
 [> CryptoTracker App on Github](https://github.com/glenfish/CryptoTracker)
 
-## Trello Board - Project Management
 
-[> CryptoTracker App Trello Board](https://trello.com/b/9gKJL3WM/crypto-portfolio-manager-terminal-app)
-
-Screenshots:  
-[> trello 1](./docs/trello_screenshots/ScreenShot2020-12-11at11.40.39PM.png)
-
-[> trello 2](./docs/trello_screenshots/ScreenShot2020-12-12at1.25.33PM.png)
-
-[> trello 3](./docs/trello_screenshots/ScreenShot2020-12-14at5.09.36PM.png)
-
-[> trello 4](./docs/trello_screenshots/ScreenShot2020-12-14at11.38.44PM.png)
-
-[> trello 5](./docs/trello_screenshots/ScreenShot2020-12-14at11.38.44PM.png)
-
-[> trello 6](./docs/trello_screenshots/ScreenShot2020-12-15at9.52.52PM.png)
-
-[> trello 7](./docs/trello_screenshots/ScreenShot2020-12-16at9.53.05PM.png)
-
-[> trello 8](./docs/trello_screenshots/ScreenShot2020-12-16at12.09.35AM.png)
-
-[> trello 9](./docs/trello_screenshots/ScreenShot2020-12-19at6.48.20PM.png)
-
-[> trello 10](./docs/trello_screenshots/ScreenShot2020-12-20at6.08.19PM.png)
 
 ## Statement Of Purpose
 
@@ -96,7 +72,7 @@ MVP release of CryptoTracker
 - log out
 - 8000+ cryptocurrencies and digital assets
 
-## Out of scope: Additonal planned features post MVP
+## Additonal planned features post MVP
 
 - add and display 24hr % change, market cap, asset_buy_date, asset_sell_date, usd_profit, btc_profit
 - edit all aspects of portfolio
