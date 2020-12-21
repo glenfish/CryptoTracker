@@ -1,6 +1,5 @@
 # CryptoTracker
-CryptoTracker v 1.2  beta
-Built with Ruby 2.7.2  
+CryptoTracker v 1.2  beta  
 
 ## Installation
 
@@ -43,7 +42,7 @@ There are online services that offer similar functionality, however most people 
 
 This app aims to offer a better crypto tracking solution that is local and private, with real time pricing data and other metrics. It was designed to be simple, fast, easy to use and light weight. It requires Ruby and runs on Windows, Mac and Linux systems.
 
-The v1.1 release covered in this README file is a working product that offers many of the features described, however it is a work in progress and may new features will be added over time, beyond the scope of this document. Please check back in the future for updates.
+Built with Ruby 2.7.2
 
 
 ## Scope
