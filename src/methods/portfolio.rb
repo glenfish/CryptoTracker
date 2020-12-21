@@ -39,7 +39,9 @@ def add_crypto_to_portfolio(active_user)
     if (confirm == 'y' && quantity >= 0)
         json= {"username":active_user.username,"data":portfolio_json['data'].merge({symbol=>{"asset_name"=>"", "asset_quantity"=>quantity, "asset_buy_date"=>Time.now.strftime("%Y-%m-%d"), "asset_sell_date"=>"", "usd_price"=>"", "btc_price"=>"", "usd_profit"=>"", "btc_profit"=>""}})}
         write_json_file(json, path_to_portfolio_file)
-        active_user.portfolio_modified = true
+        if quantity > 0
+            active_user.portfolio_modified = true
+        end
         puts "Your portfolio was updated"
     else
         puts "Your portfolio was not changed"
