@@ -1,10 +1,5 @@
 # frozen_string_literal: true
 
-require 'httparty'
-require 'json'
-require 'terminal-table'
-require 'colorize'
-require 'active_support'
 require_relative './methods/menu'
 path_to_users_file = './json/users/users.json'
 path_to_portfolio_file = "./json/portfolios/tester.json" #default
