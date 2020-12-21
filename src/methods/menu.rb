@@ -1,11 +1,5 @@
 # frozen_string_literal: true
 
-require 'httparty'
-require 'json'
-require 'terminal-table'
-require 'colorize'
-
-
 require_relative '../api/api'
 require_relative 'classes'
 require_relative 'json-read-write'
@@ -14,6 +8,14 @@ require_relative 'help'
 require_relative 'user'
 require_relative 'general'
 require_relative 'password'
+
+installing_missing_gems do
+    require 'httparty'
+    require 'json'
+    require 'terminal-table'
+    require 'colorize'
+    require 'active_support'
+end
 
 path_to_users_file = './json/users/users.json'
 path_to_portfolio_file = "./json/portfolios/default.json"
