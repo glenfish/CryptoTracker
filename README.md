@@ -1,7 +1,7 @@
 # CryptoTracker
 CryptoTracker v 2.0  beta  
 
-## Installation
+## Install
 
 To Install:
 ```
@@ -17,6 +17,8 @@ colorize version
 activesupport
 ```
 
+## Run
+
 In the 'src' directory, run:  
  ```
  bash crypto.sh
@@ -24,7 +26,7 @@ In the 'src' directory, run:
 
  Optionally to open directly into a user account, run:  
 ```
-crypto.sh -u "username" -p "password"
+crypto.sh -u username -p password
 ```
 
 ## Github Repository
