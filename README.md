@@ -1,5 +1,5 @@
 # CryptoTracker
-CryptoTracker v 2.0  beta  
+CryptoTracker v0.2-alpha 
 
 ## Install
 
