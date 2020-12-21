@@ -139,7 +139,7 @@ The user can access the following in the help file, listed below:
 
 The help file explains in detail how to use the software.
 
-[> View CryptoTracker Help Here](https://github.com/glenfish/CryptoTracker/docs/help_content.txt)
+[> View CryptoTracker Help Here](./docs/help_content.txt)
 
 
 
