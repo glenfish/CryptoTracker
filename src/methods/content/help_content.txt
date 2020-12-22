@@ -90,7 +90,7 @@ You will be asked to confirm. After confirmation, you can go to the next step an
 2. Show All Users
 Selecting this option will display all users, their credentials, their Active status (yes/no) and their Type (admin/user). Remember, only a user can manage a portfolio. Admin users can create, view and manage users only.
 
-3. Deactivate User
+3. Activate / Deactivate a User
 Select either activate and deactivate and choose the user by username to set their status.
 
 IMPORTANT: You cannot set the main Admin user (with username: fusion22) to inactive. If you try to, it will be rejected. Why? Because you always need to have an active Admin user to create regular users. If all Admin users were somehow set to inactive, users could no longer be created or managed. Think of it as a safety feature!
