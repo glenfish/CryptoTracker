@@ -88,10 +88,10 @@ Is Admin? (y/n): ** Note: you must select 'n' if you want to create a regular us
 You will be asked to confirm. After confirmation, you can go to the next step and verify that the new user is created.
 
 2. Show All Users
-Selecting this option will disp[lay all users, their credentials, their Active status (yes/no) and their Type (admin/user). Remember, only a user can manage a portfolio. Admin users can create, view and manage users only.
+Selecting this option will display all users, their credentials, their Active status (yes/no) and their Type (admin/user). Remember, only a user can manage a portfolio. Admin users can create, view and manage users only.
 
 3. Deactivate User
-This option will ask you for a username. If the username is found in the list of users or admins, you will be asked to confirm before that account is deactivated. Once an account is deactivated it cannot be reactivated. You can always create a new account for the user. 
+Select either activate and deactivate and choose the user by username to set their status.
 
 IMPORTANT: You cannot set the main Admin user (with username: fusion22) to inactive. If you try to, it will be rejected. Why? Because you always need to have an active Admin user to create regular users. If all Admin users were somehow set to inactive, users could no longer be created or managed. Think of it as a safety feature!
 
