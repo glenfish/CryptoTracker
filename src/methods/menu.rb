@@ -15,6 +15,7 @@ installing_missing_gems do
     require 'terminal-table'
     require 'colorize'
     require 'active_support'
+    require "tty-prompt"
 end
 
 path_to_users_file = './json/users/users.json'
