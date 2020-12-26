@@ -85,16 +85,11 @@ def top_level_menu_selection(selection, path_to_users_file, username, password)
     end
 end
 
-# logged in User menu display
-def logged_in_main_menu(menu_title = "Welcome To Crypto Tracker")
-    menu_options = ['View Portfolio', 'Add/Remove Crypto', 'Help', 'Quit']
-    rows = []
-    menu_options.each_with_index do |menu_option, index|
-        rows << ["#{index + 1}. #{menu_option}"]
-    end
-    table = Terminal::Table.new :title => menu_title.colorize(:cyan), :rows => rows
-    # title
-    puts table
+def logged_in_main_menu_tty(menu_title="Welcome to CryptoTracker")
+    # puts menu_title
+    prompt2 = TTY::Prompt.new
+    menu_options = {'View Portfolio': 1, 'Add/Remove Crypto': 2, 'Help': 3, 'Quit': 4}
+    prompt2.select('', menu_options, convert: :integer)
 end
 
 # logged in User menu selection handling

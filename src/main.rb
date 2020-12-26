@@ -32,11 +32,16 @@ end
 # START CONTROL FLOW
 logged_in = false
 while !logged_in
+    clear
     begin
+    prompt = TTY::Prompt.new
     case
     when (username_flag == "" || password_flag == "") # if no flag was captured for username, show the 'logged out' top level menu
-        top_level_menu("CryptoTracker :: You Are Logged Out") # Optionally pass a title to the Main Menu
-        user_selection = gets.strip.chomp.to_i # get user selection
+        # top_level_menu("CryptoTracker :: You Are Logged Out") # Optionally pass a title to the Main Menu
+        menu_options = {Login: 1, Help: 2, Quit: 3}
+        user_selection = prompt.select('Select an option', menu_options, convert: :integer)
+        clear
+        # user_selection = gets.strip.chomp.to_i # get user selection
         select = top_level_menu_selection(user_selection, path_to_users_file, username_flag, password_flag)
     else # if username_flag and password_flag was captured, proceed to automatically log in with the arguments passed
         select = top_level_menu_selection(1, path_to_users_file, username_flag, password_flag)
@@ -68,8 +73,8 @@ while logged_in
         end
     end
     while active_user.admin == false # regular user, not admin user
-        logged_in_main_menu("Crypto Portfolio Tracker Main Menu") # Optionally pass a title to the Main Menu
-        user_selection = gets.strip.chomp.to_i # get user selection
+        user_selection = logged_in_main_menu_tty("Crypto Portfolio Tracker Main Menu") # Optionally pass a title to the Main Menu
+        # user_selection = gets.strip.chomp.to_i # get user selection
         begin
         select = logged_in_menu_selection(user_selection)
         rescue
