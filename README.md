@@ -40,6 +40,16 @@ log in as default admin user:
 bash crypto.sh -u admin -p fusion22
 ```
 
+## Add your API Key
+
+You will need to create an account with CoinMarketCap.com and get an API key. Instructions for this are on the website at the link below. You MUST do this step. The app won't run without a functioning API key:
+```
+https://pro.coinmarketcap.com/signup
+```
+Once you have your key, replace the one in the file below and save.
+
+`CryptoTracker/src/api/api_key.txt`
+
 ## Statement Of Purpose
 
 A terminal application for creating and managing a portfolio of cryptocurrency or digital assets using live market rate API data. It was designed to be simple, fast, easy to use and light weight. Requires Ruby. Runs on Windows, Mac and Linux systems.
