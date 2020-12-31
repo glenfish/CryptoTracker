@@ -65,17 +65,15 @@ MVP release of CryptoTracker
 - help file
 - bash script to run ruby app
 - script flags for auto-login and help
-- log out
 - 8000+ cryptocurrencies and digital assets
 
 ## Additonal planned features post MVP
 
 - add and display 24hr % change, market cap, asset_buy_date, asset_sell_date, usd_profit, btc_profit
 - edit all aspects of portfolio
-- display summary profit and loss statement
+- display summary profit and loss statement over time
 - save portfolio view or P&L to PDF or print
-- design and build out a GUI front end
-- run as a standalone executable app
+- run as a standalone executable
 
 ## CryptoTracker App Features
 
@@ -83,11 +81,9 @@ MVP release of CryptoTracker
 
 The user can add a symbol name that represents the cryptocurrency on trading exchanges, and the quantity purchased. The app will display a list of all entries, showing name, symbol, quantity, current USD price of the asset, and the current USD value of the user's assets, with a grand total showing the combined portfolio value.
 
-This is done by merging hashes and writing to the username.json portfolio file.
-
 ### API v Local Calls
 
-To minimise API calls, every call is cached locally in a JSON file. If the portfolio is changed in any way the API is called, otherwise the local cache data is used. Local cache is reset every time a user logs in, resulting in a refresh of pricing. The state management is controlled using an object attribute on the user.
+To minimise API calls, every call is cached locally in a JSON file. If the portfolio is changed in any way the API is called, otherwise the local cache data is used. Local cache is reset every time a user logs in, resulting in a refresh of pricing.
 
 ### User Management
 
@@ -137,6 +133,9 @@ The user can access the following in the help file, listed below:
 The help file explains in detail how to use the software.
 
 [> View CryptoTracker Help Here](./docs/help_content.txt)
+
+Copyright Nicholas Fehberg 2020. All Rights Reserved. 
+Available free for personal use. No redistribution.
 
 
 
