@@ -25,11 +25,21 @@ In the 'src' directory, run:
  ```
  bash crypto.sh
  ```
+Note: Log in using the default admin account and create either admin or regular users  
+```
+username: admin  
+password: fusion22
+```
 
  Optionally to open directly into a user account, run:  
 ```
 crypto.sh -u username -p password
 ```
+log in as default admin user:
+```
+bash crypto.sh -u admin -p fusion22
+```
+
 
 ## Github Repository
 
