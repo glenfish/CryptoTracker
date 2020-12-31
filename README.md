@@ -70,7 +70,7 @@ MVP release of CryptoTracker
 - script flags for auto-login and help
 - 8000+ cryptocurrencies and digital assets
 
-## Additonal planned features post MVP
+## Planned features
 
 - add and display 24hr % change, market cap, asset_buy_date, asset_sell_date, usd_profit, btc_profit
 - edit all aspects of portfolio
