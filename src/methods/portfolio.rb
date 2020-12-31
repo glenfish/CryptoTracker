@@ -78,7 +78,7 @@ def show_portfolio(portfolio_assets_quantities_array, active_user = "")
     # show the portfolio based on the whether the portfolio has been modified. It crypto added since last API call, run API. If not, read cached file.
     if active_user.portfolio_modified
         if !api_key.match(/(...\X-)/) 
-            puts "Error: api key does not match"
+            puts "Error: api key error. Please make sure you have signed up for a free account with CoinMarketCap.com and you have generated an API key. Save it in the file CryptoTracker/src/api/api_key.txt"
             return
         end
         print "... loading live data "
