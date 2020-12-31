@@ -18,4 +18,6 @@ gem "colorize", "~> 0.8.1"
 
 gem 'activesupport'
 
+gem 'tty-prompt'
+
 # gem "rails"
