@@ -13,8 +13,10 @@ Requires gems (they will autoinstall with a confirmation prompt)
 httparty  
 json  
 terminal-table  
-colorize version  
+colorize
 activesupport
+tty-prompt
+
 ```
 
 ## Run
