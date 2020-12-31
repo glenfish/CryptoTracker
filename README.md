@@ -39,18 +39,12 @@ crypto.sh -u username -p password
 
 ## Statement Of Purpose
 
-CryptoTracker aims to provide investors in cryptocurrency and other digital assets a tool with which to record buys and sells, output profit and loss statements and offer live pricing functionality for the portfolio.
-
-There are online services that offer similar functionality, however most people are not comfortable entering their investments into an unknown website or cloud based service. They prefer anonymity. Many users rely on manually updated Excel spreadsheets.
-
-This app aims to offer a better crypto tracking solution that is local and private, with real time pricing data and other metrics. It was designed to be simple, fast, easy to use and light weight. It requires Ruby and runs on Windows, Mac and Linux systems.
+A terminal application for creating and managing a portfolio of cryptocurrency or digital assets using live market rate API data. It was designed to be simple, fast, easy to use and light weight. Requires Ruby. Runs on Windows, Mac and Linux systems.
 
 Built with Ruby 2.7.2
 
 
 ## Scope
-
-A terminal application for creating and managing a portfolio of cryptocurrency or digital assets using live market rate API data.
 
 MVP release of CryptoTracker 
 
