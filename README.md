@@ -40,13 +40,6 @@ log in as default admin user:
 bash crypto.sh -u admin -p fusion22
 ```
 
-
-## Github Repository
-
-[> CryptoTracker App on Github](https://github.com/glenfish/CryptoTracker)
-
-
-
 ## Statement Of Purpose
 
 A terminal application for creating and managing a portfolio of cryptocurrency or digital assets using live market rate API data. It was designed to be simple, fast, easy to use and light weight. Requires Ruby. Runs on Windows, Mac and Linux systems.
