@@ -1,6 +1,10 @@
 def create_user_object(user_object_array)
+    begin
     file = File.open('api/api_key.txt')
-    api_key = file.read # get the API key
+    api_key = file.read.strip.chomp # get the API key
+    rescue # handle errors reading API key from file
+        puts "Error: api key error. Please make sure you have signed up for a free account with CoinMarketCap.com and you have generated an API key. Save it in the file CryptoTracker/src/api/api_key.txt"
+    end
     active_user = User.new(user_object_array[0], user_object_array[1], user_object_array[2], user_object_array[3], api_key) # create user object with (name, username, password, admin, api_key)
     return active_user # return the user object
 end
